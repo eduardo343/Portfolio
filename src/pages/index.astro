@@ -1,54 +1,452 @@
 ---
+// Import reusable Astro components for consistent layout structure
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+// Import site configuration constants
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
+		<!-- Include base head meta tags, favicon, etc. -->
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<!-- 
+		  Import Press Start 2P font from Google Fonts
+		  This is the iconic 8-bit style font used in classic video games
+		  display=swap ensures text remains visible during font load
+		-->
 		<link
 			href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
 			rel="stylesheet"
 		/>
 		<style>
+			/* Main body styling with complex 8-bit background pattern */
 			body {
-				background: linear-gradient(to bottom, #ccc, #fff);
-				color: #1100ff;
+				/* 
+				  Create a diamond/checkerboard pattern using multiple linear gradients
+				  This mimics the pixelated backgrounds common in retro games
+				*/
+				background: 
+					/* Four diagonal gradients create diamond pattern */
+					linear-gradient(45deg, #0f0f23 25%, transparent 25%), 
+					linear-gradient(-45deg, #0f0f23 25%, transparent 25%), 
+					linear-gradient(45deg, transparent 75%, #0f0f23 75%), 
+					linear-gradient(-45deg, transparent 75%, #0f0f23 75%),
+					/* Base gradient from lighter to darker for depth */
+					linear-gradient(to bottom, #1a1a3a, #0f0f23);
+				/* 
+				  Set sizes for each background layer
+				  First 4 are 20x20px for diamond pattern, last covers full area
+				*/
+				background-size: 20px 20px, 20px 20px, 20px 20px, 20px 20px, 100% 100%;
+				/* 
+				  Position each gradient layer to create seamless diamond pattern
+				  Offset positions create the interlocking effect
+				*/
+				background-position: 0 0, 0 10px, 10px -10px, -10px 0px, 0 0;
+				/* Bright neon green text - classic retro gaming color */
+				color: #00ff41;
+				/* 8-bit style font applied globally */
 				font-family: 'Press Start 2P', monospace;
+				/* Ensure full viewport height */
+				min-height: 100vh;
+				position: relative;
+				/* Prevent horizontal scrolling from animations */
+				overflow-x: hidden;
 			}
 
-			h1 {
-				text-shadow: 2px 2px 0 #000;
+			/* CRT monitor scanlines effect using CSS pseudo-element */
+			body::before {
+				content: '';  /* Empty content for pseudo-element */
+				position: fixed;  /* Stay in place during scroll */
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				/* 
+				  Create horizontal lines that repeat every 4px
+				  This simulates the scanlines visible on old CRT monitors
+				*/
+				background: repeating-linear-gradient(
+					0deg,                          /* Horizontal direction */
+					transparent,                   /* Transparent line */
+					transparent 2px,               /* Transparent until 2px */
+					rgba(0, 255, 65, 0.03) 2px,   /* Very subtle green line */
+					rgba(0, 255, 65, 0.03) 4px    /* Green line until 4px, then repeat */
+				);
+				/* Don't interfere with mouse events */
+				pointer-events: none;
+				/* High z-index to overlay everything */
+				z-index: 1000;
 			}
 
+			/* Main hero section container - the central focus of the page */
+			.pixel-hero {
+				position: relative;  /* For absolutely positioned pseudo-elements */
+				padding: 4rem 2rem;  /* Generous padding for content breathing room */
+				text-align: center;  /* Center all text content */
+				/* Semi-transparent dark background for content readability */
+				background: rgba(0, 0, 0, 0.3);
+				/* Bright neon green border, no rounded corners for pixel aesthetic */
+				border: 3px solid #00ff41;
+				border-radius: 0;  /* Sharp corners for 8-bit look */
+				margin: 2rem;  /* Space from page edges */
+				/* Multiple shadow layers create depth and glow effects */
+				box-shadow: 
+					0 0 30px rgba(0, 255, 65, 0.3),      /* Outer green glow */
+					inset 0 0 30px rgba(0, 255, 65, 0.1); /* Inner green glow */
+			}
+
+			/* Animated rainbow border effect using pseudo-element */
+			.pixel-hero::before {
+				content: '';  /* Empty content for decoration */
+				position: absolute;
+				/* Position slightly outside the main element to create border effect */
+				top: -3px;
+				left: -3px;
+				right: -3px;
+				bottom: -3px;
+				/* 
+				  Multi-color gradient that will animate to create flowing rainbow effect
+				  Colors cycle through neon pink, green, and blue
+				*/
+				background: linear-gradient(
+					45deg,  /* Diagonal gradient direction */
+					#ff0080, #00ff41, #0080ff, #ff0080  /* Color stops creating rainbow */
+				);
+				/* Place behind main element */
+				z-index: -1;
+				/* Apply the moving animation */
+				animation: rainbow-border 3s linear infinite;
+			}
+
+			/* Animation that shifts the gradient position to create moving rainbow effect */
+			@keyframes rainbow-border {
+				0% { background-position: 0% 50%; }    /* Start position */
+				50% { background-position: 100% 50%; } /* Middle - fully shifted */
+				100% { background-position: 0% 50%; }  /* End - back to start for seamless loop */
+			}
+
+			/* Glitch text effect for main headings - simulates digital corruption */
+			.glitch-text {
+				font-size: 2.5rem;  /* Large, bold text size */
+				color: #00ff41;     /* Primary neon green color */
+				/* 
+				  Multiple text shadows create layered glow effect
+				  Each shadow has increasing blur radius for depth
+				*/
+				text-shadow: 
+					0 0 5px #00ff41,   /* Small inner glow */
+					0 0 10px #00ff41,  /* Medium glow */
+					0 0 15px #00ff41,  /* Larger glow */
+					0 0 20px #00ff41;  /* Outermost glow */
+				position: relative;     /* For pseudo-element positioning */
+				display: inline-block;  /* Allow transforms while keeping inline behavior */
+				/* Apply the glitch animation continuously */
+				animation: glitch 2s infinite;
+			}
+
+			/* 
+			  Glitch animation simulates digital interference/corruption
+			  Uses shifting colored shadows to create RGB separation effect
+			*/
+			@keyframes glitch {
+				/* Normal state - clean green glow */
+				0%, 100% {
+					text-shadow: 
+						0 0 5px #00ff41,   /* Consistent green glows */
+						0 0 10px #00ff41,
+						0 0 15px #00ff41,
+						0 0 20px #00ff41;
+				}
+				/* First glitch state - left pink, right blue separation */
+				25% {
+					text-shadow: 
+						-2px 0 #ff0080,    /* Pink shadow shifted left */
+						2px 0 #0080ff,     /* Blue shadow shifted right */
+						0 0 5px #00ff41;   /* Small green glow remains */
+				}
+				/* Second glitch state - opposite separation for dynamic effect */
+				50% {
+					text-shadow: 
+						2px 0 #ff0080,     /* Pink shadow shifted right */
+						-2px 0 #0080ff,    /* Blue shadow shifted left */
+						0 0 5px #00ff41;   /* Small green glow remains */
+				}
+				/* Return to normal state briefly before looping */
+				75% {
+					text-shadow: 
+						0 0 5px #00ff41,   /* Back to normal green glow */
+						0 0 10px #00ff41,
+						0 0 15px #00ff41,
+						0 0 20px #00ff41;
+				}
+			}
+
+			/* Subtitle text styling with neon pink theme */
+			.pixel-subtitle {
+				font-size: 1rem;        /* Readable size for description text */
+				color: #ff0080;         /* Hot pink color for contrast with green headings */
+				margin: 2rem 0;        /* Vertical spacing around subtitle */
+				line-height: 1.8;      /* Comfortable reading line height */
+				max-width: 600px;      /* Limit width for readability */
+				margin-left: auto;     /* Center horizontally */
+				margin-right: auto;    /* Center horizontally */
+				/* Pink text shadow with glow effect */
+				text-shadow: 
+					1px 1px 0 #aa0055,              /* Dark pink shadow for depth */
+					0 0 10px rgba(255, 0, 128, 0.3); /* Soft pink glow */
+			}
+
+			/* Container for call-to-action buttons */
+			.pixel-buttons {
+				display: flex;           /* Horizontal layout */
+				gap: 1rem;              /* Space between buttons */
+				justify-content: center; /* Center buttons horizontally */
+				flex-wrap: wrap;        /* Allow wrapping on smaller screens */
+				margin-top: 3rem;       /* Space above button group */
+			}
+
+			/* Main call-to-action buttons with 3D arcade-style design */
 			.pixel-button {
-				display: inline-block;
-				padding: 0.75rem 1.5rem;
-				border: 4px solid #00ff00;
-				background-color: black;
-				color: #00ff00;
-				text-decoration: none;
-				transition: background-color 0.3s, color 0.3s;
+				display: inline-block;    /* Allow padding and transforms */
+				padding: 1rem 2rem;      /* Generous padding for clickable area */
+				border: 3px solid #00ff41; /* Thick neon green border */
+				/* Dark gradient background mimicking button depth */
+				background: linear-gradient(45deg, #0f0f23, #1a1a3a);
+				color: #00ff41;          /* Bright green text */
+				text-decoration: none;   /* Remove link underline */
+				font-family: 'Press Start 2P', monospace; /* Pixel font */
+				font-size: 0.8rem;       /* Readable but compact size */
+				transition: all 0.3s ease; /* Smooth hover animations */
+				position: relative;      /* For pseudo-element positioning */
+				overflow: hidden;        /* Hide sliding light effect overflow */
+				text-transform: uppercase; /* All caps for retro game feel */
+				/* Multi-layer shadow creates 3D button effect */
+				box-shadow: 
+					0 4px 0 #00aa2e,            /* Dark green 3D shadow */
+					0 8px 15px rgba(0, 0, 0, 0.3); /* Soft black shadow for depth */
 			}
 
+			/* Sliding light effect across button on hover */
+			.pixel-button::before {
+				content: '';              /* Empty content for decoration */
+				position: absolute;
+				top: 0;
+				left: -100%;             /* Start completely off-screen left */
+				width: 100%;
+				height: 100%;
+				/* 
+				  Semi-transparent light beam that sweeps across button
+				  Creates 'scanning' or 'charging' effect common in retro games
+				*/
+				background: linear-gradient(90deg, 
+					transparent,                 /* Invisible start */
+					rgba(0, 255, 65, 0.2),      /* Semi-transparent green light */
+					transparent);               /* Invisible end */
+				transition: left 0.5s ease; /* Smooth sliding animation */
+			}
+
+			/* Trigger the light sweep on hover */
+			.pixel-button:hover::before {
+				left: 100%; /* Move completely off-screen right */
+			}
+
+			/* Button hover effects - transforms into active/pressed state */
 			.pixel-button:hover {
-				background-color: #00ff00;
-				color: black;
+				/* Bright green gradient background when active */
+				background: linear-gradient(45deg, #00ff41, #00aa2e);
+				color: #0f0f23;          /* Dark text for contrast */
+				transform: translateY(-4px); /* Lift button up */
+				/* Enhanced 3D shadow effects for lifted state */
+				box-shadow: 
+					0 8px 0 #007a22,            /* Deeper 3D shadow */
+					0 12px 20px rgba(0, 0, 0, 0.4), /* Larger drop shadow */
+					0 0 20px rgba(0, 255, 65, 0.5); /* Bright green glow */
+			}
+
+			/* Secondary button variant with pink color scheme */
+			.pixel-button.secondary {
+				border-color: #ff0080;   /* Hot pink border */
+				color: #ff0080;          /* Hot pink text */
+				/* Pink-themed 3D shadow */
+				box-shadow: 
+					0 4px 0 #aa0055,            /* Dark pink 3D shadow */
+					0 8px 15px rgba(0, 0, 0, 0.3); /* Same drop shadow */
+			}
+
+			/* Secondary button hover effects */
+			.pixel-button.secondary:hover {
+				/* Pink gradient background when active */
+				background: linear-gradient(45deg, #ff0080, #aa0055);
+				color: #0f0f23;          /* Dark text for contrast */
+				/* Pink-themed enhanced shadows */
+				box-shadow: 
+					0 8px 0 #77003d,            /* Deeper pink 3D shadow */
+					0 12px 20px rgba(0, 0, 0, 0.4), /* Larger drop shadow */
+					0 0 20px rgba(255, 0, 128, 0.5); /* Bright pink glow */
+			}
+
+			/* Container for floating pixel animation - covers entire viewport */
+			.floating-pixels {
+				position: absolute;      /* Position relative to viewport */
+				top: 0;
+				left: 0;
+				width: 100%;            /* Full viewport width */
+				height: 100%;           /* Full viewport height */
+				pointer-events: none;   /* Don't interfere with mouse interactions */
+				overflow: hidden;       /* Hide pixels that go outside bounds */
+			}
+
+			/* Individual floating pixel elements */
+			.floating-pixel {
+				position: absolute;      /* Absolute positioning for animation */
+				width: 4px;             /* Small square pixel size */
+				height: 4px;
+				background: #00ff41;    /* Default neon green color */
+				/* Apply floating animation continuously */
+				animation: float 6s infinite linear;
+				opacity: 0.7;           /* Semi-transparent for subtlety */
+				/* Small glow effect around each pixel */
+				box-shadow: 0 0 4px #00ff41;
+			}
+
+			/* Every 2nd pixel gets pink color and different timing */
+			.floating-pixel:nth-child(2n) {
+				background: #ff0080;    /* Hot pink color */
+				box-shadow: 0 0 4px #ff0080; /* Pink glow */
+				animation-delay: -2s;   /* Start animation 2s earlier */
+			}
+
+			/* Every 3rd pixel gets blue color and different timing */
+			.floating-pixel:nth-child(3n) {
+				background: #0080ff;    /* Electric blue color */
+				box-shadow: 0 0 4px #0080ff; /* Blue glow */
+				animation-delay: -4s;   /* Start animation 4s earlier */
+			}
+
+			/* 
+			  Floating animation moves pixels from bottom to top with rotation
+			  Simulates particle effects common in retro games
+			*/
+			@keyframes float {
+				/* Start: Below viewport, invisible, no rotation */
+				0% {
+					transform: translateY(100vh) rotate(0deg);
+					opacity: 0;
+				}
+				/* Fade in after moving up slightly */
+				10% {
+					opacity: 0.7;
+				}
+				/* Stay visible through most of the journey */
+				90% {
+					opacity: 0.7;
+				}
+				/* End: Above viewport, invisible, full rotation */
+				100% {
+					transform: translateY(-100px) rotate(360deg);
+					opacity: 0;
+				}
+			}
+
+			/* Responsive design for tablet and mobile devices */
+			@media (max-width: 768px) {
+				/* Reduce heading size for smaller screens */
+				.glitch-text {
+					font-size: 1.8rem; /* Smaller but still impactful */
+				}
+				
+				/* Reduce subtitle text size for mobile readability */
+				.pixel-subtitle {
+					font-size: 0.8rem; /* More compact for small screens */
+				}
+				
+				/* Adjust button sizing for touch interfaces */
+				.pixel-button {
+					padding: 0.8rem 1.5rem; /* Slightly smaller padding */
+					font-size: 0.7rem;      /* Smaller text but still readable */
+				}
+				
+				/* Reduce hero section spacing on mobile */
+				.pixel-hero {
+					margin: 1rem;        /* Less margin to use more screen space */
+					padding: 2rem 1rem;  /* Reduce internal padding */
+				}
 			}
 		</style>
 	</head>
-	<body class="flex flex-col min-h-screen">
-		<Header />
-		<main class="flex-1 flex flex-col items-center justify-center px-4 py-8">
-			<h1>👾 ¡Hello there! My name is Alan</h1>
-			<p class="mt-4 text-center text-green-500">
-				Web developer with a passion for retro style and digital experiences.
-			</p>
-			<a href="/contact" class="pixel-button mt-6">Contact Me</a>
-		</main>
-		<Footer class="py-6 bg-black text-center text-green-500" />
+	<body>
+		<!-- 
+		  Background particle animation system
+		  Creates floating pixels that rise from bottom to top like retro game particles
+		-->
+		<div class="floating-pixels">
+			<!-- Each pixel is positioned at different horizontal locations -->
+			<!-- animation-delay creates staggered timing for natural particle flow -->
+			<div class="floating-pixel" style="left: 10%; animation-delay: 0s;"></div>
+			<div class="floating-pixel" style="left: 20%; animation-delay: -1s;"></div>
+			<div class="floating-pixel" style="left: 30%; animation-delay: -2s;"></div>
+			<div class="floating-pixel" style="left: 40%; animation-delay: -3s;"></div>
+			<div class="floating-pixel" style="left: 50%; animation-delay: -4s;"></div>
+			<div class="floating-pixel" style="left: 60%; animation-delay: -5s;"></div>
+			<div class="floating-pixel" style="left: 70%; animation-delay: -1.5s;"></div>
+			<div class="floating-pixel" style="left: 80%; animation-delay: -2s;"></div>
+			<div class="floating-pixel" style="left: 90%; animation-delay: -3.5s;"></div>
+		</div>
+
+		<!-- Main page layout using Flexbox for full-height design -->
+		<div class="flex flex-col min-h-screen">
+			<!-- Include the 8-bit styled navigation header -->
+			<Header />
+			
+			<!-- 
+			  Main content area - uses flex-1 to take remaining space
+			  Centers the hero section both horizontally and vertically
+			-->
+			<main class="flex-1 flex items-center justify-center px-4">
+				<!-- Central hero section with all main content -->
+				<div class="pixel-hero">
+					<!-- Primary heading with glitch animation effect -->
+					<h1 class="glitch-text">👾 ¡HELLO PLAYER!</h1>
+					
+					<!-- Secondary heading introducing the developer -->
+					<h2 class="glitch-text" style="font-size: 1.5rem; margin-top: 1rem;">I'M ALAN UGARTE</h2>
+					
+					<!-- 
+					  Description paragraph with role and mission statement
+					  Uses computer emoji to reinforce the tech theme
+					-->
+					<p class="pixel-subtitle">
+						💻 Full Stack Developer & Digital Creator 💻<br/>
+						Programming the future with retro vibes and modern code.<br/>
+						Ready to level up your digital experience!
+					</p>
+					
+					<!-- Call-to-action button group -->
+					<div class="pixel-buttons">
+						<!-- Primary CTA - Contact form -->
+						<a href="/contact" class="pixel-button">
+							📧 Contact Me
+						</a>
+						
+						<!-- Secondary CTA - Portfolio/Projects (uses different color scheme) -->
+						<a href="/blog" class="pixel-button secondary">
+							🚀 View Projects
+						</a>
+						
+						<!-- Tertiary CTA - About page -->
+						<a href="/about" class="pixel-button">
+							👨‍💻 About Me
+						</a>
+					</div>
+				</div>
+			</main>
+			
+			<!-- Include footer component for consistent site structure -->
+			<Footer />
+		</div>
 	</body>
 </html>

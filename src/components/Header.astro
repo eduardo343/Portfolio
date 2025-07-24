@@ -1,84 +1,241 @@
 ---
+// Import necessary components and constants
 import HeaderLink from './HeaderLink.astro';
 import { SITE_TITLE } from '../consts';
 ---
 
-<header>
+<!-- 8-bit styled navigation header with retro gaming aesthetics -->
+<header class="pixel-header">
 	<nav>
-		<h2><a href="/">{SITE_TITLE}</a></h2>
-		<div class="internal-links">
-			<HeaderLink href="/">Home</HeaderLink>
-			<HeaderLink href="/blog">Projects</HeaderLink>
-			<HeaderLink href="/about">About</HeaderLink>
-			<HeaderLink href="/contact">Contact</HeaderLink>
+		<!-- Logo section with alien emoji and site title -->
+		<div class="logo-section">
+			<h2><a href="/" class="pixel-logo">👾 {SITE_TITLE}</a></h2>
 		</div>
+		
+		<!-- Main navigation links with gaming-themed emojis -->
+		<div class="internal-links">
+			<HeaderLink href="/" class="pixel-nav-link">🏠 Home</HeaderLink>
+			<HeaderLink href="/blog" class="pixel-nav-link">🚀 Projects</HeaderLink>
+			<HeaderLink href="/about" class="pixel-nav-link">👨‍💻 About</HeaderLink>
+			<HeaderLink href="/contact" class="pixel-nav-link">📧 Contact</HeaderLink>
+		</div>
+		
+		<!-- Social media links with emoji icons for better retro aesthetic -->
 		<div class="social-links">
-			<a href="https://www.twitch.tv/malan117" target="_blank">
+			<a href="https://www.twitch.tv/malan117" target="_blank" class="pixel-social">
 				<span class="sr-only">Follow me in twitch</span>
-				<svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32">
-					<path
-						fill="currentColor"
-						d="M2 0L0 3.2v11.2h4V16h2l2-1.6h2.4L16 10.4V0H2zm12 9.6l-2.4 2.4H9.2l-2 1.6V12H2.8V1.6h11.2v8zM10 4.8h1.2v3.2H10V4.8zm-3.2 0H8v3.2H6.8V4.8z"
-					/>
-				</svg>
+				🎮
 			</a>
-			<a href="https://www.linkedin.com/in/alan-ugarte/" target="_blank">
+			<a href="https://www.linkedin.com/in/alan-ugarte/" target="_blank" class="pixel-social">
 				<span class="sr-only">Connect with me on LinkedIn</span>
-				<svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32">
-					<path
-						fill="currentColor"
-						d="M1.146 1.146C.417 1.875.417 3.042 1.146 3.77c.729.729 1.896.729 2.625 0 .729-.728.729-1.895 0-2.624C3.042.417 1.875.417 1.146 1.146zM.5 5.5h3V15h-3V5.5zm5 0h2.857v1.286h.041c.398-.755 1.37-1.551 2.823-1.551C14.5 5.235 15 7.02 15 9.377V15h-3V9.877c0-1.225-.022-2.8-1.708-2.8-1.71 0-1.972 1.338-1.972 2.719V15h-3V5.5z"
-					/>
-				</svg>
+				💼
 			</a>
-			<a href="https://github.com/eduardo343" target="_blank">
-				<span class="sr-only">Go to Astro's GitHub repo</span>
-				<svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32">
-					<path
-						fill="currentColor"
-						d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-					></path>
-				</svg>
+			<a href="https://github.com/eduardo343" target="_blank" class="pixel-social">
+				<span class="sr-only">Go to GitHub repo</span>
+				⚡
 			</a>
 		</div>
 	</nav>
 </header>
 <style>
-	header {
+	/* Main header container with 8-bit gaming aesthetic */
+	.pixel-header {
 		margin: 0;
-		padding: 0 1em;
-		background: white;
-		box-shadow: 0 2px 8px rgba(var(--black), 5%);
+		padding: 0;
+		/* Dark gradient background mimicking retro console screens */
+		background: linear-gradient(135deg, #0f0f23 0%, #1a1a3a 50%, #0f0f23 100%);
+		/* Bright neon green border for that classic arcade look */
+		border-bottom: 4px solid #00ff41;
+		/* Layered shadow creates depth and neon glow effect */
+		box-shadow: 
+			0 4px 0 #00aa2e,  /* Darker green shadow for 3D effect */
+			0 8px 16px rgba(0, 255, 65, 0.3);  /* Soft green glow */
+		position: relative;
 	}
+	
+	/* Animated rainbow line at the top - classic 80s aesthetic */
+	.pixel-header::before {
+		content: '';  /* Empty content for pseudo-element */
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 2px;
+		/* Multi-color gradient creating rainbow effect */
+		background: linear-gradient(90deg, 
+			#ff0080 0%,   /* Hot pink */
+			#00ff41 25%,  /* Neon green */
+			#0080ff 50%,  /* Electric blue */
+			#ff0080 75%,  /* Hot pink again */
+			#00ff41 100%); /* Neon green */
+		/* Gentle pulsing animation for retro feel */
+		animation: rainbow-glow 2s ease-in-out infinite alternate;
+	}
+	
+	/* Animation for the rainbow glow effect */
+	@keyframes rainbow-glow {
+		0% { opacity: 0.6; }   /* Dimmer state */
+		100% { opacity: 1; }   /* Brighter state */
+	}
+	
+	/* Logo heading styling */
 	h2 {
 		margin: 0;
-		font-size: 1em;
+		font-size: 1.2em;
+		/* Pixel-perfect retro font */
+		font-family: 'Press Start 2P', monospace;
 	}
-
-	h2 a,
-	h2 a.active {
+	
+	/* Main logo link styling */
+	.pixel-logo {
+		color: #00ff41;  /* Bright neon green */
 		text-decoration: none;
+		/* Multiple text shadows create depth and glow */
+		text-shadow: 
+			2px 2px 0 #00aa2e,  /* Dark green for 3D effect */
+			0 0 10px rgba(0, 255, 65, 0.5);  /* Soft green glow */
+		/* Smooth transitions for hover effects */
+		transition: all 0.3s ease;
 	}
+	
+	/* Logo hover effect - changes to pink with stronger glow */
+	.pixel-logo:hover {
+		color: #ff0080;  /* Hot pink color change */
+		text-shadow: 
+			2px 2px 0 #aa0055,  /* Dark pink shadow */
+			0 0 15px rgba(255, 0, 128, 0.7);  /* Bright pink glow */
+		transform: scale(1.05);  /* Slight scale up on hover */
+	}
+	
+	/* Navigation container layout */
 	nav {
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
+		justify-content: space-between;  /* Distribute items evenly */
+		padding: 1em 1.5em;
+		font-family: 'Press Start 2P', monospace;
 	}
-	nav a {
-		padding: 1em 0.5em;
-		color: var(--black);
-		border-bottom: 4px solid transparent;
-		text-decoration: none;
-	}
-	nav a.active {
-		text-decoration: none;
-		border-bottom-color: var(--accent);
-	}
-	.social-links,
-	.social-links a {
+	
+	/* Container for main navigation links */
+	.internal-links {
 		display: flex;
+		gap: 0.5em;  /* Space between nav items */
+		flex-wrap: wrap;  /* Allow wrapping on smaller screens */
 	}
-	@media (max-width: 720px) {
+	
+	/* Individual navigation link styling */
+	.pixel-nav-link {
+		padding: 0.5em 1em;
+		color: #00ff41;  /* Neon green text */
+		border: 2px solid #00ff41;  /* Matching border */
+		background: transparent;  /* See-through background */
+		text-decoration: none;
+		transition: all 0.3s ease;  /* Smooth animations */
+		font-size: 0.7em;  /* Smaller text for nav items */
+		position: relative;  /* For pseudo-element positioning */
+		overflow: hidden;  /* Hide the sliding effect overflow */
+	}
+	
+	/* Sliding light effect on navigation links */
+	.pixel-nav-link::before {
+		content: '';  /* Empty content for effect */
+		position: absolute;
+		top: 0;
+		left: -100%;  /* Start off-screen to the left */
+		width: 100%;
+		height: 100%;
+		/* Semi-transparent gradient that slides across */
+		background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.2), transparent);
+		transition: left 0.5s ease;  /* Smooth sliding animation */
+	}
+	
+	/* Trigger the sliding effect on hover */
+	.pixel-nav-link:hover::before {
+		left: 100%;  /* Slide across to the right */
+	}
+	
+	/* Navigation link hover effects */
+	.pixel-nav-link:hover {
+		background-color: rgba(0, 255, 65, 0.1);  /* Subtle green background */
+		/* Multiple glowing shadows for depth */
+		box-shadow: 
+			0 0 10px rgba(0, 255, 65, 0.5),  /* Outer glow */
+			inset 0 0 10px rgba(0, 255, 65, 0.1);  /* Inner glow */
+		transform: translateY(-2px);  /* Lift effect on hover */
+	}
+	
+	/* Active state for current page navigation link */
+	.pixel-nav-link.active {
+		background-color: #00ff41;  /* Solid green background */
+		color: #0f0f23;  /* Dark text for contrast */
+		/* Strong glow and 3D shadow effects */
+		box-shadow: 
+			0 0 15px rgba(0, 255, 65, 0.7),  /* Bright outer glow */
+			0 4px 0 #00aa2e;  /* 3D shadow underneath */
+	}
+	
+	/* Social media links container */
+	.social-links {
+		display: flex;
+		gap: 0.5em;  /* Space between social icons */
+	}
+	
+	/* Individual social media link styling */
+	.pixel-social {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 40px;   /* Fixed square dimensions */
+		height: 40px;
+		border: 2px solid #ff0080;  /* Hot pink border */
+		background: transparent;
+		color: #ff0080;  /* Matching text color */
+		text-decoration: none;
+		transition: all 0.3s ease;  /* Smooth hover transitions */
+		font-size: 1.2em;  /* Larger emoji icons */
+		position: relative;
+	}
+	
+	/* Social link hover effects with playful rotation */
+	.pixel-social:hover {
+		background-color: #ff0080;  /* Fill with pink background */
+		color: #0f0f23;  /* Dark text for contrast */
+		/* Glowing shadow effects */
+		box-shadow: 
+			0 0 15px rgba(255, 0, 128, 0.7),  /* Pink glow */
+			0 4px 0 #aa0055;  /* 3D shadow */
+		/* Lift and slight rotation for playful effect */
+		transform: translateY(-2px) rotate(5deg);
+	}
+	
+	/* Responsive design for tablet screens */
+	@media (max-width: 768px) {
+		/* Stack navigation vertically on smaller screens */
+		nav {
+			flex-direction: column;
+			gap: 1em;
+			padding: 1em;
+		}
+		
+		/* Center navigation links */
+		.internal-links {
+			justify-content: center;
+		}
+		
+		/* Center social links */
+		.social-links {
+			justify-content: center;
+		}
+		
+		/* Smaller text for nav links on mobile */
+		.pixel-nav-link {
+			font-size: 0.6em;
+			padding: 0.4em 0.8em;
+		}
+	}
+	
+	/* Hide social links on very small screens to save space */
+	@media (max-width: 480px) {
 		.social-links {
 			display: none;
 		}

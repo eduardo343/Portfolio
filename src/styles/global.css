@@ -1,10 +1,8 @@
 /*
-  The CSS in this style tag is based off of Bear Blog's default CSS.
-  https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
-  License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
+  8-bit Retro Portfolio Theme
+  Custom styles for a pixel-perfect gaming experience
  */
  @import "tailwindcss";
-
 
  @layer base {
 	body{
@@ -13,16 +11,29 @@
 }
 
 :root {
-	--accent: #2337ff;
-	--accent-dark: #000d8a;
+	/* 8-bit Color Palette */
+	--pixel-green: #00ff41;
+	--pixel-green-dark: #00aa2e;
+	--pixel-pink: #ff0080;
+	--pixel-pink-dark: #aa0055;
+	--pixel-blue: #0080ff;
+	--pixel-blue-dark: #0055aa;
+	--pixel-bg: #0f0f23;
+	--pixel-bg-light: #1a1a3a;
+	--pixel-white: #ffffff;
+	--pixel-black: #000000;
+	
+	/* Legacy variables for compatibility */
+	--accent: var(--pixel-green);
+	--accent-dark: var(--pixel-green-dark);
 	--black: 15, 18, 25;
 	--gray: 96, 115, 159;
 	--gray-light: 229, 233, 240;
 	--gray-dark: 34, 41, 57;
 	--gray-gradient: rgba(var(--gray-light), 50%), #fff;
 	--box-shadow:
-		0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
-		0 16px 32px rgba(var(--gray), 33%);
+		0 4px 0 var(--pixel-green-dark),
+		0 8px 16px rgba(0, 255, 65, 0.3);
 }
 @font-face {
 	font-family: 'Atkinson';
