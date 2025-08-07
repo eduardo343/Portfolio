@@ -1,35 +1,29 @@
 ---
-title: 'Markdown Style Guide'
-description: 'Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro.'
-pubDate: 'Jun 19 2024'
-heroImage: '/blog-placeholder-1.jpg'
+title: 'Trellcord'
+description: 'Hey there, this my first proyect using tsx and graphql i have more details but the user experience its amazing'
+pubDate: 'Jun 20 2024'
+heroImage: '/TrellCord.png'
 ---
+## Trellcord was invented one day while I was playing video games and working.
 
-Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro.
+I was talking with a friend, and we imagined a platform where you could combine work and fun — or even rivalry.
 
-## Headings
+The idea is: if there's a conflict at work, like deciding whose turn it is to handle a task — for example, Mark didn't complete the UI section — instead of arguing, you settle it through a game. The winner gets to decide who takes the next task or how to resolve the issue.
 
-The following HTML `<h1>`—`<h6>` elements represent six levels of section headings. `<h1>` is the highest section level while `<h6>` is the lowest.
+## Teams
 
-# H1
+If you choose the "Friendly" mode, the focus is on fun and entertainment. You’ll have access to games, screen sharing, and a whiteboard. We even plan to implement AI features — for games or game recommendations.
 
-## H2
+If you choose "Enterprise" mode, the focus is on productivity. You’ll have an unlimited whiteboard, the ability to send documents or images (no matter the size), and planned AI tools to assist your workflow. We’re also looking into integrating design tools like Canva or Figma.And yes, I know what you’re thinking — why include games?
+Well, on Fridays or weekends, or when there's a conflict with a teammate, you can settle it with a quick game — whether it’s for fun or to decide who tackles the next task. You can also share your screen or even watch movies together.
 
-### H3
 
-#### H4
 
-##### H5
+## The clasic 
 
-###### H6
+Nice! You can have classic archive boards, delete boards, join other classic boards, etc. But in other boards, you can add a password for more security, my friend.
 
-## Paragraph
-
-Xerum, quo qui aut unt expliquam qui dolut labo. Aque venitatiusda cum, voluptionse latur sitiae dolessi aut parist aut dollo enim qui voluptate ma dolestendit peritin re plis aut quas inctum laceat est volestemque commosa as cus endigna tectur, offic to cor sequas etum rerum idem sintibus eiur? Quianimin porecus evelectur, cum que nis nust voloribus ratem aut omnimi, sitatur? Quiatem. Nam, omnis sum am facea corem alique molestrunt et eos evelece arcillit ut aut eos eos nus, sin conecerem erum fuga. Ri oditatquam, ad quibus unda veliamenimin cusam et facea ipsamus es exerum sitate dolores editium rerore eost, temped molorro ratiae volorro te reribus dolorer sperchicium faceata tiustia prat.
-
-Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sapicia is sinveli squiatum, core et que aut hariosam ex eat.
-
-## Images
+## User Interface Components
 
 ### Syntax
 
