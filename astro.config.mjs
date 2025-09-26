@@ -10,22 +10,22 @@ export default defineConfig({
   integrations: [
     mdx(),
     sitemap({
-      changefreq: 'weekly',
-      priority: 0.7,
-      lastmod: new Date(),
-      // Customize specific page priorities
-      customPages: [
-        'https://alanugarte.dev/', // Homepage - highest priority
-        'https://alanugarte.dev/about',
-        'https://alanugarte.dev/contact',
-        'https://alanugarte.dev/blog'
-      ]
-    })
+  changefreq: 'weekly',
+  priority: 0.7,
+  lastmod: new Date(),
+  // Customize specific page priorities
+  customPages: [
+    'https://alanugarte.dev/', // Homepage - highest priority
+    'https://alanugarte.dev/about',
+    'https://alanugarte.dev/contact',
+    'https://alanugarte.dev/blog'
+  ]
+})
   ],
-  compilerOptions: {
-    // Enable TypeScript strict mode
-    strict: true
-  },
+  // compilerOptions: {
+  //   // Enable TypeScript strict mode
+  //   strict: true
+  // },
   vite: {
     plugins: [tailwindcss()],
   },
@@ -34,7 +34,7 @@ export default defineConfig({
     inlineStylesheets: 'auto'
   },
   // Experimental features for better SEO
-  experimental: {
-    contentCollectionCache: true
-  }
+  // experimental: {
+  //   contentCollectionCache: true
+  // }
 });

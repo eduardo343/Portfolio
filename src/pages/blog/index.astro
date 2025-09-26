@@ -4,7 +4,6 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import { getCollection } from 'astro:content';
-import FormattedDate from '../../components/FormattedDate.astro';
 
 const posts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
@@ -14,98 +13,397 @@ const posts = (await getCollection('blog')).sort(
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title="Projects - Alan Ugarte" description="Explore my featured projects built with Laravel 11, Angular 19, and NoSQL databases" />
+		<!-- Import Press Start 2P font for consistency -->
+		<link
+			href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+			rel="stylesheet"
+		/>
 		<style>
-			main {
-				width: 960px;
+			/* Apply same retro background as homepage */
+			body {
+				background: 
+					linear-gradient(45deg, #0f0f23 25%, transparent 25%), 
+					linear-gradient(-45deg, #0f0f23 25%, transparent 25%), 
+					linear-gradient(45deg, transparent 75%, #0f0f23 75%), 
+					linear-gradient(-45deg, transparent 75%, #0f0f23 75%),
+					linear-gradient(to bottom, #1a1a3a, #0f0f23);
+				background-size: 20px 20px, 20px 20px, 20px 20px, 20px 20px, 100% 100%;
+				background-position: 0 0, 0 10px, 10px -10px, -10px 0px, 0 0;
+				color: #00ff41;
+				font-family: 'Press Start 2P', monospace;
+				min-height: 100vh;
+				position: relative;
+				overflow-x: hidden;
 			}
-			ul {
+
+			/* CRT scanlines effect */
+			body::before {
+				content: '';
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: repeating-linear-gradient(
+					0deg,
+					transparent,
+					transparent 2px,
+					rgba(0, 255, 65, 0.03) 2px,
+					rgba(0, 255, 65, 0.03) 4px
+				);
+				pointer-events: none;
+				z-index: 1000;
+			}
+
+			/* Main container */
+			.projects-container {
+				max-width: 1000px;
+				margin: 0 auto;
+				padding: 2rem;
+				min-height: 100vh;
 				display: flex;
-				flex-wrap: wrap;
-				gap: 2rem;
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
 			}
-			ul li {
-				width: calc(50% - 1rem);
-			}
-			ul li * {
-				text-decoration: none;
-				transition: 0.2s ease;
-			}
-			ul li:first-child {
-				width: 100%;
-				margin-bottom: 1rem;
+
+			/* Title */
+			.projects-title {
+				font-size: 2.5rem;
+				color: #00ff41;
 				text-align: center;
+				margin-bottom: 3rem;
+				text-shadow: 
+					0 0 5px #00ff41,
+					0 0 10px #00ff41,
+					0 0 15px #00ff41;
+				animation: glitch 2s infinite;
 			}
-			ul li:first-child img {
-				width: 100%;
+
+			@keyframes glitch {
+				0%, 100% {
+					text-shadow: 
+						0 0 5px #00ff41,
+						0 0 10px #00ff41,
+						0 0 15px #00ff41;
+				}
+				25% {
+					text-shadow: 
+						-2px 0 #ff0080,
+						2px 0 #0080ff,
+						0 0 5px #00ff41;
+				}
+				50% {
+					text-shadow: 
+						2px 0 #ff0080,
+						-2px 0 #0080ff,
+						0 0 5px #00ff41;
+				}
+				75% {
+					text-shadow: 
+						0 0 5px #00ff41,
+						0 0 10px #00ff41,
+						0 0 15px #00ff41;
+				}
 			}
-			ul li:first-child .title {
-				font-size: 2.369rem;
+
+			/* Revolver cylinder container */
+			.revolver-cylinder {
+				position: relative;
+				width: 400px;
+				height: 400px;
+				margin: 2rem auto;
+				border: 4px solid #00ff41;
+				border-radius: 50%;
+				background: radial-gradient(
+					circle at center,
+					rgba(0, 0, 0, 0.8) 0%,
+					rgba(15, 15, 35, 0.9) 50%,
+					rgba(0, 0, 0, 0.8) 100%
+				);
+				box-shadow: 
+					0 0 30px rgba(0, 255, 65, 0.5),
+					inset 0 0 30px rgba(0, 255, 65, 0.2),
+					inset 0 0 60px rgba(0, 0, 0, 0.8);
+				animation: cylinder-rotate 20s linear infinite;
 			}
-			ul li img {
+
+			@keyframes cylinder-rotate {
+				from { transform: rotate(0deg); }
+				to { transform: rotate(360deg); }
+			}
+
+			/* Center hub of the cylinder */
+			.cylinder-hub {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				width: 60px;
+				height: 60px;
+				transform: translate(-50%, -50%);
+				border: 3px solid #ff0080;
+				border-radius: 50%;
+				background: radial-gradient(
+					circle at center,
+					#ff0080 0%,
+					#aa0055 50%,
+					#0f0f23 100%
+				);
+				box-shadow: 
+					0 0 20px rgba(255, 0, 128, 0.8),
+					inset 0 0 10px rgba(0, 0, 0, 0.5);
+				z-index: 10;
+			}
+
+			/* Project chambers */
+			.project-chamber {
+				position: absolute;
+				width: 80px;
+				height: 80px;
+				border: 3px solid #0080ff;
+				border-radius: 50%;
+				background: rgba(0, 0, 0, 0.6);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				cursor: pointer;
+				transition: all 0.3s ease;
+				box-shadow: 
+					0 0 15px rgba(0, 128, 255, 0.3),
+					inset 0 0 15px rgba(0, 128, 255, 0.1);
+			}
+
+			/* Position chambers around the circle */
+			.project-chamber:nth-child(2) {
+				top: 20px;
+				left: 50%;
+				transform: translateX(-50%);
+			}
+
+			.project-chamber:nth-child(3) {
+				top: 50%;
+				right: 20px;
+				transform: translateY(-50%);
+			}
+
+			.project-chamber:nth-child(4) {
+				bottom: 20px;
+				left: 50%;
+				transform: translateX(-50%);
+			}
+
+			.project-chamber:nth-child(5) {
+				top: 50%;
+				left: 20px;
+				transform: translateY(-50%);
+			}
+
+			/* Chamber hover effects */
+			.project-chamber:hover {
+				transform: scale(1.2) translateX(-50%);
+				border-color: #00ff41;
+				background: rgba(0, 255, 65, 0.2);
+				box-shadow: 
+					0 0 25px rgba(0, 255, 65, 0.8),
+					inset 0 0 20px rgba(0, 255, 65, 0.2);
+				z-index: 5;
+			}
+
+			.project-chamber:nth-child(3):hover {
+				transform: scale(1.2) translateY(-50%);
+			}
+
+			.project-chamber:nth-child(5):hover {
+				transform: scale(1.2) translateY(-50%);
+			}
+
+			/* Project emoji/icon */
+			.project-icon {
+				font-size: 2rem;
+				filter: drop-shadow(0 0 5px currentColor);
+			}
+
+			/* Project info popup */
+			.project-popup {
+				position: absolute;
+				top: 120%;
+				left: 50%;
+				transform: translateX(-50%);
+				width: 300px;
+				padding: 1.5rem;
+				background: rgba(0, 0, 0, 0.9);
+				border: 2px solid #00ff41;
+				color: #00ff41;
+				font-size: 0.7rem;
+				line-height: 1.4;
+				opacity: 0;
+				pointer-events: none;
+				transition: all 0.3s ease;
+				z-index: 100;
+				box-shadow: 
+					0 0 20px rgba(0, 255, 65, 0.5),
+					inset 0 0 20px rgba(0, 255, 65, 0.1);
+			}
+
+			.project-chamber:hover .project-popup {
+				opacity: 1;
+				pointer-events: all;
+				transform: translateX(-50%) translateY(-10px);
+			}
+
+			.project-title {
+				color: #ff0080;
 				margin-bottom: 0.5rem;
-				border-radius: 12px;
+				font-size: 0.8rem;
+				text-shadow: 1px 1px 0 #aa0055;
 			}
-			ul li a {
-				display: block;
+
+			.project-description {
+				color: #0080ff;
+				margin-bottom: 1rem;
+				font-size: 0.6rem;
+				text-shadow: 1px 1px 0 #004080;
 			}
-			.title {
-				margin: 0;
-				color: rgb(var(--black));
-				line-height: 1;
+
+			.project-tech {
+				color: #00ff41;
+				font-size: 0.5rem;
+				text-shadow: 1px 1px 0 #00aa2e;
 			}
-			.date {
-				margin: 0;
-				color: rgb(var(--gray));
+
+			/* Instructions */
+			.instructions {
+				text-align: center;
+				margin-top: 3rem;
+				color: #ff0080;
+				font-size: 0.8rem;
+				text-shadow: 1px 1px 0 #aa0055;
+				animation: pulse 2s infinite;
 			}
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: rgb(var(--accent));
+
+			@keyframes pulse {
+				0%, 100% { opacity: 1; }
+				50% { opacity: 0.5; }
 			}
-			ul a:hover img {
-				box-shadow: var(--box-shadow);
-			}
-			@media (max-width: 720px) {
-				ul {
-					gap: 0.5em;
+
+			/* Responsive design */
+			@media (max-width: 768px) {
+				.projects-title {
+					font-size: 1.8rem;
 				}
-				ul li {
-					width: 100%;
-					text-align: center;
+
+				.revolver-cylinder {
+					width: 300px;
+					height: 300px;
 				}
-				ul li:first-child {
-					margin-bottom: 0;
+
+				.project-chamber {
+					width: 60px;
+					height: 60px;
 				}
-				ul li:first-child .title {
-					font-size: 1.563em;
+
+				.project-icon {
+					font-size: 1.5rem;
+				}
+
+				.project-popup {
+					width: 250px;
+					font-size: 0.6rem;
+				}
+
+				.instructions {
+					font-size: 0.7rem;
+				}
+			}
+
+			@media (max-width: 480px) {
+				.projects-container {
+					padding: 1rem;
+				}
+
+				.revolver-cylinder {
+					width: 250px;
+					height: 250px;
+				}
+
+				.project-chamber {
+					width: 50px;
+					height: 50px;
+				}
+
+				.project-icon {
+					font-size: 1.2rem;
+				}
+
+				.project-popup {
+					width: 200px;
+					font-size: 0.55rem;
+				}
+			}
+
+			/* Accessibility */
+			@media (prefers-reduced-motion: reduce) {
+				.revolver-cylinder {
+					animation: none !important;
+				}
+
+				.projects-title {
+					animation: none !important;
+				}
+
+				.instructions {
+					animation: none !important;
 				}
 			}
 		</style>
 	</head>
 	<body>
-		<Header />
-		<main>
-			<section>
-				<ul>
-					{
-						posts.map((post) => (
-							<li>
-								<a href={`/blog/${post.id}/`}>
-									<img width={720} height={360} src={post.data.heroImage} alt="" />
-									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</section>
-		</main>
-		<Footer />
+		<div class="flex flex-col min-h-screen">
+			<Header />
+			
+			<main class="flex-1">
+				<div class="projects-container">
+					<h1 class="projects-title">💥 PROJECT ARSENAL</h1>
+					
+					<div class="revolver-cylinder">
+						<!-- Center hub -->
+						<div class="cylinder-hub"></div>
+						
+						<!-- Project chambers positioned around the circle -->
+						{posts.map((post, index) => (
+							<a href={`/blog/${post.id}/`} class="project-chamber">
+								<div class="project-icon">
+									{
+										index === 0 ? '🛒' :
+										index === 1 ? '📋' :
+										index === 2 ? '💰' :
+										'🚀'
+									}
+								</div>
+								<div class="project-popup">
+									<div class="project-title">{post.data.title}</div>
+									<div class="project-description">{post.data.description}</div>
+									<div class="project-tech">
+										{
+											index === 0 ? 'Laravel 11 • Angular 19 • MongoDB' :
+											index === 1 ? 'Laravel 11 • Angular 19 • Firebase' :
+											index === 2 ? 'Laravel 11 • PHP 8.2 • DynamoDB' :
+											'Full Stack Development'
+										}
+									</div>
+								</div>
+							</a>
+						))}
+					</div>
+					
+					<div class="instructions">
+						🎯 Hover over each chamber to preview • Click to explore the project
+					</div>
+				</div>
+			</main>
+			
+			<Footer />
+		</div>
 	</body>
 </html>
