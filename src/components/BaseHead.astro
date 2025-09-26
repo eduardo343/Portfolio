@@ -8,11 +8,21 @@ interface Props {
 	title: string;
 	description: string;
 	image?: string;
+	keywords?: string;
+	author?: string;
+	type?: string;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
+const { 
+	title, 
+	description, 
+	image = '/me.jpg',
+	keywords = 'Alan Ugarte, Full Stack Developer, Laravel 11, Angular 19, PHP 8.2, TypeScript 5.0, MongoDB, Firebase, NoSQL, Web Development, Software Engineer',
+	author = 'Alan Ugarte',
+	type = 'website'
+} = Astro.props;
 ---
 
 <!-- Global Metadata -->
@@ -39,17 +49,78 @@ const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
 <title>{title}</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
+<meta name="keywords" content={keywords} />
+<meta name="author" content={author} />
+<meta name="robots" content="index, follow" />
+<meta name="language" content="English" />
+<meta name="theme-color" content="#00ff41" />
+
+<!-- Enhanced SEO Meta Tags -->
+<meta name="classification" content="Full Stack Developer Portfolio" />
+<meta name="subject" content="Web Development, Software Engineering, Laravel, Angular" />
+<meta name="designer" content="Alan Ugarte" />
+<meta name="owner" content="Alan Ugarte" />
+<meta name="url" content={canonicalURL} />
+<meta name="identifier-URL" content={canonicalURL} />
+<meta name="directory" content="submission" />
+<meta name="category" content="Technology, Web Development, Portfolio" />
+<meta name="coverage" content="Worldwide" />
+<meta name="distribution" content="Global" />
+<meta name="rating" content="General" />
+<meta name="revisit-after" content="7 days" />
+<meta name="target" content="all" />
+<meta name="HandheldFriendly" content="True" />
+<meta name="MobileOptimized" content="320" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Alan Ugarte",
+  "url": "https://alanugarte.dev",
+  "image": "https://alanugarte.dev/me.jpg",
+  "sameAs": [
+    "https://github.com/alanugarte",
+    "https://linkedin.com/in/alanugarte"
+  ],
+  "jobTitle": "Full Stack Developer",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Freelance"
+  },
+  "knowsAbout": [
+    "Laravel 11",
+    "Angular 19",
+    "PHP 8.2",
+    "TypeScript 5.0",
+    "MongoDB",
+    "Firebase Firestore",
+    "Web Development",
+    "Full Stack Development"
+  ],
+  "description": "Passionate Full Stack Developer specializing in Laravel, Angular, and NoSQL databases with over 5 years of professional experience."
+}
+</script>
 
 <!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
+<meta property="og:type" content={type} />
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={new URL(image, Astro.url)} />
+<meta property="og:image:alt" content={`${author} - Full Stack Developer`} />
+<meta property="og:locale" content="en_US" />
+<meta property="og:site_name" content="Alan Ugarte Portfolio" />
 
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={Astro.url} />
-<meta property="twitter:title" content={title} />
-<meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(image, Astro.url)} />
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={Astro.url} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={new URL(image, Astro.url)} />
+<meta name="twitter:image:alt" content={`${author} - Full Stack Developer`} />
+<meta name="twitter:creator" content="@alanugarte" />
+<meta name="twitter:site" content="@alanugarte" />

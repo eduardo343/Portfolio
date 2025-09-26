@@ -1,40 +1,385 @@
 ---
-import Layout from '../layouts/BlogPost.astro';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 ---
 
-<Layout
-	title="About Me"
-	description="Lorem ipsum dolor sit amet"
-	pubDate={new Date('June 08 2021')}
-	heroImage="/me.jpg"
->
-	<p>
-		My name is Alan Ugarte, and I am a software engineer with a passion for building
-		innovative solutions. I have a strong background in web development, specializing in creating
-		scalable and efficient applications. With a keen eye for detail and a commitment to quality,
-		I strive to deliver exceptional user experiences through clean and maintainable code.
-	</p>
+<html lang="en">
+	<head>
+		<BaseHead title="About Alan Ugarte - Full Stack Developer" description="Learn about Alan Ugarte's journey as a Full Stack Developer specializing in Laravel, Angular, and NoSQL databases" />
+		<!-- Import Press Start 2P font for consistency -->
+		<link
+			href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			/* Apply same retro background as homepage */
+			body {
+				background: 
+					linear-gradient(45deg, #0f0f23 25%, transparent 25%), 
+					linear-gradient(-45deg, #0f0f23 25%, transparent 25%), 
+					linear-gradient(45deg, transparent 75%, #0f0f23 75%), 
+					linear-gradient(-45deg, transparent 75%, #0f0f23 75%),
+					linear-gradient(to bottom, #1a1a3a, #0f0f23);
+				background-size: 20px 20px, 20px 20px, 20px 20px, 20px 20px, 100% 100%;
+				background-position: 0 0, 0 10px, 10px -10px, -10px 0px, 0 0;
+				color: #00ff41;
+				font-family: 'Press Start 2P', monospace;
+				min-height: 100vh;
+				position: relative;
+				overflow-x: hidden;
+			}
 
-	<p>
-		Im starting in the world of programation in 15 years old, and I have been working
-		professionally for over 5 years. My journey has taken me through various roles, from front-end
-		developer to full-stack engineer, allowing me to gain a comprehensive understanding of the
-		software development lifecycle. I am proficient in a wide range of technologies, including
-		JavaScript, React, Node.js, and more.
-	</p>
+			/* CRT scanlines effect */
+			body::before {
+				content: '';
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: repeating-linear-gradient(
+					0deg,
+					transparent,
+					transparent 2px,
+					rgba(0, 255, 65, 0.03) 2px,
+					rgba(0, 255, 65, 0.03) 4px
+				);
+				pointer-events: none;
+				z-index: 1000;
+			}
 
-	<p>
-		My first programming language was C++, which I learned in high school. Since then, I have
-		explored many other languages and frameworks, always eager to learn and adapt to new challenges.
-		
-	</p>
+			/* Main about container */
+			.pixel-about {
+				position: relative;
+				padding: 2rem;
+				max-width: 1000px;
+				margin: 2rem auto;
+			}
 
-	<p>
-		In my free time, I enjoy contributing to open-source projects, participating in hackathons,
-		and staying up-to-date with the latest industry trends. I am also an advocate for clean code
-		and best practices, and I love sharing my knowledge with others through mentoring and
-		presentations.
-	</p>
+			/* About sections */
+			.about-section {
+				background: rgba(0, 0, 0, 0.4);
+				border: 3px solid #00ff41;
+				margin-bottom: 2rem;
+				padding: 2rem;
+				position: relative;
+				box-shadow: 
+					0 0 30px rgba(0, 255, 65, 0.3),
+					inset 0 0 30px rgba(0, 255, 65, 0.1);
+			}
 
+			/* Rainbow border for sections */
+			.about-section::before {
+				content: '';
+				position: absolute;
+				top: -3px;
+				left: -3px;
+				right: -3px;
+				bottom: -3px;
+				background: linear-gradient(
+					45deg,
+					#ff0080, #00ff41, #0080ff, #ff0080
+				);
+				z-index: -1;
+				animation: rainbow-border 3s linear infinite;
+			}
 
-</Layout>
+			@keyframes rainbow-border {
+				0% { background-position: 0% 50%; }
+				50% { background-position: 100% 50%; }
+				100% { background-position: 0% 50%; }
+			}
+
+			/* Section titles */
+			.section-title {
+				font-size: 1.5rem;
+				color: #00ff41;
+				margin-bottom: 1.5rem;
+				text-align: center;
+				text-shadow: 
+					0 0 5px #00ff41,
+					0 0 10px #00ff41;
+				animation: glitch 2s infinite;
+			}
+
+			/* Main title */
+			.main-title {
+				font-size: 2.5rem;
+				color: #00ff41;
+				text-align: center;
+				margin-bottom: 3rem;
+				text-shadow: 
+					0 0 5px #00ff41,
+					0 0 10px #00ff41,
+					0 0 15px #00ff41;
+				animation: glitch 2s infinite;
+			}
+
+			/* Glitch animation */
+			@keyframes glitch {
+				0%, 100% {
+					text-shadow: 
+						0 0 5px #00ff41,
+						0 0 10px #00ff41,
+						0 0 15px #00ff41;
+				}
+				25% {
+					text-shadow: 
+						-2px 0 #ff0080,
+						2px 0 #0080ff,
+						0 0 5px #00ff41;
+				}
+				50% {
+					text-shadow: 
+						2px 0 #ff0080,
+						-2px 0 #0080ff,
+						0 0 5px #00ff41;
+				}
+				75% {
+					text-shadow: 
+						0 0 5px #00ff41,
+						0 0 10px #00ff41,
+						0 0 15px #00ff41;
+				}
+			}
+
+			/* Content text */
+			.pixel-text {
+				color: #ff0080;
+				font-size: 0.8rem;
+				line-height: 1.8;
+				margin-bottom: 1.5rem;
+				text-shadow: 1px 1px 0 #aa0055;
+			}
+
+			/* Timeline container */
+			.timeline {
+				position: relative;
+				padding-left: 2rem;
+			}
+
+			.timeline::before {
+				content: '';
+				position: absolute;
+				left: 0;
+				top: 0;
+				bottom: 0;
+				width: 3px;
+				background: linear-gradient(to bottom, #ff0080, #00ff41, #0080ff);
+				border-radius: 2px;
+			}
+
+			/* Timeline items */
+			.timeline-item {
+				position: relative;
+				margin-bottom: 2rem;
+				padding-left: 2rem;
+			}
+
+			.timeline-item::before {
+				content: '';
+				position: absolute;
+				left: -2rem;
+				top: 0.5rem;
+				width: 12px;
+				height: 12px;
+				background: #00ff41;
+				border: 2px solid #ff0080;
+				border-radius: 50%;
+				box-shadow: 0 0 10px #00ff41;
+			}
+
+			.timeline-date {
+				color: #0080ff;
+				font-size: 0.7rem;
+				font-weight: bold;
+				margin-bottom: 0.5rem;
+				text-shadow: 1px 1px 0 #004080;
+			}
+
+			.timeline-title {
+				color: #00ff41;
+				font-size: 0.9rem;
+				margin-bottom: 0.5rem;
+				text-shadow: 1px 1px 0 #00aa2e;
+			}
+
+			.timeline-desc {
+				color: #ff0080;
+				font-size: 0.7rem;
+				line-height: 1.6;
+				text-shadow: 1px 1px 0 #aa0055;
+			}
+
+			/* Skills grid */
+			.skills-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+				gap: 1rem;
+				margin-top: 1rem;
+			}
+
+			.skill-category {
+				background: rgba(0, 0, 0, 0.6);
+				border: 2px solid #ff0080;
+				padding: 1rem;
+				text-align: center;
+				transition: all 0.3s ease;
+			}
+
+			.skill-category:hover {
+				border-color: #00ff41;
+				box-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
+				transform: translateY(-2px);
+			}
+
+			.skill-title {
+				color: #00ff41;
+				font-size: 0.8rem;
+				margin-bottom: 1rem;
+				text-shadow: 1px 1px 0 #00aa2e;
+			}
+
+			.skill-list {
+				color: #ff0080;
+				font-size: 0.6rem;
+				line-height: 1.8;
+				text-shadow: 1px 1px 0 #aa0055;
+			}
+
+			/* Responsive design */
+			@media (max-width: 768px) {
+				.main-title {
+					font-size: 1.8rem;
+				}
+				.section-title {
+					font-size: 1.2rem;
+				}
+				.pixel-about {
+					margin: 1rem;
+					padding: 1rem;
+				}
+				.about-section {
+					padding: 1.5rem;
+				}
+				.skills-grid {
+					grid-template-columns: 1fr;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="flex flex-col min-h-screen">
+			<Header />
+			
+			<main class="flex-1 px-4 py-8">
+				<div class="pixel-about">
+					<h1 class="main-title">👨‍💻 PLAYER PROFILE</h1>
+					
+					<!-- Introduction Section -->
+					<section class="about-section">
+						<h2 class="section-title">🎯 MISSION STATEMENT</h2>
+						<p class="pixel-text">
+							¡Hola! I'm Alan Ugarte, a passionate Full Stack Developer with over 5 years of professional experience crafting digital solutions. My journey began at age 15 with my first line of C++, and since then, I've been on an epic quest to master the art of programming.
+						</p>
+						<p class="pixel-text">
+							I specialize in building scalable web applications using modern technologies, with a strong focus on Laravel 11 backends, Angular 19 frontends, and NoSQL databases. My mission is to transform complex business requirements into elegant, efficient, and user-friendly solutions.
+						</p>
+					</section>
+
+					<!-- Experience Timeline -->
+					<section class="about-section">
+						<h2 class="section-title">🚀 EXPERIENCE LOG</h2>
+						<div class="timeline">
+							<div class="timeline-item">
+								<div class="timeline-date">2019 - PRESENT</div>
+								<div class="timeline-title">Full Stack Developer</div>
+								<div class="timeline-desc">
+									Developing and maintaining web applications using Laravel, Angular, and various database technologies. Leading projects from conception to deployment, focusing on performance optimization and user experience.
+								</div>
+							</div>
+							<div class="timeline-item">
+								<div class="timeline-date">2018 - 2019</div>
+								<div class="timeline-title">Frontend Developer</div>
+								<div class="timeline-desc">
+									Specialized in creating responsive and interactive user interfaces using JavaScript, HTML5, CSS3, and early Angular frameworks. Collaborated with design teams to implement pixel-perfect designs.
+								</div>
+							</div>
+							<div class="timeline-item">
+								<div class="timeline-date">2016 - 2018</div>
+								<div class="timeline-title">Programming Journey Begins</div>
+								<div class="timeline-desc">
+									Started programming at age 15 with C++. Explored various programming languages including Java, Python, and JavaScript. Built first web applications and discovered passion for web development.
+								</div>
+							</div>
+						</div>
+					</section>
+
+					<!-- Technical Skills -->
+					<section class="about-section">
+						<h2 class="section-title">⚡ TECH ARSENAL</h2>
+						<div class="skills-grid">
+							<div class="skill-category">
+								<div class="skill-title">🖥️ BACKEND</div>
+								<div class="skill-list">
+									PHP 8.2<br/>
+									Laravel 11<br/>
+									Node.js<br/>
+									RESTful APIs<br/>
+									GraphQL
+								</div>
+							</div>
+							<div class="skill-category">
+								<div class="skill-title">🎨 FRONTEND</div>
+								<div class="skill-list">
+									TypeScript 5.0<br/>
+									Angular 19<br/>
+									JavaScript ES6+<br/>
+									HTML5 & CSS3<br/>
+									Tailwind CSS
+								</div>
+							</div>
+							<div class="skill-category">
+								<div class="skill-title">🗄️ DATABASES</div>
+								<div class="skill-list">
+									MongoDB<br/>
+									Firebase Firestore<br/>
+									DynamoDB<br/>
+									MySQL<br/>
+									Redis
+								</div>
+							</div>
+							<div class="skill-category">
+								<div class="skill-title">🛠️ TOOLS & OTHERS</div>
+								<div class="skill-list">
+									Git & GitHub<br/>
+									Docker<br/>
+									AWS Services<br/>
+									Agile/Scrum<br/>
+									CI/CD
+								</div>
+							</div>
+						</div>
+					</section>
+
+					<!-- Philosophy & Interests -->
+					<section class="about-section">
+						<h2 class="section-title">💡 CODING PHILOSOPHY</h2>
+						<p class="pixel-text">
+							I believe in writing clean, maintainable code that not only solves problems but also tells a story. My approach combines modern development practices with a deep understanding of business requirements to deliver solutions that truly matter.
+						</p>
+						<p class="pixel-text">
+							When I'm not coding, you'll find me contributing to open-source projects, participating in hackathons, mentoring junior developers, or exploring the latest industry trends. I'm passionate about sharing knowledge and believe that the best way to grow is by helping others succeed.
+						</p>
+						<p class="pixel-text">
+							Currently focused on mastering Laravel 11's latest features, exploring Angular 19's new capabilities, and diving deeper into NoSQL database optimization techniques.
+						</p>
+					</section>
+				</div>
+			</main>
+			
+			<Footer />
+		</div>
+	</body>
+</html>
