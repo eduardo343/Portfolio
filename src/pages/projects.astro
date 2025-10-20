@@ -2,108 +2,15 @@
 import BaseHead from '../../components/BaseHead.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-
-// Datos de los proyectos - Edita aquí tus proyectos reales
-const projects = [
-	{
-		level: 1,
-		emoji: '🚀',
-		title: 'SPACE INVADERS CLONE',
-		description: 'Recreación del clásico arcade con mecánicas modernas, power-ups y efectos de partículas. Incluye tabla de puntuaciones y múltiples niveles.',
-		techs: [
-			{ name: 'JS', class: 'js' },
-			{ name: 'CANVAS', class: 'canvas' },
-			{ name: 'WEBGL', class: 'webgl' }
-		],
-		links: {
-			demo: 'https://tu-demo.com',
-			github: 'https://github.com/tu-usuario/proyecto'
-		}
-	},
-	{
-		level: 2,
-		emoji: '🛒',
-		title: 'E-COMMERCE DASHBOARD',
-		description: 'Panel de administración completo con analytics en tiempo real, gestión de inventario y procesamiento de pagos seguros.',
-		techs: [
-			{ name: 'REACT', class: 'react' },
-			{ name: 'NODE', class: 'node' },
-			{ name: 'MONGO', class: 'mongo' }
-		],
-		links: {
-			demo: 'https://tu-ecommerce-demo.com',
-			github: 'https://github.com/tu-usuario/ecommerce'
-		}
-	},
-	{
-		level: 3,
-		emoji: '🏃‍♂️',
-		title: 'FITNESS TRACKER APP',
-		description: 'App móvil con seguimiento GPS, métricas de salud, retos sociales y integración con dispositivos wearables.',
-		techs: [
-			{ name: 'FLUTTER', class: 'flutter' },
-			{ name: 'FIRE', class: 'firebase' },
-			{ name: 'REST', class: 'api' }
-		],
-		links: {
-			demo: 'https://play.google.com/store/tu-app'
-		}
-	},
-	{
-		level: 4,
-		emoji: '🧠',
-		title: 'AI IMAGE GENERATOR',
-		description: 'Generador de imágenes con IA usando modelos de difusión. Interface web intuitiva con historial y personalización avanzada.',
-		techs: [
-			{ name: 'PYTHON', class: 'python' },
-			{ name: 'AI/ML', class: 'ai' },
-			{ name: 'DOCKER', class: 'docker' }
-		],
-		links: {
-			demo: 'https://tu-ai-demo.com',
-			github: 'https://github.com/tu-usuario/ai-generator'
-		}
-	},
-	{
-		level: 5,
-		emoji: '🎵',
-		title: 'MUSIC STREAMING PLATFORM',
-		description: 'Plataforma de streaming con recomendaciones IA, playlists colaborativas y reproductor con visualizador de ondas.',
-		techs: [
-			{ name: 'VUE', class: 'vue' },
-			{ name: 'NODE', class: 'node' },
-			{ name: 'PSQL', class: 'postgres' }
-		],
-		links: {
-			demo: 'https://tu-music-platform.com'
-		}
-	},
-	{
-		level: 6,
-		emoji: '⚡',
-		title: 'BLOCKCHAIN WALLET',
-		description: 'Cartera de criptomonedas multi-chain con intercambio DEX, staking y portfolio tracking. Seguridad de grado bancario.',
-		techs: [
-			{ name: 'SOL', class: 'solidity' },
-			{ name: 'WEB3', class: 'web3' },
-			{ name: 'NEXT', class: 'next' }
-		],
-		links: {
-			demo: 'https://tu-wallet-demo.com',
-			github: 'https://github.com/tu-usuario/blockchain-wallet'
-		}
-	}
-];
-
-const totalProjects = projects.length;
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="en">
 	<head>
 		<BaseHead title="Portfolio - Alan Ugarte" description="Retro gaming portfolio showcasing full stack development projects" />
 		<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 		<style>
+			/* Variables de colores neón */
 			:root {
 				--neon-green: #00ff41;
 				--neon-cyan: #00ffff;
@@ -125,10 +32,12 @@ const totalProjects = projects.length;
 				font-family: 'Press Start 2P', monospace;
 				background: var(--dark-bg);
 				color: var(--neon-green);
-				min-height: 100vh;
+				overflow: hidden;
+				height: 100vh;
 				position: relative;
 			}
 
+			/* Grid animado de fondo */
 			.retro-grid {
 				position: fixed;
 				top: 0;
@@ -149,6 +58,7 @@ const totalProjects = projects.length;
 				100% { transform: perspective(800px) rotateX(60deg) translateZ(-200px) translateY(50px); }
 			}
 
+			/* Estrellas parpadeantes */
 			.stars-container {
 				position: fixed;
 				top: 0;
@@ -156,9 +66,37 @@ const totalProjects = projects.length;
 				width: 100%;
 				height: 100%;
 				z-index: 2;
-				pointer-events: none;
 			}
 
+			.stars-container::before,
+			.stars-container::after {
+				content: '';
+				position: absolute;
+				width: 2px;
+				height: 2px;
+				background: var(--neon-yellow);
+				border-radius: 50%;
+				animation: twinkle 2s infinite alternate;
+			}
+
+			.stars-container::before {
+				top: 20%;
+				left: 10%;
+				animation-delay: 0s;
+			}
+
+			.stars-container::after {
+				top: 60%;
+				right: 15%;
+				animation-delay: 1s;
+			}
+
+			@keyframes twinkle {
+				0% { opacity: 0.3; transform: scale(0.8); }
+				100% { opacity: 1; transform: scale(1.2); }
+			}
+
+			/* Efectos scanline */
 			.scanlines {
 				position: fixed;
 				top: 0;
@@ -176,26 +114,25 @@ const totalProjects = projects.length;
 				z-index: 10;
 			}
 
-			.portfolio-wrapper {
-				position: relative;
-				z-index: 5;
-				padding: 2rem 0;
-			}
-
+			/* Consola principal */
 			.console {
+				position: relative;
 				width: 95%;
 				max-width: 1200px;
-				margin: 0 auto;
+				height: 90vh;
+				margin: 5vh auto;
 				background: var(--console-bg);
 				border: var(--border-thick) solid var(--neon-cyan);
 				border-radius: 20px;
 				box-shadow: 
 					0 0 20px var(--neon-cyan),
 					inset 0 0 20px rgba(0, 255, 255, 0.1);
+				z-index: 5;
 				display: flex;
 				flex-direction: column;
 			}
 
+			/* LEDs de estado */
 			.console-leds {
 				display: flex;
 				gap: 15px;
@@ -233,22 +170,26 @@ const totalProjects = projects.length;
 				50% { opacity: 0.3; }
 			}
 
+			/* Pantalla principal */
 			.screen {
+				flex: 1;
 				margin: 0 30px;
 				background: var(--screen-bg);
 				border: 6px solid #333;
 				border-radius: 15px;
-				min-height: 600px;
+				position: relative;
 				overflow: hidden;
 				box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.8);
 			}
 
 			.screen-content {
 				padding: 40px;
+				height: 100%;
 				position: relative;
 				z-index: 3;
 			}
 
+			/* Título con efecto glitch */
 			.title-section {
 				text-align: center;
 				margin-bottom: 40px;
@@ -261,6 +202,7 @@ const totalProjects = projects.length;
 					2px 2px 0px var(--neon-magenta),
 					-2px -2px 0px var(--neon-cyan);
 				animation: glitch 3s infinite;
+				position: relative;
 			}
 
 			@keyframes glitch {
@@ -269,6 +211,7 @@ const totalProjects = projects.length;
 				97% { transform: translate(-1px, -1px); }
 				98% { transform: translate(1px, 2px); }
 				99% { transform: translate(-2px, -1px); }
+				100% { transform: translate(0); }
 			}
 
 			.subtitle {
@@ -283,9 +226,10 @@ const totalProjects = projects.length;
 				to { transform: translateY(-10px); }
 			}
 
+			/* Contenedor de proyectos */
 			.projects-container {
 				position: relative;
-				min-height: 450px;
+				height: 60%;
 			}
 
 			.project {
@@ -293,24 +237,24 @@ const totalProjects = projects.length;
 				top: 0;
 				left: 0;
 				width: 100%;
+				height: 100%;
 				opacity: 0;
 				transform: translateX(100px);
-				transition: all 0.5s ease;
+				transition: all 0.3s ease;
 				display: flex;
 				align-items: center;
 				justify-content: center;
 				gap: 40px;
-				pointer-events: none;
 			}
 
 			.project.active {
 				opacity: 1;
 				transform: translateX(0);
-				pointer-events: auto;
 			}
 
 			.project-header {
 				text-align: center;
+				animation: float 3s ease-in-out infinite alternate;
 			}
 
 			.level-indicator {
@@ -332,6 +276,7 @@ const totalProjects = projects.length;
 				50% { transform: translateY(-20px); }
 			}
 
+			/* Cuadro de diálogo RPG */
 			.dialog-box {
 				background: linear-gradient(135deg, rgba(0, 20, 40, 0.9), rgba(0, 8, 20, 0.9));
 				border: 4px solid var(--neon-green);
@@ -375,44 +320,7 @@ const totalProjects = projects.length;
 				margin-bottom: 20px;
 			}
 
-			.project-links {
-				display: flex;
-				gap: 10px;
-				margin-bottom: 20px;
-			}
-
-			.project-link {
-				padding: 10px 15px;
-				font-size: 0.7rem;
-				border-radius: 8px;
-				border: 2px solid var(--neon-cyan);
-				background: rgba(0, 255, 255, 0.1);
-				color: var(--neon-cyan);
-				text-decoration: none;
-				text-shadow: 0 0 5px var(--neon-cyan);
-				box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
-				transition: all 0.3s ease;
-				display: inline-block;
-			}
-
-			.project-link:hover {
-				background: rgba(0, 255, 255, 0.2);
-				box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
-				transform: translateY(-2px);
-			}
-
-			.project-link.demo {
-				border-color: var(--neon-magenta);
-				color: var(--neon-magenta);
-				text-shadow: 0 0 5px var(--neon-magenta);
-				box-shadow: 0 0 10px rgba(255, 0, 128, 0.3);
-			}
-
-			.project-link.demo:hover {
-				background: rgba(255, 0, 128, 0.2);
-				box-shadow: 0 0 20px rgba(255, 0, 128, 0.6);
-			}
-
+			/* Badges de tecnologías */
 			.tech-badges {
 				display: flex;
 				gap: 10px;
@@ -453,6 +361,7 @@ const totalProjects = projects.length;
 				to { box-shadow: 0 0 20px currentColor, 0 0 30px currentColor; }
 			}
 
+			/* Controles */
 			.controls {
 				padding: 30px;
 				display: flex;
@@ -462,6 +371,7 @@ const totalProjects = projects.length;
 				border-top: 2px solid #333;
 			}
 
+			/* Barra de progreso */
 			.progress-bar {
 				display: flex;
 				align-items: center;
@@ -480,17 +390,19 @@ const totalProjects = projects.length;
 				border: 2px solid var(--neon-cyan);
 				border-radius: 10px;
 				overflow: hidden;
+				position: relative;
 			}
 
 			.progress-fill {
 				height: 100%;
-				width: 16.66%;
+				width: 25%;
 				background: linear-gradient(90deg, var(--neon-green), var(--neon-cyan));
 				border-radius: 8px;
-				transition: width 0.5s ease;
+				transition: width 0.3s ease;
 				box-shadow: 0 0 10px var(--neon-green);
 			}
 
+			/* Display digital */
 			.digital-display {
 				font-size: 1.5rem;
 				color: var(--neon-green);
@@ -513,6 +425,7 @@ const totalProjects = projects.length;
 				51%, 100% { opacity: 0.3; }
 			}
 
+			/* Botones de navegación */
 			.nav-buttons {
 				display: flex;
 				gap: 20px;
@@ -532,9 +445,10 @@ const totalProjects = projects.length;
 					0 8px 16px rgba(0, 0, 0, 0.3),
 					0 0 20px rgba(255, 0, 128, 0.3),
 					inset 0 0 10px rgba(255, 0, 128, 0.1);
+				position: relative;
 			}
 
-			.nav-btn:hover:not(:disabled) {
+			.nav-btn:hover {
 				transform: translateY(-3px) scale(1.05);
 				box-shadow: 
 					0 12px 24px rgba(0, 0, 0, 0.4),
@@ -552,18 +466,20 @@ const totalProjects = projects.length;
 				transform: none;
 			}
 
+			.btn-icon {
+				text-shadow: 0 0 10px currentColor;
+			}
+
+			/* Responsivo */
 			@media (max-width: 768px) {
 				.console {
 					width: 98%;
-					border-width: 4px;
+					height: 95vh;
+					margin: 2.5vh auto;
 				}
 				
 				.glitch-title {
 					font-size: 1.8rem;
-				}
-				
-				.subtitle {
-					font-size: 0.8rem;
 				}
 				
 				.project {
@@ -573,10 +489,6 @@ const totalProjects = projects.length;
 				
 				.project-sprite {
 					font-size: 4rem;
-				}
-				
-				.dialog-box {
-					padding: 20px;
 				}
 				
 				.controls {
@@ -598,127 +510,225 @@ const totalProjects = projects.length;
 		</style>
 	</head>
 	<body>
+		<!-- Grid animado de fondo -->
 		<div class="retro-grid"></div>
-		<div class="stars-container" id="stars"></div>
+		<div class="stars-container"></div>
 		<div class="scanlines"></div>
 		
-		<Header />
-		
-		<div class="portfolio-wrapper">
-			<div class="console">
-				<div class="console-leds">
-					<div class="led led-power"></div>
-					<div class="led led-data"></div>
-					<div class="led led-system"></div>
-				</div>
-				
-				<div class="screen">
-					<div class="screen-content">
-						<div class="title-section">
-							<h1 class="glitch-title">ALAN'S PORTFOLIO</h1>
-							<p class="subtitle">&gt;&gt;&gt; LEVEL SELECT &lt;&lt;&lt;</p>
-						</div>
-						
-						<div class="projects-container">
-							{projects.map((project, index) => (
-								<div class={`project ${index === 0 ? 'active' : ''}`} data-level={project.level}>
+		<div class="flex flex-col min-h-screen">
+			<Header />
+			
+			<main class="flex-1">
+				<!-- Consola principal -->
+				<div class="console">
+					<!-- LEDs de estado -->
+					<div class="console-leds">
+						<div class="led led-power"></div>
+						<div class="led led-data"></div>
+						<div class="led led-system"></div>
+					</div>
+					
+					<!-- Pantalla principal -->
+					<div class="screen">
+						<div class="screen-content">
+							<!-- Título con efecto glitch -->
+							<div class="title-section">
+								<h1 class="glitch-title" data-text="ALAN'S PORTFOLIO">ALAN'S PORTFOLIO</h1>
+								<p class="subtitle">>>> LEVEL SELECT <<<</p>
+							</div>
+							
+							<!-- Contenedor de proyectos -->
+							<div class="projects-container">
+								<!-- Proyecto 1 -->
+								<div class="project active" data-level="1">
 									<div class="project-header">
-										<span class="level-indicator">LVL {String(project.level).padStart(2, '0')}</span>
-										<div class="project-sprite">{project.emoji}</div>
+										<span class="level-indicator">LVL 01</span>
+										<div class="project-sprite">🚀</div>
 									</div>
 									<div class="dialog-box">
 										<div class="dialog-header">
-											<span class="project-title">{project.title}</span>
+											<span class="project-title">SPACE INVADERS CLONE</span>
 										</div>
 										<div class="dialog-content">
-											<p>{project.description}</p>
-											
-											{project.links && (
-												<div class="project-links">
-													{project.links.demo && (
-														<a href={project.links.demo} target="_blank" rel="noopener noreferrer" class="project-link demo">
-															▶ DEMO
-														</a>
-													)}
-													{project.links.github && (
-														<a href={project.links.github} target="_blank" rel="noopener noreferrer" class="project-link">
-															⚙ CODE
-														</a>
-													)}
-													{project.links && 'case' in project.links && project.links.case && (
-														<a href={String(project.links.case)} target="_blank" rel="noopener noreferrer" class="project-link">
-															📄 CASE
-														</a>
-													)}
-												</div>
-											)}
-											
+											<p>Recreación del clásico arcade con mecánicas modernas, power-ups y efectos de partículas. Incluye tabla de puntuaciones y múltiples niveles.</p>
 											<div class="tech-badges">
-												{project.techs.map(tech => (
-													<span class={`badge ${tech.class}`}>{tech.name}</span>
-												))}
+												<span class="badge js">JS</span>
+												<span class="badge canvas">CANVAS</span>
+												<span class="badge webgl">WEBGL</span>
 											</div>
 										</div>
 									</div>
 								</div>
-							))}
-						</div>
-					</div>
-				</div>
-				
-				<div class="controls">
-					<div class="progress-bar">
-						<div class="progress-label">PROGRESS</div>
-						<div class="progress-container">
-							<div class="progress-fill" id="progressFill"></div>
+								
+								<!-- Proyecto 2 -->
+								<div class="project" data-level="2">
+									<div class="project-header">
+										<span class="level-indicator">LVL 02</span>
+										<div class="project-sprite">🛒</div>
+									</div>
+									<div class="dialog-box">
+										<div class="dialog-header">
+											<span class="project-title">E-COMMERCE DASHBOARD</span>
+										</div>
+										<div class="dialog-content">
+											<p>Panel de administración completo con analytics en tiempo real, gestión de inventario y procesamiento de pagos seguros.</p>
+											<div class="tech-badges">
+												<span class="badge react">REACT</span>
+												<span class="badge node">NODE</span>
+												<span class="badge mongo">MONGO</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<!-- Proyecto 3 -->
+								<div class="project" data-level="3">
+									<div class="project-header">
+										<span class="level-indicator">LVL 03</span>
+										<div class="project-sprite">🏃‍♂️</div>
+									</div>
+									<div class="dialog-box">
+										<div class="dialog-header">
+											<span class="project-title">FITNESS TRACKER APP</span>
+										</div>
+										<div class="dialog-content">
+											<p>App móvil con seguimiento GPS, métricas de salud, retos sociales y integración con dispositivos wearables.</p>
+											<div class="tech-badges">
+												<span class="badge flutter">FLUTTER</span>
+												<span class="badge firebase">FIRE</span>
+												<span class="badge api">REST</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<!-- Proyecto 4 -->
+								<div class="project" data-level="4">
+									<div class="project-header">
+										<span class="level-indicator">LVL 04</span>
+										<div class="project-sprite">🧠</div>
+									</div>
+									<div class="dialog-box">
+										<div class="dialog-header">
+											<span class="project-title">AI IMAGE GENERATOR</span>
+										</div>
+										<div class="dialog-content">
+											<p>Generador de imágenes con IA usando modelos de difusión. Interface web intuitiva con historial y personalización avanzada.</p>
+											<div class="tech-badges">
+												<span class="badge python">PYTHON</span>
+												<span class="badge ai">AI/ML</span>
+												<span class="badge docker">DOCKER</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<!-- Proyecto 5 -->
+								<div class="project" data-level="5">
+									<div class="project-header">
+										<span class="level-indicator">LVL 05</span>
+										<div class="project-sprite">🎵</div>
+									</div>
+									<div class="dialog-box">
+										<div class="dialog-header">
+											<span class="project-title">MUSIC STREAMING PLATFORM</span>
+										</div>
+										<div class="dialog-content">
+											<p>Plataforma de streaming con recomendaciones IA, playlists colaborativas y reproductor con visualizador de ondas.</p>
+											<div class="tech-badges">
+												<span class="badge vue">VUE</span>
+												<span class="badge node">NODE</span>
+												<span class="badge postgres">PSQL</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<!-- Proyecto 6 -->
+								<div class="project" data-level="6">
+									<div class="project-header">
+										<span class="level-indicator">LVL 06</span>
+										<div class="project-sprite">⚡</div>
+									</div>
+									<div class="dialog-box">
+										<div class="dialog-header">
+											<span class="project-title">BLOCKCHAIN WALLET</span>
+										</div>
+										<div class="dialog-content">
+											<p>Cartera de criptomonedas multi-chain con intercambio DEX, staking y portfolio tracking. Seguridad de grado bancario.</p>
+											<div class="tech-badges">
+												<span class="badge solidity">SOL</span>
+												<span class="badge web3">WEB3</span>
+												<span class="badge next">NEXT</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 					
-					<div class="digital-display">
-						<span class="current-page">01</span>
-						<span class="separator">/</span>
-						<span class="total-pages">{String(totalProjects).padStart(2, '0')}</span>
-					</div>
-					
-					<div class="nav-buttons">
-						<button class="nav-btn" id="prevBtn">
-							<span class="btn-icon">◄</span>
-						</button>
-						<button class="nav-btn" id="nextBtn">
-							<span class="btn-icon">►</span>
-						</button>
+					<!-- Controles -->
+					<div class="controls">
+						<!-- Barra de progreso -->
+						<div class="progress-bar">
+							<div class="progress-label">PROGRESS</div>
+							<div class="progress-container">
+								<div class="progress-fill"></div>
+							</div>
+						</div>
+						
+						<!-- Display digital -->
+						<div class="digital-display">
+							<span class="current-page">01</span>
+							<span class="separator">/</span>
+							<span class="total-pages">06</span>
+						</div>
+						
+						<!-- Botones de navegación -->
+						<div class="nav-buttons">
+							<button class="nav-btn prev-btn" id="prevBtn">
+								<span class="btn-icon">◄</span>
+							</button>
+							<button class="nav-btn next-btn" id="nextBtn">
+								<span class="btn-icon">►</span>
+							</button>
+						</div>
 					</div>
 				</div>
-			</div>
+			</main>
+			
+			<Footer />
 		</div>
 		
-		<Footer />
-		
-		<script define:vars={{ totalProjects }}>
+		<script>
 			class RetroPortfolio {
 				constructor() {
 					this.currentProject = 0;
-					this.totalProjects = totalProjects;
+					this.totalProjects = 6;
 					this.projects = document.querySelectorAll('.project');
 					this.prevBtn = document.getElementById('prevBtn');
 					this.nextBtn = document.getElementById('nextBtn');
-					this.progressFill = document.getElementById('progressFill');
+					this.progressFill = document.querySelector('.progress-fill');
 					this.currentPageDisplay = document.querySelector('.current-page');
 					
 					this.init();
 					this.createStars();
 					this.bindEvents();
+					this.updateDisplay();
 				}
 				
 				init() {
-					this.updateDisplay();
+					this.showProject(0);
 					this.updateButtons();
 				}
 				
 				createStars() {
-					const starsContainer = document.getElementById('stars');
-					for (let i = 0; i < 20; i++) {
+					const starsContainer = document.querySelector('.stars-container');
+					
+					for (let i = 0; i < 15; i++) {
 						const star = document.createElement('div');
+						star.className = 'star';
 						star.style.cssText = `
 							position: absolute;
 							width: ${Math.random() * 3 + 1}px;
@@ -727,7 +737,7 @@ const totalProjects = projects.length;
 							border-radius: 50%;
 							top: ${Math.random() * 100}%;
 							left: ${Math.random() * 100}%;
-							animation: pulse ${Math.random() * 3 + 1}s infinite;
+							animation: twinkle ${Math.random() * 3 + 1}s infinite alternate;
 							animation-delay: ${Math.random() * 2}s;
 							box-shadow: 0 0 6px var(--neon-yellow);
 						`;
@@ -736,22 +746,37 @@ const totalProjects = projects.length;
 				}
 				
 				bindEvents() {
-					this.prevBtn.addEventListener('click', () => this.navigate(-1));
-					this.nextBtn.addEventListener('click', () => this.navigate(1));
+					this.prevBtn.addEventListener('click', () => this.navigateProject(-1));
+					this.nextBtn.addEventListener('click', () => this.navigateProject(1));
 					
 					document.addEventListener('keydown', (e) => {
-						if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
-							e.preventDefault();
-							this.navigate(-1);
-						}
-						if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {
-							e.preventDefault();
-							this.navigate(1);
+						switch(e.key) {
+							case 'ArrowLeft':
+							case 'a':
+							case 'A':
+								e.preventDefault();
+								this.navigateProject(-1);
+								break;
+							case 'ArrowRight':
+							case 'd':
+							case 'D':
+								e.preventDefault();
+								this.navigateProject(1);
+								break;
 						}
 					});
 					
-					// Touch events para móviles
+					[this.prevBtn, this.nextBtn].forEach(btn => {
+						btn.addEventListener('click', () => this.playClickEffect(btn));
+					});
+					
+					this.setupTouchEvents();
+				}
+				
+				setupTouchEvents() {
 					let touchStartX = 0;
+					let touchEndX = 0;
+					
 					const screen = document.querySelector('.screen');
 					
 					screen.addEventListener('touchstart', (e) => {
@@ -759,35 +784,56 @@ const totalProjects = projects.length;
 					});
 					
 					screen.addEventListener('touchend', (e) => {
-						const diff = touchStartX - e.changedTouches[0].screenX;
-						if (Math.abs(diff) > 50) {
-							this.navigate(diff > 0 ? 1 : -1);
-						}
+						touchEndX = e.changedTouches[0].screenX;
+						this.handleSwipe();
 					});
+					
+					const handleSwipe = () => {
+						const swipeThreshold = 50;
+						const diff = touchStartX - touchEndX;
+						
+						if (Math.abs(diff) > swipeThreshold) {
+							if (diff > 0) {
+								this.navigateProject(1);
+							} else {
+								this.navigateProject(-1);
+							}
+						}
+					};
+					
+					this.handleSwipe = handleSwipe;
 				}
 				
-				navigate(direction) {
+				navigateProject(direction) {
 					const newIndex = this.currentProject + direction;
+					
 					if (newIndex >= 0 && newIndex < this.totalProjects) {
-						this.projects[this.currentProject].classList.remove('active');
-						this.currentProject = newIndex;
-						
-						setTimeout(() => {
-							this.projects[this.currentProject].classList.add('active');
-						}, 150);
-						
-						this.updateDisplay();
-						this.updateButtons();
-						this.triggerScreenEffect();
-						
-						if (navigator.vibrate) navigator.vibrate(50);
+						this.showProject(newIndex);
+						this.vibrateDevice();
 					}
 				}
 				
+				showProject(index) {
+					if (this.projects[this.currentProject]) {
+						this.projects[this.currentProject].classList.remove('active');
+					}
+					
+					this.currentProject = index;
+					
+					setTimeout(() => {
+						this.projects[this.currentProject].classList.add('active');
+					}, 150);
+					
+					this.updateDisplay();
+					this.updateButtons();
+					this.triggerScreenEffect();
+				}
+				
 				updateDisplay() {
-					this.currentPageDisplay.textContent = String(this.currentProject + 1).padStart(2, '0');
-					const progress = ((this.currentProject + 1) / this.totalProjects) * 100;
-					this.progressFill.style.width = progress + '%';
+					this.currentPageDisplay.textContent = (this.currentProject + 1).toString().padStart(2, '0');
+					
+					const progressPercentage = ((this.currentProject + 1) / this.totalProjects) * 100;
+					this.progressFill.style.width = `${progressPercentage}%`;
 				}
 				
 				updateButtons() {
@@ -798,16 +844,32 @@ const totalProjects = projects.length;
 				triggerScreenEffect() {
 					const screen = document.querySelector('.screen');
 					screen.style.filter = 'brightness(1.5) contrast(1.2)';
+					
 					setTimeout(() => {
 						screen.style.filter = 'brightness(1) contrast(1)';
 					}, 100);
 				}
+				
+				playClickEffect(button) {
+					button.style.transform = 'translateY(2px) scale(0.95)';
+					
+					setTimeout(() => {
+						button.style.transform = '';
+					}, 150);
+					
+					this.vibrateDevice();
+				}
+				
+				vibrateDevice() {
+					if (navigator.vibrate) {
+						navigator.vibrate(50);
+					}
+				}
 			}
 			
 			document.addEventListener('DOMContentLoaded', () => {
-				new RetroPortfolio();
+				const portfolio = new RetroPortfolio();
 				
-				// Efecto glitch aleatorio en el título
 				setInterval(() => {
 					if (Math.random() < 0.3) {
 						const title = document.querySelector('.glitch-title');
@@ -817,7 +879,24 @@ const totalProjects = projects.length;
 						}, 500);
 					}
 				}, 10000);
+				
+				window.portfolio = portfolio;
 			});
+			
+			document.addEventListener('touchstart', function(event) {
+				if (event.touches.length > 1) {
+					event.preventDefault();
+				}
+			});
+			
+			let lastTouchEnd = 0;
+			document.addEventListener('touchend', function(event) {
+				const now = (new Date()).getTime();
+				if (now - lastTouchEnd <= 300) {
+					event.preventDefault();
+				}
+				lastTouchEnd = now;
+			}, false);
 		</script>
 	</body>
 </html>

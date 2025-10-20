@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alan's Retro Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Grid animado de fondo -->
+    <div class="retro-grid"></div>
+    <div class="stars-container"></div>
+    <div class="scanlines"></div>
+    
+    <!-- Consola principal -->
+    <div class="console">
+        <!-- LEDs de estado -->
+        <div class="console-leds">
+            <div class="led led-power"></div>
+            <div class="led led-data"></div>
+            <div class="led led-system"></div>
+        </div>
+        
+        <!-- Pantalla principal -->
+        <div class="screen">
+            <div class="screen-content">
+                <!-- Título con efecto glitch -->
+                <div class="title-section">
+                    <h1 class="glitch-title" data-text="ALAN'S PORTFOLIO">ALAN'S PORTFOLIO</h1>
+                    <p class="subtitle">>>> LEVEL SELECT <<<</p>
+                </div>
+                
+                <!-- Contenedor de proyectos -->
+                <div class="projects-container">
+                    <!-- Proyecto 1 -->
+                    <div class="project active" data-level="1">
+                        <div class="project-header">
+                            <span class="level-indicator">LVL 01</span>
+                            <div class="project-sprite">🚀</div>
+                        </div>
+                        <div class="dialog-box">
+                            <div class="dialog-header">
+                                <span class="project-title">SPACE INVADERS CLONE</span>
+                            </div>
+                            <div class="dialog-content">
+                                <p>Recreación del clásico arcade con mecánicas modernas, power-ups y efectos de partículas. Incluye tabla de puntuaciones y múltiples niveles.</p>
+                                <div class="tech-badges">
+                                    <span class="badge js">JS</span>
+                                    <span class="badge canvas">CANVAS</span>
+                                    <span class="badge webgl">WEBGL</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Proyecto 2 -->
+                    <div class="project" data-level="2">
+                        <div class="project-header">
+                            <span class="level-indicator">LVL 02</span>
+                            <div class="project-sprite">🛒</div>
+                        </div>
+                        <div class="dialog-box">
+                            <div class="dialog-header">
+                                <span class="project-title">E-COMMERCE DASHBOARD</span>
+                            </div>
+                            <div class="dialog-content">
+                                <p>Panel de administración completo con analytics en tiempo real, gestión de inventario y procesamiento de pagos seguros.</p>
+                                <div class="tech-badges">
+                                    <span class="badge react">REACT</span>
+                                    <span class="badge node">NODE</span>
+                                    <span class="badge mongo">MONGO</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Proyecto 3 -->
+                    <div class="project" data-level="3">
+                        <div class="project-header">
+                            <span class="level-indicator">LVL 03</span>
+                            <div class="project-sprite">🏃‍♂️</div>
+                        </div>
+                        <div class="dialog-box">
+                            <div class="dialog-header">
+                                <span class="project-title">FITNESS TRACKER APP</span>
+                            </div>
+                            <div class="dialog-content">
+                                <p>App móvil con seguimiento GPS, métricas de salud, retos sociales y integración con dispositivos wearables.</p>
+                                <div class="tech-badges">
+                                    <span class="badge flutter">FLUTTER</span>
+                                    <span class="badge firebase">FIRE</span>
+                                    <span class="badge api">REST</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Proyecto 4 -->
+                    <div class="project" data-level="4">
+                        <div class="project-header">
+                            <span class="level-indicator">LVL 04</span>
+                            <div class="project-sprite">🧠</div>
+                        </div>
+                        <div class="dialog-box">
+                            <div class="dialog-header">
+                                <span class="project-title">AI IMAGE GENERATOR</span>
+                            </div>
+                            <div class="dialog-content">
+                                <p>Generador de imágenes con IA usando modelos de difusión. Interface web intuitiva con historial y personalización avanzada.</p>
+                                <div class="tech-badges">
+                                    <span class="badge python">PYTHON</span>
+                                    <span class="badge ai">AI/ML</span>
+                                    <span class="badge docker">DOCKER</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Proyecto 5 -->
+                    <div class="project" data-level="5">
+                        <div class="project-header">
+                            <span class="level-indicator">LVL 05</span>
+                            <div class="project-sprite">🎵</div>
+                        </div>
+                        <div class="dialog-box">
+                            <div class="dialog-header">
+                                <span class="project-title">MUSIC STREAMING PLATFORM</span>
+                            </div>
+                            <div class="dialog-content">
+                                <p>Plataforma de streaming con recomendaciones IA, playlists colaborativas y reproductor con visualizador de ondas.</p>
+                                <div class="tech-badges">
+                                    <span class="badge vue">VUE</span>
+                                    <span class="badge node">NODE</span>
+                                    <span class="badge postgres">PSQL</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Proyecto 6 -->
+                    <div class="project" data-level="6">
+                        <div class="project-header">
+                            <span class="level-indicator">LVL 06</span>
+                            <div class="project-sprite">⚡</div>
+                        </div>
+                        <div class="dialog-box">
+                            <div class="dialog-header">
+                                <span class="project-title">BLOCKCHAIN WALLET</span>
+                            </div>
+                            <div class="dialog-content">
+                                <p>Cartera de criptomonedas multi-chain con intercambio DEX, staking y portfolio tracking. Seguridad de grado bancario.</p>
+                                <div class="tech-badges">
+                                    <span class="badge solidity">SOL</span>
+                                    <span class="badge web3">WEB3</span>
+                                    <span class="badge next">NEXT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Controles -->
+        <div class="controls">
+            <!-- Barra de progreso -->
+            <div class="progress-bar">
+                <div class="progress-label">PROGRESS</div>
+                <div class="progress-container">
+                    <div class="progress-fill"></div>
+                </div>
+            </div>
+            
+            <!-- Display digital -->
+            <div class="digital-display">
+                <span class="current-page">01</span>
+                <span class="separator">/</span>
+                <span class="total-pages">06</span>
+            </div>
+            
+            <!-- Botones de navegación -->
+            <div class="nav-buttons">
+                <button class="nav-btn prev-btn" id="prevBtn">
+                    <span class="btn-icon">◄</span>
+                </button>
+                <button class="nav-btn next-btn" id="nextBtn">
+                    <span class="btn-icon">►</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
