@@ -3,6 +3,7 @@
 // all pages through the use of the <BaseHead /> component.
 import '../styles/global.css';
 import { SITE_TITLE } from '../consts';
+import { getLang } from '../utils/i18n';
 
 interface Props {
 	title: string;
@@ -14,6 +15,8 @@ interface Props {
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const lang = getLang(Astro.url);
+const locale = lang === 'es' ? 'es_MX' : 'en_US';
 
 const { 
 	title, 
@@ -41,6 +44,9 @@ const {
 <!-- Font preloads -->
 <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin />
 <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet" />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
@@ -52,8 +58,8 @@ const {
 <meta name="keywords" content={keywords} />
 <meta name="author" content={author} />
 <meta name="robots" content="index, follow" />
-<meta name="language" content="English" />
-<meta name="theme-color" content="#00ff41" />
+<meta name="language" content={lang === 'es' ? 'Spanish' : 'English'} />
+<meta name="theme-color" content="#b35a3f" />
 
 <!-- Enhanced SEO Meta Tags -->
 <meta name="classification" content="Full Stack Developer Portfolio" />
@@ -112,7 +118,7 @@ const {
 <meta property="og:description" content={description} />
 <meta property="og:image" content={new URL(image, Astro.url)} />
 <meta property="og:image:alt" content={`${author} - Full Stack Developer`} />
-<meta property="og:locale" content="en_US" />
+<meta property="og:locale" content={locale} />
 <meta property="og:site_name" content="Alan Ugarte Portfolio" />
 
 <!-- Twitter Card -->

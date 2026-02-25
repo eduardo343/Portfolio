@@ -1,277 +1,116 @@
 ---
 import { GITHUB_URL, LINKEDIN_URL, EMAIL } from '../consts';
+import { getLang } from '../utils/i18n';
+
 const today = new Date();
+const lang = getLang(Astro.url);
+
+const copy = {
+	es: {
+		title: 'Contacto',
+		description: 'Disponible para colaboraciones, freelance y productos digitales.',
+		built: 'Construido con Astro y enfoque full stack.'
+	},
+	en: {
+		title: 'Contact',
+		description: 'Available for collaborations, freelance, and digital product work.',
+		built: 'Built with Astro and a full-stack mindset.'
+	}
+} as const;
+
+const t = copy[lang];
+const emailHref = `mailto:${EMAIL}`;
 ---
 
-<footer class="pixel-footer">
-	<!-- Terminal-style footer content -->
-
-		
-		<div class="footer-section copyright-section">
-			<div class="copyright-content">
-				© {today.getFullYear()} Alan Ugarte • Built with ❤️ and lots of ☕
-				<br/>
-				<span class="astro-credit">Powered by 🚀 Astro</span>
+<footer class="aztec-footer">
+	<div class="footer-grid">
+		<section class="footer-card">
+			<h3>{t.title}</h3>
+			<p>{t.description}</p>
+			<div class="footer-links">
+				<a href={emailHref}>{EMAIL}</a>
+				<a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+				<a href={GITHUB_URL} target="_blank" rel="noopener noreferrer">GitHub</a>
 			</div>
-		</div>
-		
-		<!-- Terminal cursor animation -->
-		<div class="terminal-cursor">_</div>
+		</section>
+
+		<section class="footer-card signature">
+			<p>© {today.getFullYear()} Alan Ugarte</p>
+			<p>{t.built}</p>
+		</section>
 	</div>
 </footer>
 
 <style>
-	/* Pixel-art styled footer */
-	.pixel-footer {
-		background: rgba(0, 0, 0, 0.6);
-		border-top: 3px solid #00ff41;
-		color: #00ff41;
-		font-family: 'Press Start 2P', 'Courier New', monospace;
-		padding: 2rem 1rem;
-		position: relative;
+	.aztec-footer {
 		margin-top: auto;
+		padding: 1.4rem 1rem 1.8rem;
+		background:
+			repeating-linear-gradient(45deg, rgba(179, 90, 63, 0.12) 0 14px, transparent 14px 28px),
+			linear-gradient(180deg, rgba(240, 224, 193, 0.95), rgba(229, 208, 171, 0.96));
+		border-top: 2px solid rgba(142, 63, 42, 0.5);
 	}
-	
-	/* Animated border effect */
-	.pixel-footer::before {
-		content: '';
-		position: absolute;
-		top: -3px;
-		left: 0;
-		right: 0;
-		height: 3px;
-		background: linear-gradient(
-			90deg,
-			#ff0080, #00ff41, #0080ff, #ff0080
-		);
-		animation: rainbow-border 3s linear infinite;
-		background-size: 400% 100%;
-	}
-	
-	@keyframes rainbow-border {
-		0% { background-position: 0% 50%; }
-		50% { background-position: 100% 50%; }
-		100% { background-position: 0% 50%; }
-	}
-	
-	.footer-container {
-		max-width: 1000px;
+
+	.footer-grid {
+		max-width: 1120px;
 		margin: 0 auto;
 		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 1.5rem;
+		grid-template-columns: 1.4fr 1fr;
+		gap: 1rem;
 	}
-	
-	.footer-section {
-		padding: 1rem;
-		background: rgba(0, 0, 0, 0.4);
-		border: 2px solid #00ff41;
-		border-radius: 0;
-		position: relative;
-		box-shadow: 
-			0 0 15px rgba(0, 255, 65, 0.2),
-			inset 0 0 15px rgba(0, 255, 65, 0.05);
+
+	.footer-card {
+		border: 1px solid rgba(46, 31, 23, 0.25);
+		background: rgba(255, 248, 231, 0.7);
+		padding: 0.9rem;
 	}
-	
-	/* Terminal prompt styling */
-	.terminal-line {
-		margin-bottom: 0.5rem;
-		font-size: 0.7rem;
-	}
-	
-	.prompt {
-		color: #0080ff;
-		text-shadow: 1px 1px 0 #004080;
-	}
-	
-	.command {
-		color: #00ff41;
-		text-shadow: 1px 1px 0 #00aa2e;
-		margin-left: 0.5rem;
-	}
-	
-	.terminal-output {
-		color: #00ff41;
-		font-size: 0.6rem;
-		line-height: 1.6;
-		text-shadow: 1px 1px 0 #00aa2e;
-		padding-left: 1rem;
-		border-left: 2px solid #00ff41;
-	}
-	
-	/* Social links styling */
-	.social-links {
-		display: flex;
-		gap: 0.8rem;
-		justify-content: flex-start;
-		flex-wrap: wrap;
-		padding-left: 1rem;
-		border-left: 2px solid #00ff41;
-	}
-	
-	/* Copyright section specific styling */
-	.copyright-section {
-		border-color: #ff0080;
-		box-shadow: 
-			0 0 15px rgba(255, 0, 128, 0.2),
-			inset 0 0 15px rgba(255, 0, 128, 0.05);
-	}
-	
-	.copyright-content {
-		color: #ff0080;
-		font-size: 0.6rem;
-		line-height: 1.6;
-		text-shadow: 1px 1px 0 #aa0055;
-		text-align: center;
-	}
-	
-	.astro-credit {
-		color: #0080ff;
-		font-size: 0.5rem;
-		text-shadow: 1px 1px 0 #004080;
-	}
-	
-	.pixel-social-link {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.5rem;
-		padding: 0.5rem 1rem;
-		border: 2px solid #00ff41;
-		background: rgba(0, 0, 0, 0.6);
-		color: #00ff41;
-		text-decoration: none;
-		font-size: 0.6rem;
-		transition: all 0.3s ease;
-		position: relative;
-		overflow: hidden;
-	}
-	
-	.pixel-social-link::before {
-		content: '';
-		position: absolute;
-		top: 0;
-		left: -100%;
-		width: 100%;
-		height: 100%;
-		background: linear-gradient(90deg, 
-			transparent,
-			rgba(0, 255, 65, 0.2),
-			transparent);
-		transition: left 0.5s ease;
-	}
-	
-	.pixel-social-link:hover::before {
-		left: 100%;
-	}
-	
-	.pixel-social-link:hover {
-		background: linear-gradient(45deg, #00ff41, #00aa2e);
-		color: #0f0f23;
-		transform: translateY(-2px);
-		box-shadow: 
-			0 4px 0 #007a22,
-			0 8px 15px rgba(0, 255, 65, 0.3);
-	}
-	
-	.social-icon {
-		font-size: 0.8rem;
-	}
-	
-	.social-text {
-		text-transform: uppercase;
-	}
-	
-	
-	/* Animated terminal cursor */
-	.terminal-cursor {
-		position: absolute;
-		bottom: 1rem;
-		right: 2rem;
-		color: #00ff41;
+
+	.footer-card h3 {
+		margin: 0;
+		font-family: 'Cinzel', 'Georgia', serif;
 		font-size: 1rem;
-		animation: cursor-blink 1s infinite;
+		letter-spacing: 0.05em;
+		color: #8e3f2a;
 	}
-	
-	@keyframes cursor-blink {
-		0%, 50% { opacity: 1; }
-		51%, 100% { opacity: 0; }
+
+	.footer-card p {
+		margin: 0.4rem 0 0;
+		font-size: 0.86rem;
+		line-height: 1.4;
+		color: rgba(46, 31, 23, 0.84);
 	}
-	
-	/* Responsive design */
+
+	.footer-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin-top: 0.7rem;
+	}
+
+	.footer-links a {
+		text-decoration: none;
+		padding: 0.33rem 0.58rem;
+		border: 1px solid rgba(46, 31, 23, 0.2);
+		font-size: 0.78rem;
+		font-weight: 700;
+		background: rgba(255, 255, 255, 0.56);
+		color: rgba(46, 31, 23, 0.9);
+	}
+
+	.footer-links a:hover {
+		border-color: rgba(47, 123, 106, 0.7);
+		background: rgba(47, 123, 106, 0.14);
+	}
+
+	.signature {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+
 	@media (max-width: 768px) {
-		.footer-container {
+		.footer-grid {
 			grid-template-columns: 1fr;
-			gap: 1rem;
-		}
-		
-		.footer-section {
-			padding: 0.8rem;
-		}
-		
-		.terminal-line {
-			font-size: 0.6rem;
-		}
-		
-		.terminal-output,
-		.copyright-content {
-			font-size: 0.55rem;
-		}
-		
-		.social-links {
-			gap: 0.5rem;
-			justify-content: center;
-		}
-		
-		.pixel-social-link {
-			padding: 0.4rem 0.8rem;
-			font-size: 0.55rem;
-		}
-		
-		.astro-credit {
-			font-size: 0.45rem;
-		}
-	}
-	
-	@media (max-width: 480px) {
-		.pixel-footer {
-			padding: 1.5rem 0.5rem;
-		}
-		
-		.terminal-cursor {
-			bottom: 0.5rem;
-			right: 1rem;
-		}
-		
-		.copyright-content {
-			font-size: 0.5rem;
-		}
-		
-		.astro-credit {
-			font-size: 0.4rem;
-		}
-	}
-	
-	/* High contrast mode support */
-	@media (prefers-contrast: high) {
-		.pixel-footer {
-			background: rgba(0, 0, 0, 0.9);
-			border-top-color: #ffffff;
-		}
-		
-		.footer-section {
-			border-color: #ffffff;
-		}
-	}
-	
-	/* Reduce motion for accessibility */
-	@media (prefers-reduced-motion: reduce) {
-		.pixel-footer::before,
-		.terminal-cursor {
-			animation: none !important;
-		}
-		
-		.pixel-social-link::before {
-			transition: none !important;
 		}
 	}
 </style>

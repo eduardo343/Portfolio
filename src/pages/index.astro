@@ -5,10 +5,13 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 // Import site configuration constants
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { getLang } from '../utils/i18n';
+
+const lang = getLang(Astro.url);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
 	<head>
 		<!-- Include base head meta tags, favicon, etc. -->
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />

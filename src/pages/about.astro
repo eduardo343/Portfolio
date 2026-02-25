@@ -2,9 +2,12 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { getLang } from '../utils/i18n';
+
+const lang = getLang(Astro.url);
 ---
 
-<html lang="en">
+<html lang={lang}>
 	<head>
 		<BaseHead title="About Alan Ugarte - Full Stack Developer" description="Learn about Alan Ugarte's journey as a Full Stack Developer specializing in Laravel, Angular, and NoSQL databases" />
 		<!-- Import Press Start 2P font for consistency -->
