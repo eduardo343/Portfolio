@@ -1,24 +1,50 @@
 ---
-import { GITHUB_URL, LINKEDIN_URL, EMAIL } from '../consts';
 const today = new Date();
 ---
 
 <footer class="pixel-footer">
 	<!-- Terminal-style footer content -->
-
-		
+	<div class="footer-container">
 		<div class="footer-section copyright-section">
-			<div class="copyright-content">
-				© {today.getFullYear()} Alan Ugarte • Built with ❤️ and lots of ☕
-				<br/>
-				<span class="astro-credit">Powered by 🚀 Astro</span>
+			<div class="copyright-content" data-year={today.getFullYear()}>
+				<span data-i18n="footer.copy">© {today.getFullYear()} Alan Ugarte • Built with love and lots of coffee</span>
+				<br />
+				<span class="astro-credit" data-i18n="footer.powered">Powered by Astro</span>
 			</div>
 		</div>
-		
-		<!-- Terminal cursor animation -->
-		<div class="terminal-cursor">_</div>
 	</div>
+	<!-- Terminal cursor animation -->
+	<div class="terminal-cursor">_</div>
 </footer>
+
+<script is:inline>
+	(() => {
+		const root = document.querySelector('.pixel-footer');
+		const languageApi = window.portfolioLanguage;
+		if (!root || !languageApi) return;
+
+		const year = root.querySelector('[data-year]')?.getAttribute('data-year') || String(new Date().getFullYear());
+		const translations = {
+			es: {
+				'footer.copy': `© ${year} Alan Ugarte • Hecho con amor y mucho cafe`,
+				'footer.powered': 'Impulsado por Astro'
+			},
+			en: {
+				'footer.copy': `© ${year} Alan Ugarte • Built with love and lots of coffee`,
+				'footer.powered': 'Powered by Astro'
+			}
+		};
+
+		const render = (lang) => {
+			languageApi.applyTranslations(root, translations, lang);
+		};
+
+		render(languageApi.getLang());
+		window.addEventListener('portfolio-lang-change', (event) => {
+			render(event.detail);
+		});
+	})();
+</script>
 
 <style>
 	/* Pixel-art styled footer */

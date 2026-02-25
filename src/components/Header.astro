@@ -14,29 +14,66 @@ import { SITE_TITLE } from '../consts';
 		
 		<!-- Main navigation links with gaming-themed emojis -->
 		<div class="internal-links">
-			<HeaderLink href="/" class="pixel-nav-link">🏠 Home</HeaderLink>
-			<HeaderLink href="/blog" class="pixel-nav-link">🚀 Projects</HeaderLink>
-			<HeaderLink href="/about" class="pixel-nav-link">👨‍💻 About</HeaderLink>
-			<HeaderLink href="/contact" class="pixel-nav-link">📧 Contact</HeaderLink>
+			<HeaderLink href="/" class="pixel-nav-link" data-i18n="header.home">🏠 Home</HeaderLink>
+			<HeaderLink href="/blog" class="pixel-nav-link" data-i18n="header.projects">🚀 Projects</HeaderLink>
+			<HeaderLink href="/about" class="pixel-nav-link" data-i18n="header.about">👨‍💻 About</HeaderLink>
+			<HeaderLink href="/contact" class="pixel-nav-link" data-i18n="header.contact">📧 Contact</HeaderLink>
 		</div>
 		
 		<!-- Social media links with emoji icons for better retro aesthetic -->
 		<div class="social-links">
 			<a href="https://www.twitch.tv/malan117" target="_blank" class="pixel-social">
-				<span class="sr-only">Follow me in twitch</span>
+				<span class="sr-only" data-i18n="header.social.twitch">Follow me in twitch</span>
 				🎮
 			</a>
 			<a href="https://www.linkedin.com/in/alan-ugarte/" target="_blank" class="pixel-social">
-				<span class="sr-only">Connect with me on LinkedIn</span>
+				<span class="sr-only" data-i18n="header.social.linkedin">Connect with me on LinkedIn</span>
 				💼
 			</a>
 			<a href="https://github.com/eduardo343" target="_blank" class="pixel-social">
-				<span class="sr-only">Go to GitHub repo</span>
+				<span class="sr-only" data-i18n="header.social.github">Go to GitHub repo</span>
 				⚡
 			</a>
 		</div>
 	</nav>
 </header>
+<script is:inline>
+	(() => {
+		const root = document.querySelector('.pixel-header');
+		const languageApi = window.portfolioLanguage;
+		if (!root || !languageApi) return;
+
+		const translations = {
+			es: {
+				'header.home': '🏠 Inicio',
+				'header.projects': '🚀 Proyectos',
+				'header.about': '👨‍💻 Sobre mi',
+				'header.contact': '📧 Contacto',
+				'header.social.twitch': 'Sigueme en Twitch',
+				'header.social.linkedin': 'Conecta conmigo en LinkedIn',
+				'header.social.github': 'Ir al repositorio de GitHub'
+			},
+			en: {
+				'header.home': '🏠 Home',
+				'header.projects': '🚀 Projects',
+				'header.about': '👨‍💻 About',
+				'header.contact': '📧 Contact',
+				'header.social.twitch': 'Follow me on Twitch',
+				'header.social.linkedin': 'Connect with me on LinkedIn',
+				'header.social.github': 'Go to GitHub repo'
+			}
+		};
+
+		const render = (lang) => {
+			languageApi.applyTranslations(root, translations, lang);
+		};
+
+		render(languageApi.getLang());
+		window.addEventListener('portfolio-lang-change', (event) => {
+			render(event.detail);
+		});
+	})();
+</script>
 <style>
 	/* Main header container with 8-bit gaming aesthetic */
 	.pixel-header {

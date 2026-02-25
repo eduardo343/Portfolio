@@ -68,7 +68,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 							{
 								updatedDate && (
 									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
+										<span data-i18n="blog.lastUpdatedLabel">Last updated on</span> <FormattedDate date={updatedDate} />
 									</div>
 								)
 							}
@@ -81,5 +81,30 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			</article>
 		</main>
 		<Footer />
+		<script is:inline>
+			(() => {
+				const root = document.body;
+				const languageApi = window.portfolioLanguage;
+				if (!root || !languageApi) return;
+
+				const translations = {
+					es: {
+						'blog.lastUpdatedLabel': 'Ultima actualizacion'
+					},
+					en: {
+						'blog.lastUpdatedLabel': 'Last updated on'
+					}
+				};
+
+				const render = (lang) => {
+					languageApi.applyTranslations(root, translations, lang);
+				};
+
+				render(languageApi.getLang());
+				window.addEventListener('portfolio-lang-change', (event) => {
+					render(event.detail);
+				});
+			})();
+		</script>
 	</body>
 </html>

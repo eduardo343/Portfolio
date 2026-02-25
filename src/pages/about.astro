@@ -273,88 +273,88 @@ import Footer from '../components/Footer.astro';
 		<div class="flex flex-col min-h-screen">
 			<Header />
 			
-			<main class="flex-1 px-4 py-8">
-				<div class="pixel-about">
-					<h1 class="main-title">👨‍💻 PLAYER PROFILE</h1>
-					
-					<!-- Introduction Section -->
-					<section class="about-section">
-						<h2 class="section-title">🎯 MISSION STATEMENT</h2>
-						<p class="pixel-text">
-							¡Hola! I'm Alan Ugarte, a passionate Full Stack Developer with over 5 years of professional experience crafting digital solutions. My journey began at age 15 with my first line of C++, and since then, I've been on an epic quest to master the art of programming.
-						</p>
-						<p class="pixel-text">
-							I specialize in building scalable web applications using modern technologies, with a strong focus on Laravel 11 backends, Angular 19 frontends, and NoSQL databases. My mission is to transform complex business requirements into elegant, efficient, and user-friendly solutions.
-						</p>
-					</section>
+				<main class="flex-1 px-4 py-8">
+					<div class="pixel-about">
+						<h1 class="main-title" data-i18n="about.mainTitle">👨‍💻 PLAYER PROFILE</h1>
+						
+						<!-- Introduction Section -->
+						<section class="about-section">
+							<h2 class="section-title" data-i18n="about.missionTitle">🎯 MISSION STATEMENT</h2>
+							<p class="pixel-text" data-i18n="about.missionP1">
+								¡Hola! I'm Alan Ugarte, a passionate Full Stack Developer with over 5 years of professional experience crafting digital solutions. My journey began at age 15 with my first line of C++, and since then, I've been on an epic quest to master the art of programming.
+							</p>
+							<p class="pixel-text" data-i18n="about.missionP2">
+								I specialize in building scalable web applications using modern technologies, with a strong focus on Laravel 11 backends, Angular 19 frontends, and NoSQL databases. My mission is to transform complex business requirements into elegant, efficient, and user-friendly solutions.
+							</p>
+						</section>
 
-					<!-- Experience Timeline -->
-					<section class="about-section">
-						<h2 class="section-title">🚀 EXPERIENCE LOG</h2>
-						<div class="timeline">
-							<div class="timeline-item">
-								<div class="timeline-date">2024 - PRESENT</div>
-								<div class="timeline-title">Freelancer</div>
-								<div class="timeline-desc">
-									Currently developing and maintaining web applications with Python, React, and diverse databases. Leading projects end-to-end with a focus on performance, scalability, and user experience.
+						<!-- Experience Timeline -->
+						<section class="about-section">
+							<h2 class="section-title" data-i18n="about.experienceTitle">🚀 EXPERIENCE LOG</h2>
+							<div class="timeline">
+								<div class="timeline-item">
+									<div class="timeline-date" data-i18n="about.exp1.date">2024 - PRESENT</div>
+									<div class="timeline-title" data-i18n="about.exp1.title">Freelancer</div>
+									<div class="timeline-desc" data-i18n="about.exp1.desc">
+										Currently developing and maintaining web applications with Python, React, and diverse databases. Leading projects end-to-end with a focus on performance, scalability, and user experience.
+									</div>
+								</div>
+								<div class="timeline-item">
+									<div class="timeline-date" data-i18n="about.exp2.date">2024</div>
+									<div class="timeline-title" data-i18n="about.exp2.title">Geem Solutions</div>
+									<div class="timeline-desc" data-i18n="about.exp2.desc">
+										Full Stack Developer for point-of-sale systems using PHP and React. Enhanced application performance and user experience through modern development practices.
+									</div>
+								</div>
+								<div class="timeline-item">
+									<div class="timeline-date" data-i18n="about.exp3.date">2023 - 2024</div>
+									<div class="timeline-title" data-i18n="about.exp3.title">Magmalabs</div>
+									<div class="timeline-desc" data-i18n="about.exp3.desc">
+										Began my professional journey as a Full Stack Developer. Contributed to projects like Bright Coders and Magma Chat, working with Python and React to deliver robust web applications.
+									</div>
 								</div>
 							</div>
-							<div class="timeline-item">
-								<div class="timeline-date">2024</div>
-								<div class="timeline-title">Geem Solutions</div>
-								<div class="timeline-desc">
-									Full Stack Developer for point-of-sale systems using PHP and React. Enhanced application performance and user experience through modern development practices.
-								</div>
-							</div>
-							<div class="timeline-item">
-								<div class="timeline-date">2023 - 2024</div>
-								<div class="timeline-title">Magmalabs</div>
-								<div class="timeline-desc">
-									Began my professional journey as a Full Stack Developer. Contributed to projects like Bright Coders and Magma Chat, working with Python and React to deliver robust web applications.
-								</div>
-							</div>
-						</div>
-					</section>
+						</section>
 
-					<!-- Technical Skills -->
-					<section class="about-section">
-						<h2 class="section-title">⚡ TECH ARSENAL</h2>
-						<div class="skills-grid">
-							<div class="skill-category">
-								<div class="skill-title">🖥️ BACKEND</div>
-								<div class="skill-list">
-									PHP 8.2<br/>
-									Laravel 11<br/>
+						<!-- Technical Skills -->
+						<section class="about-section">
+							<h2 class="section-title" data-i18n="about.skillsTitle">⚡ TECH ARSENAL</h2>
+							<div class="skills-grid">
+								<div class="skill-category">
+									<div class="skill-title" data-i18n="about.skill.backend">🖥️ BACKEND</div>
+									<div class="skill-list">
+										PHP 8.2<br/>
+										Laravel 11<br/>
 									Node.js<br/>
 									RESTful APIs<br/>
 									GraphQL
+									</div>
 								</div>
-							</div>
-							<div class="skill-category">
-								<div class="skill-title">🎨 FRONTEND</div>
-								<div class="skill-list">
-									TypeScript 5.0<br/>
-									Angular 19<br/>
+								<div class="skill-category">
+									<div class="skill-title" data-i18n="about.skill.frontend">🎨 FRONTEND</div>
+									<div class="skill-list">
+										TypeScript 5.0<br/>
+										Angular 19<br/>
 									JavaScript ES6+<br/>
 									HTML5 & CSS3<br/>
 									Tailwind CSS
+									</div>
 								</div>
-							</div>
-							<div class="skill-category">
-								<div class="skill-title">🗄️ DATABASES</div>
-								<div class="skill-list">
-									MongoDB<br/>
-									Firebase Firestore<br/>
+								<div class="skill-category">
+									<div class="skill-title" data-i18n="about.skill.databases">🗄️ DATABASES</div>
+									<div class="skill-list">
+										MongoDB<br/>
+										Firebase Firestore<br/>
 									DynamoDB<br/>
 									MySQL<br/>
 									Redis
+									</div>
 								</div>
-							</div>
-							<div class="skill-category">
-								<div class="skill-title">🛠️ TOOLS & OTHERS</div>
-								<div class="skill-list">
-									Git & GitHub<br/>
-									Docker<br/>
+								<div class="skill-category">
+									<div class="skill-title" data-i18n="about.skill.tools">🛠️ TOOLS & OTHERS</div>
+									<div class="skill-list">
+										Git & GitHub<br/>
+										Docker<br/>
 									AWS Services<br/>
 									Agile/Scrum<br/>
 									CI/CD
@@ -363,23 +363,98 @@ import Footer from '../components/Footer.astro';
 						</div>
 					</section>
 
-					<!-- Philosophy & Interests -->
-					<section class="about-section">
-						<h2 class="section-title">💡 CODING PHILOSOPHY</h2>
-						<p class="pixel-text">
-							I believe in writing clean, maintainable code that not only solves problems but also tells a story. My approach combines modern development practices with a deep understanding of business requirements to deliver solutions that truly matter.
-						</p>
-						<p class="pixel-text">
-							When I'm not coding, you'll find me contributing to open-source projects, participating in hackathons, mentoring junior developers, or exploring the latest industry trends. I'm passionate about sharing knowledge and believe that the best way to grow is by helping others succeed.
-						</p>
-						<p class="pixel-text">
-							Currently focused on mastering Laravel 11's latest features, exploring Angular 19's new capabilities, and diving deeper into NoSQL database optimization techniques.
-						</p>
-					</section>
-				</div>
-			</main>
+						<!-- Philosophy & Interests -->
+						<section class="about-section">
+							<h2 class="section-title" data-i18n="about.philosophyTitle">💡 CODING PHILOSOPHY</h2>
+							<p class="pixel-text" data-i18n="about.philosophyP1">
+								I believe in writing clean, maintainable code that not only solves problems but also tells a story. My approach combines modern development practices with a deep understanding of business requirements to deliver solutions that truly matter.
+							</p>
+							<p class="pixel-text" data-i18n="about.philosophyP2">
+								When I'm not coding, you'll find me contributing to open-source projects, participating in hackathons, mentoring junior developers, or exploring the latest industry trends. I'm passionate about sharing knowledge and believe that the best way to grow is by helping others succeed.
+							</p>
+							<p class="pixel-text" data-i18n="about.philosophyP3">
+								Currently focused on mastering Laravel 11's latest features, exploring Angular 19's new capabilities, and diving deeper into NoSQL database optimization techniques.
+							</p>
+						</section>
+					</div>
+				</main>
 			
-			<Footer />
-		</div>
-	</body>
+				<Footer />
+			</div>
+			<script is:inline>
+				(() => {
+					const root = document.querySelector('.pixel-about');
+					const languageApi = window.portfolioLanguage;
+					if (!root || !languageApi) return;
+
+					const translations = {
+						es: {
+							'about.mainTitle': '👨‍💻 PERFIL DEL PLAYER',
+							'about.missionTitle': '🎯 MISION',
+							'about.missionP1': 'Hola, soy Alan Ugarte, un Full Stack Developer apasionado con mas de 5 anos de experiencia profesional creando soluciones digitales. Mi camino comenzo a los 15 anos con mi primera linea de C++, y desde entonces he estado en una mision constante para dominar el arte de programar.',
+							'about.missionP2': 'Me especializo en construir aplicaciones web escalables usando tecnologias modernas, con enfoque en backends con Laravel 11, frontends con Angular 19 y bases de datos NoSQL. Mi objetivo es transformar requerimientos de negocio complejos en soluciones elegantes, eficientes y faciles de usar.',
+							'about.experienceTitle': '🚀 EXPERIENCIA',
+							'about.exp1.date': '2024 - ACTUALIDAD',
+							'about.exp1.title': 'Freelancer',
+							'about.exp1.desc': 'Actualmente desarrollo y mantengo aplicaciones web con Python, React y diversas bases de datos. Lidero proyectos de extremo a extremo con foco en rendimiento, escalabilidad y experiencia de usuario.',
+							'about.exp2.date': '2024',
+							'about.exp2.title': 'Geem Solutions',
+							'about.exp2.desc': 'Full Stack Developer para sistemas punto de venta con PHP y React. Mejore el rendimiento de las aplicaciones y la experiencia de usuario mediante practicas modernas de desarrollo.',
+							'about.exp3.date': '2023 - 2024',
+							'about.exp3.title': 'Magmalabs',
+							'about.exp3.desc': 'Inicie mi trayectoria profesional como Full Stack Developer. Contribui en proyectos como Bright Coders y Magma Chat, trabajando con Python y React para entregar aplicaciones web robustas.',
+							'about.skillsTitle': '⚡ ARSENAL TECNICO',
+							'about.skill.backend': '🖥️ BACKEND',
+							'about.skill.frontend': '🎨 FRONTEND',
+							'about.skill.databases': '🗄️ BASES DE DATOS',
+							'about.skill.tools': '🛠️ HERRAMIENTAS Y OTROS',
+							'about.philosophyTitle': '💡 FILOSOFIA DE CODIGO',
+							'about.philosophyP1': 'Creo en escribir codigo limpio y mantenible que no solo resuelva problemas, sino que tambien cuente una historia. Mi enfoque combina practicas modernas de desarrollo con una comprension profunda del negocio para entregar soluciones que realmente importan.',
+							'about.philosophyP2': 'Cuando no estoy programando, participo en proyectos open source, hackathons, mentoring a desarrolladores junior o explorando nuevas tendencias del sector. Me apasiona compartir conocimiento y creo que la mejor forma de crecer es ayudar a otros a crecer.',
+							'about.philosophyP3': 'Actualmente estoy enfocado en dominar las ultimas funcionalidades de Laravel 11, explorar nuevas capacidades de Angular 19 y profundizar en tecnicas de optimizacion para bases de datos NoSQL.'
+						},
+						en: {
+							'about.mainTitle': '👨‍💻 PLAYER PROFILE',
+							'about.missionTitle': '🎯 MISSION STATEMENT',
+							'about.missionP1': "Hello, I'm Alan Ugarte, a passionate Full Stack Developer with over 5 years of professional experience crafting digital solutions. My journey began at age 15 with my first line of C++, and since then, I have been on an ongoing quest to master the art of programming.",
+							'about.missionP2': 'I specialize in building scalable web applications using modern technologies, with a strong focus on Laravel 11 backends, Angular 19 frontends, and NoSQL databases. My mission is to transform complex business requirements into elegant, efficient, and user-friendly solutions.',
+							'about.experienceTitle': '🚀 EXPERIENCE LOG',
+							'about.exp1.date': '2024 - PRESENT',
+							'about.exp1.title': 'Freelancer',
+							'about.exp1.desc': 'Currently developing and maintaining web applications with Python, React, and diverse databases. Leading projects end-to-end with a focus on performance, scalability, and user experience.',
+							'about.exp2.date': '2024',
+							'about.exp2.title': 'Geem Solutions',
+							'about.exp2.desc': 'Full Stack Developer for point-of-sale systems using PHP and React. Enhanced application performance and user experience through modern development practices.',
+							'about.exp3.date': '2023 - 2024',
+							'about.exp3.title': 'Magmalabs',
+							'about.exp3.desc': 'Began my professional journey as a Full Stack Developer. Contributed to projects like Bright Coders and Magma Chat, working with Python and React to deliver robust web applications.',
+							'about.skillsTitle': '⚡ TECH ARSENAL',
+							'about.skill.backend': '🖥️ BACKEND',
+							'about.skill.frontend': '🎨 FRONTEND',
+							'about.skill.databases': '🗄️ DATABASES',
+							'about.skill.tools': '🛠️ TOOLS & OTHERS',
+							'about.philosophyTitle': '💡 CODING PHILOSOPHY',
+							'about.philosophyP1': 'I believe in writing clean, maintainable code that not only solves problems but also tells a story. My approach combines modern development practices with a deep understanding of business requirements to deliver solutions that truly matter.',
+							'about.philosophyP2': "When I am not coding, you will find me contributing to open-source projects, participating in hackathons, mentoring junior developers, or exploring the latest industry trends. I am passionate about sharing knowledge and believe that the best way to grow is by helping others succeed.",
+							'about.philosophyP3': "Currently focused on mastering Laravel 11's latest features, exploring Angular 19's new capabilities, and diving deeper into NoSQL database optimization techniques."
+						}
+					};
+
+					const pageTitles = {
+						es: 'Sobre Alan Ugarte - Full Stack Developer',
+						en: 'About Alan Ugarte - Full Stack Developer'
+					};
+
+					const render = (lang) => {
+						languageApi.applyTranslations(root, translations, lang);
+						document.title = pageTitles[lang] || pageTitles.en;
+					};
+
+					render(languageApi.getLang());
+					window.addEventListener('portfolio-lang-change', (event) => {
+						render(event.detail);
+					});
+				})();
+			</script>
+		</body>
 </html>

@@ -124,3 +124,136 @@ const {
 <meta name="twitter:image:alt" content={`${author} - Full Stack Developer`} />
 <meta name="twitter:creator" content="@alanugarte" />
 <meta name="twitter:site" content="@alanugarte" />
+
+<script is:inline>
+	(() => {
+		const STORAGE_KEY = 'terminal-lang';
+		const aliases = {
+			esp: 'es',
+			espanol: 'es',
+			eng: 'en',
+			english: 'en'
+		};
+		const supported = new Set(['es', 'en']);
+
+		const normalize = (rawValue) => {
+			if (typeof rawValue !== 'string') return '';
+			const normalized = rawValue.trim().toLowerCase();
+			return aliases[normalized] || normalized;
+		};
+
+		const resolve = (rawValue) => {
+			const candidate = normalize(rawValue);
+			return supported.has(candidate) ? candidate : '';
+		};
+
+		const readStoredLang = () => {
+			try {
+				return localStorage.getItem(STORAGE_KEY);
+			} catch {
+				return '';
+			}
+		};
+
+		const storeLang = (lang) => {
+			try {
+				localStorage.setItem(STORAGE_KEY, lang);
+			} catch {
+				// Ignore storage write errors
+			}
+		};
+
+		const readQueryLang = () => {
+			const params = new URLSearchParams(window.location.search);
+			return resolve(params.get('lang'));
+		};
+
+		const syncInternalLinks = (lang) => {
+			document.querySelectorAll('a[href^="/"]').forEach((anchor) => {
+				const href = anchor.getAttribute('href');
+				if (!href || href.startsWith('//')) return;
+				const url = new URL(href, window.location.origin);
+				url.searchParams.set('lang', lang);
+				anchor.setAttribute('href', `${url.pathname}${url.search}${url.hash}`);
+			});
+		};
+
+		const syncUrl = (lang) => {
+			const url = new URL(window.location.href);
+			if (url.searchParams.get('lang') === lang) return;
+			url.searchParams.set('lang', lang);
+			history.replaceState(history.state ?? {}, '', `${url.pathname}${url.search}${url.hash}`);
+		};
+
+		const getLang = () => {
+			return (
+				readQueryLang() ||
+				resolve(readStoredLang()) ||
+				resolve(document.documentElement.getAttribute('lang')) ||
+				'es'
+			);
+		};
+
+		const applyTranslations = (root, dictionaries, lang) => {
+			if (!root || !dictionaries) return;
+			const messages = dictionaries[lang] || dictionaries.es || {};
+
+			root.querySelectorAll('[data-i18n]').forEach((node) => {
+				const key = node.getAttribute('data-i18n');
+				const value = key ? messages[key] : '';
+				if (typeof value === 'string') node.textContent = value;
+			});
+
+			root.querySelectorAll('[data-i18n-html]').forEach((node) => {
+				const key = node.getAttribute('data-i18n-html');
+				const value = key ? messages[key] : '';
+				if (typeof value === 'string') node.innerHTML = value;
+			});
+
+			root.querySelectorAll('[data-i18n-placeholder]').forEach((node) => {
+				const key = node.getAttribute('data-i18n-placeholder');
+				const value = key ? messages[key] : '';
+				if (typeof value === 'string') node.setAttribute('placeholder', value);
+			});
+
+			root.querySelectorAll('[data-i18n-aria-label]').forEach((node) => {
+				const key = node.getAttribute('data-i18n-aria-label');
+				const value = key ? messages[key] : '';
+				if (typeof value === 'string') node.setAttribute('aria-label', value);
+			});
+		};
+
+		const setLang = (rawLang, options = {}) => {
+			const lang = resolve(rawLang) || getLang();
+			const { emit = true, updateUrl = true, updateStorage = true } = options;
+
+			document.documentElement.lang = lang;
+			if (updateStorage) storeLang(lang);
+			if (updateUrl) syncUrl(lang);
+			syncInternalLinks(lang);
+
+			if (emit) {
+				window.dispatchEvent(new CustomEvent('portfolio-lang-change', { detail: lang }));
+			}
+
+			return lang;
+		};
+
+		window.portfolioLanguage = {
+			resolve,
+			getLang,
+			setLang,
+			applyTranslations
+		};
+
+		const initialLang = getLang();
+		setLang(initialLang, { emit: false, updateUrl: true, updateStorage: true });
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', () => {
+				syncInternalLinks(getLang());
+			});
+		} else {
+			syncInternalLinks(getLang());
+		}
+	})();
+</script>

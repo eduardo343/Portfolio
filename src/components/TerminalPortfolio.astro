@@ -1,0 +1,885 @@
+---
+import { EMAIL } from '../consts';
+
+const routes = {
+	home: '/',
+	about: '/about',
+	projects: '/blog/projects',
+	contact: '/contact',
+	blog: '/blog'
+};
+
+const projects = [
+	{
+		id: 'fitness-assistant',
+		title: 'Fitness Assistant',
+		summary: {
+			es: 'Aplicacion fitness con rutinas personalizadas y seguimiento de progreso.',
+			en: 'Fitness app with personalized routines and progress tracking.'
+		},
+		stack: ['Python', 'Streamlit'],
+		demo: 'https://fitness-assistant-vwbd5v4xbajjwfetfufbmc.streamlit.app/',
+		github: 'https://github.com/eduardo343/Fitness-Assistant.git',
+		caseLink: '/blog/using-mdx'
+	},
+	{
+		id: 'trellcord',
+		title: 'Trellcord',
+		summary: {
+			es: 'Plataforma de trabajo en equipo con tareas, comunicacion y dinamicas colaborativas.',
+			en: 'Team platform mixing tasks, communication, and collaborative workflows.'
+		},
+		stack: ['React', 'Node', 'MongoDB'],
+		demo: 'https://vercel.com/eduardo343s-projects/trellcord/2HNeVJDFudXECzcAz2vLFUzRQCrS',
+		github: 'https://github.com/eduardo343/Trellcord.git',
+		caseLink: '/blog/markdown-style-guide'
+	},
+	{
+		id: 'casino-testing-app',
+		title: 'Casino Testing App',
+		summary: {
+			es: 'Suite para simulacion y validacion de reglas en juegos de casino.',
+			en: 'Suite for simulation and rule validation in casino games.'
+		},
+		stack: ['Python', 'Streamlit', 'REST'],
+		demo: 'https://casino-testing.streamlit.app/',
+		github: 'https://github.com/eduardo343/Casino-Testing-.git'
+	},
+	{
+		id: 'techstore',
+		title: 'TechStore',
+		summary: {
+			es: 'E-commerce full stack con inventario en tiempo real y pagos seguros.',
+			en: 'Full-stack e-commerce with real-time inventory and secure payments.'
+		},
+		stack: ['Laravel 11', 'Angular 19', 'MongoDB'],
+		caseLink: '/blog/first-post'
+	},
+	{
+		id: 'taskflow',
+		title: 'TaskFlow',
+		summary: {
+			es: 'SaaS de gestion de proyectos con colaboracion en vivo y reportes.',
+			en: 'Project-management SaaS with live collaboration and reporting.'
+		},
+		stack: ['Laravel 11', 'Angular 19', 'Firebase'],
+		caseLink: '/blog/second-post'
+	},
+	{
+		id: 'smartfinance',
+		title: 'SmartFinance',
+		summary: {
+			es: 'API fintech con seguridad empresarial y deteccion de fraude.',
+			en: 'Fintech API with enterprise security and fraud detection.'
+		},
+		stack: ['Laravel 11', 'DynamoDB', 'ML'],
+		caseLink: '/blog/third-post'
+	}
+];
+
+const aboutDetails = {
+	skills: ['Laravel 11', 'Angular 19', 'TypeScript', 'MongoDB', 'Firebase', 'DynamoDB', 'Docker', 'AWS'],
+	timeline: [
+		{ period: '2024 - Present', role: 'Freelancer' },
+		{ period: '2024', role: 'Geem Solutions' },
+		{ period: '2023 - 2024', role: 'Magmalabs' }
+	]
+};
+
+const contactLinks = {
+	email: EMAIL,
+	calendly: 'https://calendly.com/alansaucedo-dev/30min'
+};
+---
+
+<section class="terminal-shell">
+	<div class="terminal-window">
+		<div class="terminal-chrome">
+			<div class="dots" aria-hidden="true">
+				<span class="dot red"></span>
+				<span class="dot yellow"></span>
+				<span class="dot green"></span>
+			</div>
+			<div class="chrome-title" id="terminalTitle">ALAN-PORTFOLIO TERMINAL</div>
+		</div>
+
+		<p class="terminal-subtitle" id="terminalSubtitle"></p>
+		<div class="terminal-output" id="terminalOutput" role="log" aria-live="polite"></div>
+
+		<form id="terminalForm" class="terminal-input-row" autocomplete="off">
+			<span id="terminalPrompt" class="prompt"></span>
+			<input
+				id="terminalInput"
+				type="text"
+				autocapitalize="off"
+				autocorrect="off"
+				spellcheck="false"
+			/>
+		</form>
+		<p class="terminal-hint" id="terminalHint"></p>
+	</div>
+</section>
+
+<script define:vars={{ projects, routes, aboutDetails, contactLinks }}>
+	(() => {
+		const output = document.getElementById('terminalOutput');
+		const form = document.getElementById('terminalForm');
+		const input = document.getElementById('terminalInput');
+		const promptNode = document.getElementById('terminalPrompt');
+		const titleNode = document.getElementById('terminalTitle');
+		const subtitleNode = document.getElementById('terminalSubtitle');
+		const hintNode = document.getElementById('terminalHint');
+
+		if (!output || !form || !input || !promptNode || !titleNode || !subtitleNode || !hintNode) {
+			return;
+		}
+
+		const SECTION_NAMES = ['about', 'projects', 'contact', 'blog'];
+		const aliases = {
+			ayuda: 'help',
+			ir: 'go',
+			idioma: 'lang',
+			limpiar: 'clear',
+			volver: 'back'
+		};
+
+		const copy = {
+			es: {
+				title: 'ALAN-PORTFOLIO TERMINAL',
+				subtitle: 'Navegacion por comandos | Escribe help para comenzar',
+				hint: 'Comandos globales: help, go <seccion>, lang <es|en>, open <seccion>, clear',
+				welcome: [
+					'Sistema listo. Bienvenido al portafolio interactivo.',
+					'Usa comandos para navegar como en una terminal real.'
+				],
+				languageChanged: 'Idioma actualizado a espanol.',
+				languageInvalid: 'Uso: lang es | lang en',
+				unknown: 'Comando no reconocido. Ejecuta help.',
+				missingArg: 'Falta parametro para este comando.',
+				alreadyRoot: 'Ya estas en la raiz.',
+				moved: (section) => `Entrando a ${section}.`,
+				openFail: 'No pude resolver ese destino para open.',
+				sectionInvalid: `Seccion invalida. Opciones: ${SECTION_NAMES.join(', ')}`,
+				help: {
+					root: [
+						'help                -> Muestra comandos del contexto actual.',
+						'go about            -> Entra a la seccion about.',
+						'go projects         -> Entra a la seccion projects.',
+						'go contact          -> Entra a la seccion contact.',
+						'go blog             -> Entra a la seccion blog.',
+						'open <seccion>      -> Abre la ruta real de esa seccion.',
+						'ls                  -> Lista secciones disponibles.',
+						'lang es|en          -> Cambia idioma.',
+						'clear               -> Limpia la terminal.'
+					],
+					about: [
+						'help                -> Comandos de about.',
+						'summary             -> Resumen profesional.',
+						'skills              -> Stack principal.',
+						'timeline            -> Experiencia resumida.',
+						'open                -> Abre la pagina about.',
+						'back                -> Volver a raiz.',
+						'lang es|en          -> Cambia idioma.',
+						'clear               -> Limpia la terminal.'
+					],
+					projects: [
+						'help                -> Comandos de projects.',
+						'list                -> Lista proyectos.',
+						'show <id|numero>    -> Muestra detalle de un proyecto.',
+						'demo <id|numero>    -> Abre demo del proyecto.',
+						'code <id|numero>    -> Abre repositorio del proyecto.',
+						'open <id|numero>    -> Abre caso o enlace principal.',
+						'back                -> Volver a raiz.',
+						'lang es|en          -> Cambia idioma.',
+						'clear               -> Limpia la terminal.'
+					],
+					contact: [
+						'help                -> Comandos de contact.',
+						'email               -> Muestra correo de contacto.',
+						'schedule            -> Muestra enlace de calendario.',
+						'open                -> Abre pagina contact.',
+						'back                -> Volver a raiz.',
+						'lang es|en          -> Cambia idioma.',
+						'clear               -> Limpia la terminal.'
+					],
+					blog: [
+						'help                -> Comandos de blog.',
+						'list                -> Lista entradas disponibles.',
+						'show <id|numero>    -> Detalle rapido de la entrada.',
+						'open <id|numero>    -> Abre la entrada en /blog.',
+						'open                -> Abre /blog/projects.',
+						'back                -> Volver a raiz.',
+						'lang es|en          -> Cambia idioma.',
+						'clear               -> Limpia la terminal.'
+					]
+				},
+				aboutSummary: 'Desarrollador full stack orientado a producto y arquitectura escalable.',
+				projectNotFound: 'Proyecto no encontrado.',
+				blogNotFound: 'Entrada no encontrada.',
+				noLink: 'No existe enlace disponible para ese elemento.'
+			},
+			en: {
+				title: 'ALAN-PORTFOLIO TERMINAL',
+				subtitle: 'Command navigation | Type help to start',
+				hint: 'Global commands: help, go <section>, lang <es|en>, open <section>, clear',
+				welcome: [
+					'System ready. Welcome to the interactive portfolio.',
+					'Use commands to navigate like a real terminal.'
+				],
+				languageChanged: 'Language updated to english.',
+				languageInvalid: 'Usage: lang es | lang en',
+				unknown: 'Unknown command. Run help.',
+				missingArg: 'Missing parameter for this command.',
+				alreadyRoot: 'You are already at root.',
+				moved: (section) => `Entering ${section}.`,
+				openFail: 'Could not resolve that open target.',
+				sectionInvalid: `Invalid section. Options: ${SECTION_NAMES.join(', ')}`,
+				help: {
+					root: [
+						'help                -> Show commands for the current context.',
+						'go about            -> Enter about section.',
+						'go projects         -> Enter projects section.',
+						'go contact          -> Enter contact section.',
+						'go blog             -> Enter blog section.',
+						'open <section>      -> Open the real route for that section.',
+						'ls                  -> List available sections.',
+						'lang es|en          -> Change language.',
+						'clear               -> Clear terminal.'
+					],
+					about: [
+						'help                -> About commands.',
+						'summary             -> Professional summary.',
+						'skills              -> Main stack.',
+						'timeline            -> Experience summary.',
+						'open                -> Open about page.',
+						'back                -> Back to root.',
+						'lang es|en          -> Change language.',
+						'clear               -> Clear terminal.'
+					],
+					projects: [
+						'help                -> Projects commands.',
+						'list                -> List projects.',
+						'show <id|number>    -> Show project details.',
+						'demo <id|number>    -> Open project demo.',
+						'code <id|number>    -> Open project repository.',
+						'open <id|number>    -> Open project case or main link.',
+						'back                -> Back to root.',
+						'lang es|en          -> Change language.',
+						'clear               -> Clear terminal.'
+					],
+					contact: [
+						'help                -> Contact commands.',
+						'email               -> Show contact email.',
+						'schedule            -> Show calendar link.',
+						'open                -> Open contact page.',
+						'back                -> Back to root.',
+						'lang es|en          -> Change language.',
+						'clear               -> Clear terminal.'
+					],
+					blog: [
+						'help                -> Blog commands.',
+						'list                -> List available entries.',
+						'show <id|number>    -> Quick entry detail.',
+						'open <id|number>    -> Open entry in /blog.',
+						'open                -> Open /blog/projects.',
+						'back                -> Back to root.',
+						'lang es|en          -> Change language.',
+						'clear               -> Clear terminal.'
+					]
+				},
+				aboutSummary: 'Full-stack developer focused on product delivery and scalable architecture.',
+				projectNotFound: 'Project not found.',
+				blogNotFound: 'Entry not found.',
+				noLink: 'No link available for that item.'
+			}
+		};
+
+		const state = {
+			lang: 'es',
+			section: 'root',
+			history: [],
+			historyIndex: -1
+		};
+
+		const projectIndex = projects.map((project, idx) => ({
+			...project,
+			number: idx + 1,
+			search: `${project.id} ${project.title}`.toLowerCase()
+		}));
+
+		const blogEntries = projectIndex.filter((project) => project.caseLink);
+
+		function getCopy() {
+			return copy[state.lang];
+		}
+
+		function normalize(value) {
+			return String(value || '').toLowerCase().trim();
+		}
+
+		function setInitialLanguage() {
+			const runtimeLanguage = window.portfolioLanguage?.getLang?.();
+			if (runtimeLanguage === 'en' || runtimeLanguage === 'es') {
+				state.lang = runtimeLanguage;
+				return;
+			}
+
+			const queryLang = new URLSearchParams(window.location.search).get('lang');
+			const localLang = localStorage.getItem('terminal-lang');
+			const candidate = queryLang || localLang;
+			if (candidate === 'en' || candidate === 'es') {
+				state.lang = candidate;
+			}
+		}
+
+		function updateMetaLanguage() {
+			const url = new URL(window.location.href);
+			url.searchParams.set('lang', state.lang);
+			history.replaceState({}, '', url);
+			localStorage.setItem('terminal-lang', state.lang);
+		}
+
+		function updatePrompt() {
+			const path = state.section === 'root' ? '~' : state.section;
+			promptNode.textContent = `alan@portfolio:${path}$`;
+			input.placeholder = state.lang === 'es' ? 'escribe un comando...' : 'type a command...';
+		}
+
+		function updateStaticLabels() {
+			const t = getCopy();
+			titleNode.textContent = t.title;
+			subtitleNode.textContent = t.subtitle;
+			hintNode.textContent = t.hint;
+		}
+
+		function addLine(text, type = 'info', html = false) {
+			const line = document.createElement('p');
+			line.className = `line ${type}`;
+			if (html) {
+				line.innerHTML = text;
+			} else {
+				line.textContent = text;
+			}
+			output.appendChild(line);
+			output.scrollTop = output.scrollHeight;
+		}
+
+		function addCommandLine(command) {
+			addLine(`${promptNode.textContent} ${command}`, 'command');
+		}
+
+		function printHelp() {
+			const t = getCopy();
+			const helpLines = t.help[state.section] || t.help.root;
+			helpLines.forEach((line) => addLine(line, 'info'));
+		}
+
+		function listCurrentContext() {
+			if (state.section === 'root') {
+				SECTION_NAMES.forEach((section) => addLine(`- ${section}`, 'info'));
+				return;
+			}
+
+			if (state.section === 'projects') {
+				projectIndex.forEach((project) => addLine(`${project.number}. ${project.title}`, 'info'));
+				return;
+			}
+
+			if (state.section === 'blog') {
+				blogEntries.forEach((entry, idx) => addLine(`${idx + 1}. ${entry.title}`, 'info'));
+				return;
+			}
+
+			if (state.section === 'contact') {
+				addLine('email', 'info');
+				addLine('schedule', 'info');
+				return;
+			}
+
+			if (state.section === 'about') {
+				addLine('summary', 'info');
+				addLine('skills', 'info');
+				addLine('timeline', 'info');
+			}
+		}
+
+		function resolveProject(token) {
+			const value = normalize(token);
+			if (!value) return null;
+			if (/^\d+$/.test(value)) {
+				const byNumber = projectIndex[Number(value) - 1];
+				return byNumber || null;
+			}
+			return projectIndex.find((project) => project.search.includes(value)) || null;
+		}
+
+		function resolveBlogEntry(token) {
+			const value = normalize(token);
+			if (!value) return null;
+			if (/^\d+$/.test(value)) {
+				const byNumber = blogEntries[Number(value) - 1];
+				return byNumber || null;
+			}
+			return blogEntries.find((entry) => entry.search.includes(value)) || null;
+		}
+
+		function openTarget(target) {
+			if (!target) {
+				addLine(getCopy().openFail, 'error');
+				return;
+			}
+
+			if (/^https?:\/\//i.test(target) || /^mailto:/i.test(target)) {
+				window.open(target, '_blank', 'noopener,noreferrer');
+				return;
+			}
+
+			const url = new URL(target, window.location.origin);
+			url.searchParams.set('lang', state.lang);
+			window.location.href = `${url.pathname}${url.search}${url.hash}`;
+		}
+
+		function handleGo(sectionName) {
+			const target = normalize(sectionName);
+			const t = getCopy();
+			if (!target) {
+				addLine(t.missingArg, 'error');
+				return;
+			}
+			if (!SECTION_NAMES.includes(target)) {
+				addLine(t.sectionInvalid, 'error');
+				return;
+			}
+			state.section = target;
+			updatePrompt();
+			addLine(t.moved(target), 'success');
+			printHelp();
+		}
+
+		function handleLang(langCode) {
+			const normalized = normalize(langCode);
+			const target =
+				normalized === 'esp' || normalized === 'espanol'
+					? 'es'
+					: normalized === 'eng' || normalized === 'english'
+						? 'en'
+						: normalized;
+			const t = getCopy();
+			if (target !== 'es' && target !== 'en') {
+				addLine(t.languageInvalid, 'error');
+				return;
+			}
+			state.lang = target;
+			if (window.portfolioLanguage?.setLang) {
+				window.portfolioLanguage.setLang(target);
+			} else {
+				updateMetaLanguage();
+			}
+			updateStaticLabels();
+			updatePrompt();
+			addLine(getCopy().languageChanged, 'success');
+		}
+
+		function handleOpen(rawArg) {
+			const value = normalize(rawArg);
+			const t = getCopy();
+
+			if (!value) {
+				if (state.section === 'root') {
+					openTarget(routes.home);
+					return;
+				}
+				if (state.section === 'about') {
+					openTarget(routes.about);
+					return;
+				}
+				if (state.section === 'projects') {
+					openTarget(routes.projects);
+					return;
+				}
+				if (state.section === 'contact') {
+					openTarget(routes.contact);
+					return;
+				}
+				if (state.section === 'blog') {
+					openTarget(routes.blog);
+					return;
+				}
+			}
+
+			if (SECTION_NAMES.includes(value)) {
+				openTarget(routes[value]);
+				return;
+			}
+
+			if (state.section === 'projects') {
+				const project = resolveProject(value);
+				if (!project) {
+					addLine(t.projectNotFound, 'error');
+					return;
+				}
+				openTarget(project.caseLink || project.demo || project.github);
+				return;
+			}
+
+			if (state.section === 'blog') {
+				const entry = resolveBlogEntry(value);
+				if (!entry) {
+					addLine(t.blogNotFound, 'error');
+					return;
+				}
+				openTarget(entry.caseLink);
+				return;
+			}
+
+			if (state.section === 'contact') {
+				if (value === 'email') {
+					openTarget(`mailto:${contactLinks.email}`);
+					return;
+				}
+				if (value === 'schedule' || value === 'calendly') {
+					openTarget(contactLinks.calendly);
+					return;
+				}
+			}
+
+			addLine(t.openFail, 'error');
+		}
+
+		function handleSectionCommand(cmd, args) {
+			const t = getCopy();
+
+			if (state.section === 'about') {
+				if (cmd === 'summary' || cmd === 'bio' || cmd === 'whoami') {
+					addLine(t.aboutSummary, 'info');
+					return;
+				}
+				if (cmd === 'skills') {
+					addLine(aboutDetails.skills.join(' | '), 'info');
+					return;
+				}
+				if (cmd === 'timeline' || cmd === 'experience') {
+					aboutDetails.timeline.forEach((entry) => addLine(`${entry.period} -> ${entry.role}`, 'info'));
+					return;
+				}
+			}
+
+			if (state.section === 'projects') {
+				if (cmd === 'list') {
+					listCurrentContext();
+					return;
+				}
+				if (cmd === 'show') {
+					const project = resolveProject(args.join(' '));
+					if (!project) {
+						addLine(t.projectNotFound, 'error');
+						return;
+					}
+					addLine(`${project.number}. ${project.title}`, 'success');
+					addLine(project.summary[state.lang], 'info');
+					addLine(project.stack.join(' | '), 'info');
+					return;
+				}
+				if (cmd === 'demo') {
+					const project = resolveProject(args.join(' '));
+					if (!project) {
+						addLine(t.projectNotFound, 'error');
+						return;
+					}
+					if (!project.demo) {
+						addLine(t.noLink, 'error');
+						return;
+					}
+					openTarget(project.demo);
+					return;
+				}
+				if (cmd === 'code' || cmd === 'repo') {
+					const project = resolveProject(args.join(' '));
+					if (!project) {
+						addLine(t.projectNotFound, 'error');
+						return;
+					}
+					if (!project.github) {
+						addLine(t.noLink, 'error');
+						return;
+					}
+					openTarget(project.github);
+					return;
+				}
+			}
+
+			if (state.section === 'contact') {
+				if (cmd === 'email') {
+					addLine(`email: <a href="mailto:${contactLinks.email}">${contactLinks.email}</a>`, 'info', true);
+					return;
+				}
+				if (cmd === 'schedule' || cmd === 'calendly') {
+					addLine(`schedule: <a href="${contactLinks.calendly}" target="_blank" rel="noopener noreferrer">${contactLinks.calendly}</a>`, 'info', true);
+					return;
+				}
+			}
+
+			if (state.section === 'blog') {
+				if (cmd === 'list' || cmd === 'latest') {
+					listCurrentContext();
+					return;
+				}
+				if (cmd === 'show') {
+					const entry = resolveBlogEntry(args.join(' '));
+					if (!entry) {
+						addLine(t.blogNotFound, 'error');
+						return;
+					}
+					const position = blogEntries.findIndex((item) => item.id === entry.id) + 1;
+					addLine(`${position}. ${entry.title}`, 'success');
+					addLine(entry.summary[state.lang], 'info');
+					return;
+				}
+			}
+
+			addLine(t.unknown, 'error');
+		}
+
+		function execute(rawCommand) {
+			const commandText = rawCommand.trim();
+			if (!commandText) return;
+
+			addCommandLine(commandText);
+
+			state.history.push(commandText);
+			state.historyIndex = state.history.length;
+
+			const parts = commandText.split(/\s+/);
+			const base = normalize(parts[0]);
+			const cmd = aliases[base] || base;
+			const args = parts.slice(1);
+
+			if (cmd === 'help') {
+				printHelp();
+				return;
+			}
+
+			if (cmd === 'clear') {
+				output.innerHTML = '';
+				return;
+			}
+
+			if (cmd === 'lang') {
+				handleLang(args[0]);
+				return;
+			}
+
+			if (cmd === 'go') {
+				handleGo(args[0]);
+				return;
+			}
+
+			if (cmd === 'back') {
+				if (state.section === 'root') {
+					addLine(getCopy().alreadyRoot, 'info');
+					return;
+				}
+				state.section = 'root';
+				updatePrompt();
+				addLine(getCopy().moved('root'), 'success');
+				printHelp();
+				return;
+			}
+
+			if (cmd === 'open') {
+				handleOpen(args.join(' '));
+				return;
+			}
+
+			if (cmd === 'ls') {
+				listCurrentContext();
+				return;
+			}
+
+			handleSectionCommand(cmd, args);
+		}
+
+		function handleHistory(event) {
+			if (event.key === 'ArrowUp') {
+				event.preventDefault();
+				if (state.historyIndex > 0) {
+					state.historyIndex -= 1;
+					input.value = state.history[state.historyIndex] || '';
+				}
+			}
+			if (event.key === 'ArrowDown') {
+				event.preventDefault();
+				if (state.historyIndex < state.history.length - 1) {
+					state.historyIndex += 1;
+					input.value = state.history[state.historyIndex] || '';
+				} else {
+					state.historyIndex = state.history.length;
+					input.value = '';
+				}
+			}
+		}
+
+		setInitialLanguage();
+		updateMetaLanguage();
+		updateStaticLabels();
+		updatePrompt();
+
+		getCopy().welcome.forEach((line) => addLine(line, 'success'));
+		printHelp();
+
+		form.addEventListener('submit', (event) => {
+			event.preventDefault();
+			execute(input.value);
+			input.value = '';
+		});
+
+		input.addEventListener('keydown', handleHistory);
+		window.addEventListener('click', () => input.focus());
+		input.focus();
+	})();
+</script>
+
+<style>
+	.terminal-shell {
+		position: relative;
+		z-index: 2;
+		padding: 1rem;
+	}
+
+	.terminal-window {
+		max-width: 1020px;
+		margin: 0 auto;
+		background: #000;
+		border: 1px solid #3a3a3a;
+		box-shadow:
+			0 0 0 1px #0f0f0f,
+			inset 0 0 0 1px #111;
+		padding: 0.9rem;
+	}
+
+	.terminal-chrome {
+		display: flex;
+		align-items: center;
+		gap: 0.7rem;
+		padding-bottom: 0.6rem;
+		border-bottom: 1px solid #2a2a2a;
+	}
+
+	.dots {
+		display: flex;
+		gap: 0.35rem;
+	}
+
+	.dot {
+		width: 10px;
+		height: 10px;
+		border-radius: 50%;
+		display: inline-block;
+	}
+
+	.dot.red { background: #6f6f6f; }
+	.dot.yellow { background: #5f5f5f; }
+	.dot.green { background: #8a8a8a; }
+
+	.chrome-title {
+		font-family: 'Press Start 2P', monospace;
+		font-size: 0.53rem;
+		line-height: 1.5;
+		color: #f2f2f2;
+		text-transform: uppercase;
+	}
+
+	.terminal-subtitle {
+		margin: 0.7rem 0;
+		color: #f2f2f2;
+		font-size: 0.88rem;
+	}
+
+	.terminal-output {
+		min-height: 330px;
+		max-height: 430px;
+		overflow-y: auto;
+		padding: 0.5rem;
+		border: 1px solid #2e2e2e;
+		background: #000;
+	}
+
+	.line {
+		margin: 0 0 0.45rem;
+		line-height: 1.45;
+		white-space: pre-wrap;
+		word-break: break-word;
+	}
+
+	.line.command {
+		color: #fff;
+	}
+
+	.line.info {
+		color: #f2f2f2;
+	}
+
+	.line.success {
+		color: #fff;
+	}
+
+	.line.error {
+		color: #e0e0e0;
+	}
+
+	.line a {
+		color: #fff;
+		text-decoration: underline;
+	}
+
+	.terminal-input-row {
+		display: flex;
+		align-items: center;
+		gap: 0.45rem;
+		margin-top: 0.8rem;
+		padding: 0.4rem 0.55rem;
+		border: 1px solid #2e2e2e;
+		background: #000;
+	}
+
+	.prompt {
+		color: #fff;
+		font-family: 'Press Start 2P', monospace;
+		font-size: 0.47rem;
+		line-height: 1.6;
+	}
+
+	#terminalInput {
+		flex: 1;
+		background: transparent;
+		border: none;
+		color: #fff;
+		font: inherit;
+		font-size: 0.92rem;
+	}
+
+	#terminalInput:focus {
+		outline: none;
+	}
+
+	.terminal-hint {
+		margin: 0.65rem 0 0;
+		font-family: 'Press Start 2P', monospace;
+		font-size: 0.44rem;
+		line-height: 1.6;
+		color: #d9d9d9;
+	}
+
+	@media (max-width: 760px) {
+		.terminal-output {
+			min-height: 300px;
+			max-height: 380px;
+		}
+		.chrome-title {
+			font-size: 0.48rem;
+		}
+		.terminal-subtitle {
+			font-size: 0.8rem;
+		}
+	}
+</style>

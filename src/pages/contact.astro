@@ -274,76 +274,129 @@ import Footer from '../components/Footer.astro';
     <div class="flex flex-col min-h-screen">
       <Header />
       
-      <main class="flex-1 flex items-center justify-center px-4">
-        <div class="pixel-contact-form">
-          <h1 class="contact-title">📧 CONTACT MISSION</h1>
-          
-          <form
-            method="POST"
-            action="https://formspree.io/f/mldbgzvv"
-          >
-            <div>
-              <label class="pixel-label" for="name">
-                🏷️ Player Name:
-              </label>
-              <input
-                class="pixel-input"
-                type="text"
-                id="name"
-                name="name"
-                placeholder="Enter your name..."
-                required
-              />
-            </div>
-            
-            <div>
-              <label class="pixel-label" for="email">
-                📧 Email Address:
-              </label>
-              <input
-                class="pixel-input"
-                type="email"
-                id="email"
-                name="email"
-                placeholder="your.email@domain.com"
-                required
-              />
-            </div>
-            
-            <div>
-              <label class="pixel-label" for="message">
-                💬 Mission Details:
-              </label>
-              <textarea
-                class="pixel-input"
-                id="message"
-                name="message"
-                rows="5"
-                placeholder="Tell me about your project or idea..."
-                required
-              ></textarea>
-            </div>
-            
-            <button class="pixel-submit" type="submit">
-              🚀 Send Message
-            </button>
-          </form>
+	      <main class="flex-1 flex items-center justify-center px-4">
+	        <div class="pixel-contact-form">
+	          <h1 class="contact-title" data-i18n="contact.title">📧 CONTACT MISSION</h1>
+	          
+	          <form
+	            method="POST"
+	            action="https://formspree.io/f/mldbgzvv"
+	          >
+	            <div>
+	              <label class="pixel-label" for="name" data-i18n="contact.nameLabel">
+	                🏷️ Player Name:
+	              </label>
+	              <input
+	                class="pixel-input"
+	                type="text"
+	                id="name"
+	                name="name"
+	                data-i18n-placeholder="contact.namePlaceholder"
+	                placeholder="Enter your name..."
+	                required
+	              />
+	            </div>
+	            
+	            <div>
+	              <label class="pixel-label" for="email" data-i18n="contact.emailLabel">
+	                📧 Email Address:
+	              </label>
+	              <input
+	                class="pixel-input"
+	                type="email"
+	                id="email"
+	                name="email"
+	                data-i18n-placeholder="contact.emailPlaceholder"
+	                placeholder="your.email@domain.com"
+	                required
+	              />
+	            </div>
+	            
+	            <div>
+	              <label class="pixel-label" for="message" data-i18n="contact.messageLabel">
+	                💬 Mission Details:
+	              </label>
+	              <textarea
+	                class="pixel-input"
+	                id="message"
+	                name="message"
+	                rows="5"
+	                data-i18n-placeholder="contact.messagePlaceholder"
+	                placeholder="Tell me about your project or idea..."
+	                required
+	              ></textarea>
+	            </div>
+	            
+	            <button class="pixel-submit" type="submit" data-i18n="contact.submit">
+	              🚀 Send Message
+	            </button>
+	          </form>
 
-          <div class="pixel-calendly">
-            <p class="calendly-text">🎮 Want to discuss your project directly?</p>
-            <a
-              href="https://calendly.com/alansaucedo-dev/30min"
-              target="_blank"
-              rel="noopener"
-              class="pixel-calendly-btn"
-            >
-              📅 Schedule Call
-            </a>
-          </div>
-        </div>
+	          <div class="pixel-calendly">
+	            <p class="calendly-text" data-i18n="contact.calendlyText">🎮 Want to discuss your project directly?</p>
+	            <a
+	              href="https://calendly.com/alansaucedo-dev/30min"
+	              target="_blank"
+	              rel="noopener"
+	              class="pixel-calendly-btn"
+	              data-i18n="contact.calendlyButton"
+	            >
+	              📅 Schedule Call
+	            </a>
+	          </div>
+	        </div>
       </main>
       
-      <Footer />
-    </div>
-  </body>
+	      <Footer />
+	    </div>
+	    <script is:inline>
+	      (() => {
+	        const root = document.querySelector('.pixel-contact-form');
+	        const languageApi = window.portfolioLanguage;
+	        if (!root || !languageApi) return;
+
+	        const translations = {
+	          es: {
+	            'contact.title': '📧 MISION DE CONTACTO',
+	            'contact.nameLabel': '🏷️ Nombre del player:',
+	            'contact.namePlaceholder': 'Escribe tu nombre...',
+	            'contact.emailLabel': '📧 Correo electronico:',
+	            'contact.emailPlaceholder': 'tu.correo@dominio.com',
+	            'contact.messageLabel': '💬 Detalles de la mision:',
+	            'contact.messagePlaceholder': 'Cuentame sobre tu proyecto o idea...',
+	            'contact.submit': '🚀 Enviar mensaje',
+	            'contact.calendlyText': '🎮 Quieres hablar de tu proyecto directamente?',
+	            'contact.calendlyButton': '📅 Agendar llamada'
+	          },
+	          en: {
+	            'contact.title': '📧 CONTACT MISSION',
+	            'contact.nameLabel': '🏷️ Player Name:',
+	            'contact.namePlaceholder': 'Enter your name...',
+	            'contact.emailLabel': '📧 Email Address:',
+	            'contact.emailPlaceholder': 'your.email@domain.com',
+	            'contact.messageLabel': '💬 Mission Details:',
+	            'contact.messagePlaceholder': 'Tell me about your project or idea...',
+	            'contact.submit': '🚀 Send Message',
+	            'contact.calendlyText': '🎮 Want to discuss your project directly?',
+	            'contact.calendlyButton': '📅 Schedule Call'
+	          }
+	        };
+
+	        const pageTitles = {
+	          es: 'Contacto - Alan Ugarte',
+	          en: 'Contact - Alan Ugarte'
+	        };
+
+	        const render = (lang) => {
+	          languageApi.applyTranslations(root, translations, lang);
+	          document.title = pageTitles[lang] || pageTitles.en;
+	        };
+
+	        render(languageApi.getLang());
+	        window.addEventListener('portfolio-lang-change', (event) => {
+	          render(event.detail);
+	        });
+	      })();
+	    </script>
+	  </body>
 </html>
