@@ -5,347 +5,202 @@ import Footer from '../components/Footer.astro';
 import { getLang } from '../utils/i18n';
 
 const lang = getLang(Astro.url);
+
+const copy = {
+	es: {
+		title: 'Contacto | Alan Ugarte',
+		description: 'Formulario de contacto para colaboraciones, freelance y nuevas ideas de producto.',
+		header: 'Hablemos de tu proyecto',
+		subtitle: 'Comparte objetivo, alcance y tiempos estimados. Respondere por correo con una propuesta clara.',
+		name: 'Nombre',
+		email: 'Correo',
+		message: 'Detalles del proyecto',
+		namePlaceholder: 'Tu nombre',
+		emailPlaceholder: 'tu.correo@dominio.com',
+		messagePlaceholder: 'Que necesitas construir y para cuando?',
+		submit: 'Enviar mensaje',
+		calendlyText: 'Prefieres una llamada directa?',
+		calendlyCta: 'Agendar llamada'
+	},
+	en: {
+		title: 'Contact | Alan Ugarte',
+		description: 'Contact form for collaborations, freelance work, and new product ideas.',
+		header: 'Let us discuss your project',
+		subtitle: 'Share goals, scope, and expected timeline. I will reply by email with a clear proposal.',
+		name: 'Name',
+		email: 'Email',
+		message: 'Project details',
+		namePlaceholder: 'Your name',
+		emailPlaceholder: 'your.email@domain.com',
+		messagePlaceholder: 'What do you need to build and by when?',
+		submit: 'Send message',
+		calendlyText: 'Prefer a direct call?',
+		calendlyCta: 'Schedule call'
+	}
+} as const;
+
+const t = copy[lang];
 ---
 
+<!doctype html>
 <html lang={lang}>
   <head>
-    <BaseHead title="Contact - Alan Ugarte" description="Get in touch - Let's build something amazing together!" />
-    <!-- Import Press Start 2P font for consistency -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
-      rel="stylesheet"
-    />
+    <BaseHead title={t.title} description={t.description} />
     <style>
-      /* Apply same retro background as homepage */
       body {
-        background: 
-          linear-gradient(45deg, #0f0f23 25%, transparent 25%), 
-          linear-gradient(-45deg, #0f0f23 25%, transparent 25%), 
-          linear-gradient(45deg, transparent 75%, #0f0f23 75%), 
-          linear-gradient(-45deg, transparent 75%, #0f0f23 75%),
-          linear-gradient(to bottom, #1a1a3a, #0f0f23);
-        background-size: 20px 20px, 20px 20px, 20px 20px, 20px 20px, 100% 100%;
-        background-position: 0 0, 0 10px, 10px -10px, -10px 0px, 0 0;
-        color: #00ff41;
-        font-family: 'Press Start 2P', monospace;
+        margin: 0;
         min-height: 100vh;
-        position: relative;
-        overflow-x: hidden;
+        font-family: 'Manrope', 'Segoe UI', sans-serif;
+        background:
+          radial-gradient(circle at 12% 0%, rgba(227, 174, 92, 0.22), transparent 38%),
+          radial-gradient(circle at 90% 18%, rgba(47, 123, 106, 0.17), transparent 35%),
+          linear-gradient(180deg, #fbf2de 0%, #f1dfbb 100%);
+        color: #2e1f17;
       }
 
-      /* CRT scanlines effect */
-      body::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: repeating-linear-gradient(
-          0deg,
-          transparent,
-          transparent 2px,
-          rgba(0, 255, 65, 0.03) 2px,
-          rgba(0, 255, 65, 0.03) 4px
-        );
-        pointer-events: none;
-        z-index: 1000;
+      main {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 1.2rem 1rem 2.2rem;
       }
 
-      /* Contact form container */
-      .pixel-contact-form {
-        position: relative;
-        padding: 3rem 2rem;
-        background: rgba(0, 0, 0, 0.4);
-        border: 3px solid #00ff41;
-        margin: 2rem auto;
-        max-width: 600px;
-        box-shadow: 
-          0 0 30px rgba(0, 255, 65, 0.3),
-          inset 0 0 30px rgba(0, 255, 65, 0.1);
+      .contact-card {
+        border: 3px solid #8e3f2a;
+        background:
+          repeating-linear-gradient(45deg, rgba(179, 90, 63, 0.1) 0 14px, transparent 14px 28px),
+          linear-gradient(155deg, rgba(248, 236, 210, 0.95), rgba(236, 214, 173, 0.9));
+        box-shadow: 0 14px 28px rgba(89, 49, 36, 0.18);
+        padding: clamp(1rem, 2.5vw, 1.7rem);
       }
 
-      /* Rainbow border animation */
-      .pixel-contact-form::before {
-        content: '';
-        position: absolute;
-        top: -3px;
-        left: -3px;
-        right: -3px;
-        bottom: -3px;
-        background: linear-gradient(
-          45deg,
-          #ff0080, #0b0e0c, #0080ff, #ff0080
-        );
-        z-index: -1;
-        animation: rainbow-border 3s linear infinite;
+      h1 {
+        margin: 0;
+        font-family: 'Cinzel', 'Georgia', serif;
+        font-size: clamp(1.5rem, 3vw, 2.2rem);
+        letter-spacing: 0.04em;
+        color: #8e3f2a;
       }
 
-      @keyframes rainbow-border {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
+      .lead {
+        margin: 0.7rem 0 1rem;
+        line-height: 1.5;
+        color: rgba(46, 31, 23, 0.86);
       }
 
-      /* Form title */
-      .contact-title {
-        font-size: 2rem;
-        color: #00ff41;
-        text-align: center;
-        margin-bottom: 2rem;
-        text-shadow: 
-          0 0 5px #00ff41,
-          0 0 10px #00ff41,
-          0 0 15px #00ff41;
-        animation: glitch 2s infinite;
+      .field {
+        margin-bottom: 0.95rem;
       }
 
-      /* Glitch animation for title */
-      @keyframes glitch {
-        0%, 100% {
-          text-shadow: 
-            0 0 5px #00ff41,
-            0 0 10px #00ff41,
-            0 0 15px #00ff41;
-        }
-        25% {
-          text-shadow: 
-            -2px 0 #ff0080,
-            2px 0 #0080ff,
-            0 0 5px #00ff41;
-        }
-        50% {
-          text-shadow: 
-            2px 0 #ff0080,
-            -2px 0 #0080ff,
-            0 0 5px #00ff41;
-        }
-        75% {
-          text-shadow: 
-            0 0 5px #00ff41,
-            0 0 10px #00ff41,
-            0 0 15px #00ff41;
-        }
-      }
-
-      /* Form labels */
-      .pixel-label {
+      label {
         display: block;
-        margin-bottom: 0.5rem;
-        color: #ff0080;
-        font-size: 0.8rem;
-        text-transform: uppercase;
-        text-shadow: 1px 1px 0 #aa0055;
+        margin-bottom: 0.35rem;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: #2f7b6a;
       }
 
-      /* Form inputs */
-      .pixel-input {
+      input,
+      textarea {
         width: 100%;
-        padding: 1rem;
-        background: rgba(0, 0, 0, 0.6);
-        border: 2px solid #00ff41;
-        color: #00ff41;
-        font-family: 'Press Start 2P', monospace;
-        font-size: 0.7rem;
-        margin-bottom: 1.5rem;
-        transition: all 0.3s ease;
+        padding: 0.65rem 0.7rem;
+        border: 1px solid rgba(46, 31, 23, 0.28);
+        background: rgba(255, 251, 242, 0.8);
+        color: #2e1f17;
+        font: inherit;
+        font-size: 0.95rem;
       }
 
-      .pixel-input:focus {
-        outline: none;
-        border-color: #ff0080;
-        box-shadow: 0 0 15px rgba(255, 0, 128, 0.5);
-        color: #ff0080;
+      input:focus,
+      textarea:focus {
+        outline: 2px solid rgba(47, 123, 106, 0.45);
+        outline-offset: 1px;
       }
 
-      .pixel-input::placeholder {
-        color: rgba(0, 255, 65, 0.5);
-        font-family: 'Press Start 2P', monospace;
-        font-size: 0.6rem;
-      }
-
-      /* Submit button */
-      .pixel-submit {
+      .submit {
         width: 100%;
-        padding: 1rem 2rem;
-        border: 3px solid #00ff41;
-        background: linear-gradient(45deg, #0f0f23, #1a1a3a);
-        color: #00ff41;
-        font-family: 'Press Start 2P', monospace;
-        font-size: 0.8rem;
-        text-transform: uppercase;
+        border: 1px solid rgba(46, 31, 23, 0.34);
+        background: linear-gradient(145deg, #2f7b6a, #255f53);
+        color: #f8edd3;
+        font-weight: 800;
+        font-size: 0.95rem;
+        padding: 0.7rem;
         cursor: pointer;
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-        box-shadow: 
-          0 4px 0 #00aa2e,
-          0 8px 15px rgba(0, 0, 0, 0.3);
+        transition: all 0.2s ease;
       }
 
-      .pixel-submit::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, 
-          transparent,
-          rgba(0, 255, 65, 0.2),
-          transparent);
-        transition: left 0.5s ease;
+      .submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 16px rgba(46, 31, 23, 0.16);
       }
 
-      .pixel-submit:hover::before {
-        left: 100%;
-      }
-
-      .pixel-submit:hover {
-        background: linear-gradient(45deg, #00ff41, #00aa2e);
-        color: #0f0f23;
-        transform: translateY(-4px);
-        box-shadow: 
-          0 8px 0 #007a22,
-          0 12px 20px rgba(0, 0, 0, 0.4),
-          0 0 20px rgba(0, 255, 65, 0.5);
-      }
-
-      /* Calendly section */
-      .pixel-calendly {
-        margin-top: 3rem;
+      .calendly {
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px dashed rgba(142, 63, 42, 0.5);
         text-align: center;
-        padding-top: 2rem;
-        border-top: 2px dashed #ff0080;
       }
 
-      .calendly-text {
-        color: #ff0080;
-        margin-bottom: 1rem;
-        font-size: 0.8rem;
-        text-shadow: 1px 1px 0 #aa0055;
+      .calendly p {
+        margin: 0 0 0.6rem;
+        color: rgba(46, 31, 23, 0.84);
       }
 
-      .pixel-calendly-btn {
-        display: inline-block;
-        padding: 1rem 2rem;
-        border: 3px solid #ff0080;
-        background: linear-gradient(45deg, #0f0f23, #1a1a3a);
-        color: #ff0080;
+      .calendly a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.5rem 0.9rem;
         text-decoration: none;
-        font-family: 'Press Start 2P', monospace;
-        font-size: 0.7rem;
-        text-transform: uppercase;
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-        box-shadow: 
-          0 4px 0 #aa0055,
-          0 8px 15px rgba(0, 0, 0, 0.3);
+        font-size: 0.9rem;
+        font-weight: 700;
+        border: 1px solid rgba(142, 63, 42, 0.5);
+        background: rgba(255, 255, 255, 0.6);
+        color: #8e3f2a;
       }
 
-      .pixel-calendly-btn:hover {
-        background: linear-gradient(45deg, #ff0080, #aa0055);
-        color: #0f0f23;
-        transform: translateY(-4px);
-        box-shadow: 
-          0 8px 0 #77003d,
-          0 12px 20px rgba(0, 0, 0, 0.4),
-          0 0 20px rgba(255, 0, 128, 0.5);
-      }
-
-      /* Responsive design */
-      @media (max-width: 768px) {
-        .contact-title {
-          font-size: 1.5rem;
-        }
-        .pixel-contact-form {
-          margin: 1rem;
-          padding: 2rem 1rem;
-        }
-        .pixel-input {
-          font-size: 0.6rem;
-        }
-        .pixel-submit {
-          font-size: 0.7rem;
-        }
+      .calendly a:hover {
+        border-color: rgba(47, 123, 106, 0.7);
+        background: rgba(47, 123, 106, 0.12);
       }
     </style>
   </head>
   <body>
-    <!-- Main page layout -->
     <div class="flex flex-col min-h-screen">
       <Header />
-      
-      <main class="flex-1 flex items-center justify-center px-4">
-        <div class="pixel-contact-form">
-          <h1 class="contact-title">📧 CONTACT MISSION</h1>
-          
-          <form
-            method="POST"
-            action="https://formspree.io/f/mldbgzvv"
-          >
-            <div>
-              <label class="pixel-label" for="name">
-                🏷️ Player Name:
-              </label>
-              <input
-                class="pixel-input"
-                type="text"
-                id="name"
-                name="name"
-                placeholder="Enter your name..."
-                required
-              />
+
+      <main class="flex-1">
+        <section class="contact-card">
+          <h1>{t.header}</h1>
+          <p class="lead">{t.subtitle}</p>
+
+          <form method="POST" action="https://formspree.io/f/mldbgzvv">
+            <div class="field">
+              <label for="name">{t.name}</label>
+              <input id="name" name="name" type="text" placeholder={t.namePlaceholder} required />
             </div>
-            
-            <div>
-              <label class="pixel-label" for="email">
-                📧 Email Address:
-              </label>
-              <input
-                class="pixel-input"
-                type="email"
-                id="email"
-                name="email"
-                placeholder="your.email@domain.com"
-                required
-              />
+
+            <div class="field">
+              <label for="email">{t.email}</label>
+              <input id="email" name="email" type="email" placeholder={t.emailPlaceholder} required />
             </div>
-            
-            <div>
-              <label class="pixel-label" for="message">
-                💬 Mission Details:
-              </label>
-              <textarea
-                class="pixel-input"
-                id="message"
-                name="message"
-                rows="5"
-                placeholder="Tell me about your project or idea..."
-                required
-              ></textarea>
+
+            <div class="field">
+              <label for="message">{t.message}</label>
+              <textarea id="message" name="message" rows="6" placeholder={t.messagePlaceholder} required></textarea>
             </div>
-            
-            <button class="pixel-submit" type="submit">
-              🚀 Send Message
-            </button>
+
+            <button class="submit" type="submit">{t.submit}</button>
           </form>
 
-          <div class="pixel-calendly">
-            <p class="calendly-text">🎮 Want to discuss your project directly?</p>
-            <a
-              href="https://calendly.com/alansaucedo-dev/30min"
-              target="_blank"
-              rel="noopener"
-              class="pixel-calendly-btn"
-            >
-              📅 Schedule Call
+          <div class="calendly">
+            <p>{t.calendlyText}</p>
+            <a href="https://calendly.com/alansaucedo-dev/30min" target="_blank" rel="noopener noreferrer">
+              {t.calendlyCta}
             </a>
           </div>
-        </div>
+        </section>
       </main>
-      
+
       <Footer />
     </div>
   </body>

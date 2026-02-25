@@ -10,6 +10,8 @@ type Props = CollectionEntry<'blog'>['data'];
 
 const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 const lang = getLang(Astro.url);
+const locale = lang === 'es' ? 'es-MX' : 'en-US';
+const lastUpdatedText = lang === 'es' ? 'Ultima actualizacion' : 'Last updated on';
 ---
 
 <html lang={lang}>
@@ -66,11 +68,11 @@ const lang = getLang(Astro.url);
 				<div class="prose">
 					<div class="title">
 						<div class="date">
-							<FormattedDate date={pubDate} />
+							<FormattedDate date={pubDate} locale={locale} />
 							{
 								updatedDate && (
 									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
+										{lastUpdatedText} <FormattedDate date={updatedDate} locale={locale} />
 									</div>
 								)
 							}
