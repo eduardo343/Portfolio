@@ -268,6 +268,124 @@ import Footer from '../components/Footer.astro';
 				}
 			}
 		</style>
+		<style>
+			body {
+				background: #000 !important;
+				color: #f5f5f5 !important;
+				font-family: 'Space Grotesk', sans-serif !important;
+			}
+
+			body::before {
+				display: none !important;
+			}
+
+			.pixel-about {
+				max-width: 980px;
+				margin: 1.2rem auto;
+				padding: 1rem;
+			}
+
+			.main-title {
+				margin-bottom: 1.2rem;
+				font-family: 'Space Grotesk', sans-serif !important;
+				font-size: clamp(1.4rem, 3vw, 2rem) !important;
+				color: #f8fafc !important;
+				text-align: left;
+				animation: none !important;
+				text-shadow: none !important;
+			}
+
+			.about-section {
+				background: #040404 !important;
+				border: 1px solid #1f1f1f !important;
+				border-radius: 12px;
+				box-shadow: none !important;
+				padding: 1.1rem !important;
+				margin-bottom: 0.9rem !important;
+			}
+
+			.about-section::before {
+				display: none !important;
+			}
+
+			.section-title {
+				font-family: 'IBM Plex Mono', ui-monospace, monospace !important;
+				font-size: 0.92rem !important;
+				letter-spacing: 0.04em;
+				text-align: left !important;
+				color: #22d3ee !important;
+				margin-bottom: 0.9rem !important;
+				animation: none !important;
+				text-shadow: none !important;
+			}
+
+			.pixel-text {
+				color: #d1d5db !important;
+				font-family: 'IBM Plex Mono', ui-monospace, monospace !important;
+				font-size: 0.9rem !important;
+				line-height: 1.75 !important;
+				margin-bottom: 1rem !important;
+				text-shadow: none !important;
+			}
+
+			.timeline::before {
+				background: #1f2937 !important;
+			}
+
+			.timeline-item::before {
+				background: #22d3ee !important;
+				border-color: #0e7490 !important;
+				box-shadow: none !important;
+			}
+
+			.timeline-date {
+				color: #94a3b8 !important;
+				text-shadow: none !important;
+			}
+
+			.timeline-title {
+				color: #f8fafc !important;
+				text-shadow: none !important;
+			}
+
+			.timeline-desc {
+				color: #cbd5e1 !important;
+				text-shadow: none !important;
+			}
+
+			.skills-grid {
+				gap: 0.75rem !important;
+			}
+
+			.skill-category {
+				background: #060606 !important;
+				border: 1px solid #1f1f1f !important;
+				border-radius: 10px;
+				transform: none !important;
+				box-shadow: none !important;
+			}
+
+			.skill-category:hover {
+				border-color: #334155 !important;
+				box-shadow: none !important;
+				transform: none !important;
+			}
+
+			.skill-title {
+				color: #e2e8f0 !important;
+				font-family: 'IBM Plex Mono', ui-monospace, monospace !important;
+				font-size: 0.74rem !important;
+				text-shadow: none !important;
+			}
+
+			.skill-list {
+				color: #94a3b8 !important;
+				font-family: 'IBM Plex Mono', ui-monospace, monospace !important;
+				font-size: 0.72rem !important;
+				line-height: 1.7 !important;
+				text-shadow: none !important;
+			}
+		</style>
 	</head>
 	<body>
 		<div class="flex flex-col min-h-screen">
@@ -281,10 +399,10 @@ import Footer from '../components/Footer.astro';
 						<section class="about-section">
 							<h2 class="section-title" data-i18n="about.missionTitle">🎯 MISSION STATEMENT</h2>
 							<p class="pixel-text" data-i18n="about.missionP1">
-								¡Hola! I'm Alan Ugarte, a passionate Full Stack Developer with over 5 years of professional experience crafting digital solutions. My journey began at age 15 with my first line of C++, and since then, I've been on an epic quest to master the art of programming.
+								¡Hola! I'm Alan Ugarte, a passionate Full Stack Developer with 3 years of professional experience crafting digital solutions. My journey began at age 15 with my first line of C++, and since then, I've been on an epic quest to master the art of programming.
 							</p>
 							<p class="pixel-text" data-i18n="about.missionP2">
-								I specialize in building scalable web applications using modern technologies, with a strong focus on Laravel 11 backends, Angular 19 frontends, and NoSQL databases. My mission is to transform complex business requirements into elegant, efficient, and user-friendly solutions.
+								I specialize in building scalable web applications using modern technologies, with a strong focus on Node.js backends, React frontends, and NoSQL databases. My mission is to transform complex business requirements into elegant, efficient, and user-friendly solutions.
 							</p>
 						</section>
 
@@ -296,21 +414,24 @@ import Footer from '../components/Footer.astro';
 									<div class="timeline-date" data-i18n="about.exp1.date">2024 - PRESENT</div>
 									<div class="timeline-title" data-i18n="about.exp1.title">Freelancer</div>
 									<div class="timeline-desc" data-i18n="about.exp1.desc">
-										Currently developing and maintaining web applications with Python, React, and diverse databases. Leading projects end-to-end with a focus on performance, scalability, and user experience.
+										Trellcord: Full-stack app combining Trello-style task management and real-time Discord-style chat. JWT auth, drag-and-drop boards, WebSockets, CI/CD with Docker & GitHub Actions. Stack: React.js, Node.js, Socket.io, MongoDB.
+Casino Fibonacci: Interactive Streamlit simulator for betting strategies (Fibonacci, Martingale, D'Alembert) with statistical analysis and 1000+ simulation runs. Stack: Python, Streamlit, Plotly, Pandas, NumPy.
+Virtual Assistant: Intelligent assistant with NLP (spaCy/NLTK), conversational memory, predictive analytics and API integration. 85% intent accuracy, responses under 2 seconds. Stack: Python, Streamlit, spaCy, NLTK.
 									</div>
 								</div>
 								<div class="timeline-item">
 									<div class="timeline-date" data-i18n="about.exp2.date">2024</div>
 									<div class="timeline-title" data-i18n="about.exp2.title">Geem Solutions</div>
 									<div class="timeline-desc" data-i18n="about.exp2.desc">
-										Full Stack Developer for point-of-sale systems using PHP and React. Enhanced application performance and user experience through modern development practices.
+										Developed and maintained a POS platform adopted by 50+ local businesses. Reduced security vulnerabilities by 40% and built a PHP remote lock system that improved debt recovery rates by 90%. Stack: PHP.
 									</div>
 								</div>
 								<div class="timeline-item">
 									<div class="timeline-date" data-i18n="about.exp3.date">2023 - 2024</div>
 									<div class="timeline-title" data-i18n="about.exp3.title">Magmalabs</div>
 									<div class="timeline-desc" data-i18n="about.exp3.desc">
-										Began my professional journey as a Full Stack Developer. Contributed to projects like Bright Coders and Magma Chat, working with Python and React to deliver robust web applications.
+										Bright-Coders: Built React (Redux) components and RESTful Rails API endpoints, boosting responsiveness by 30%. Optimized PostgreSQL queries reducing load times by 25% and improved test coverage with RSpec and Jest. Stack: React, Rails, PostgreSQL.
+MagmaChat AI: Engineered FastAPI backend services for NLP pipelines, JWT auth, AWS S3 integration, and fine-tuned Hugging Face models achieving 20% accuracy improvement on financial tasks. Stack: Python, FastAPI, AWS, Hugging Face.
 									</div>
 								</div>
 							</div>
@@ -334,10 +455,12 @@ import Footer from '../components/Footer.astro';
 									<div class="skill-title" data-i18n="about.skill.frontend">🎨 FRONTEND</div>
 									<div class="skill-list">
 										TypeScript 5.0<br/>
-										Angular 19<br/>
 									JavaScript ES6+<br/>
 									HTML5 & CSS3<br/>
-									Tailwind CSS
+									Tailwind CSS<br/>
+									React<br/>
+									Next.js<br/>
+									Astro
 									</div>
 								</div>
 								<div class="skill-category">
@@ -355,7 +478,6 @@ import Footer from '../components/Footer.astro';
 									<div class="skill-list">
 										Git & GitHub<br/>
 										Docker<br/>
-									AWS Services<br/>
 									Agile/Scrum<br/>
 									CI/CD
 								</div>
@@ -373,7 +495,7 @@ import Footer from '../components/Footer.astro';
 								When I'm not coding, you'll find me contributing to open-source projects, participating in hackathons, mentoring junior developers, or exploring the latest industry trends. I'm passionate about sharing knowledge and believe that the best way to grow is by helping others succeed.
 							</p>
 							<p class="pixel-text" data-i18n="about.philosophyP3">
-								Currently focused on mastering Laravel 11's latest features, exploring Angular 19's new capabilities, and diving deeper into NoSQL database optimization techniques.
+								Currently focused on mastering Node.js latest features, exploring React new capabilities, and diving deeper into NoSQL database optimization techniques.
 							</p>
 						</section>
 					</div>
@@ -391,18 +513,20 @@ import Footer from '../components/Footer.astro';
 						es: {
 							'about.mainTitle': '👨‍💻 PERFIL DEL PLAYER',
 							'about.missionTitle': '🎯 MISION',
-							'about.missionP1': 'Hola, soy Alan Ugarte, un Full Stack Developer apasionado con mas de 5 anos de experiencia profesional creando soluciones digitales. Mi camino comenzo a los 15 anos con mi primera linea de C++, y desde entonces he estado en una mision constante para dominar el arte de programar.',
+							'about.missionP1': 'Hola, soy Alan Ugarte, un Full Stack Developer apasionado con  3 años de experiencia profesional creando soluciones digitales. Mi camino comenzo a los 15 años con mi primera linea de C++, y desde entonces he estado en una mision constante para dominar el arte de programar.',
 							'about.missionP2': 'Me especializo en construir aplicaciones web escalables usando tecnologias modernas, con enfoque en backends con Laravel 11, frontends con Angular 19 y bases de datos NoSQL. Mi objetivo es transformar requerimientos de negocio complejos en soluciones elegantes, eficientes y faciles de usar.',
 							'about.experienceTitle': '🚀 EXPERIENCIA',
 							'about.exp1.date': '2024 - ACTUALIDAD',
 							'about.exp1.title': 'Freelancer',
-							'about.exp1.desc': 'Actualmente desarrollo y mantengo aplicaciones web con Python, React y diversas bases de datos. Lidero proyectos de extremo a extremo con foco en rendimiento, escalabilidad y experiencia de usuario.',
+							'about.exp1.desc': `Trellcord: App full-stack que combina gestión de tareas estilo Trello y chat en tiempo real estilo Discord. JWT, drag-and-drop, WebSockets y CI/CD con Docker y GitHub Actions. Stack: React.js, Node.js, Socket.io, MongoDB.
+Casino Fibonacci: Simulador educativo en Streamlit para estrategias de apuestas (Fibonacci, Martingale, D'Alembert) con análisis estadístico y +1000 simulaciones. Stack: Python, Streamlit, Plotly, Pandas, NumPy.
+Virtual Assistant: Asistente inteligente con PLN (spaCy/NLTK), memoria conversacional, análisis predictivo e integración de APIs. 85% precisión en intención, respuestas en <2 segundos. Stack: Python, Streamlit, spaCy, NLTK.`,
 							'about.exp2.date': '2024',
 							'about.exp2.title': 'Geem Solutions',
-							'about.exp2.desc': 'Full Stack Developer para sistemas punto de venta con PHP y React. Mejore el rendimiento de las aplicaciones y la experiencia de usuario mediante practicas modernas de desarrollo.',
+							'about.exp2.desc': 'GeemSolutions: Desarrollé y mantuve una plataforma POS adoptada por +50 negocios locales. Reduje vulnerabilidades de seguridad un 40% y construí un sistema de bloqueo remoto PHP que mejoró la recuperación de deuda un 90%. Stack: PHP.',
 							'about.exp3.date': '2023 - 2024',
 							'about.exp3.title': 'Magmalabs',
-							'about.exp3.desc': 'Inicie mi trayectoria profesional como Full Stack Developer. Contribui en proyectos como Bright Coders y Magma Chat, trabajando con Python y React para entregar aplicaciones web robustas.',
+							'about.exp3.desc': 'Bright-Coders: Desarrollé componentes React (Redux) y endpoints Rails RESTful, mejorando la capacidad de respuesta un 30%. Optimicé consultas PostgreSQL reduciendo tiempos de carga un 25% y cobertura de pruebas con RSpec y Jest. Stack: React, Rails, PostgreSQL. MagmaChat AI: Construí servicios backend en FastAPI para pipelines NLP, autenticación JWT, integración AWS S3 y fine-tuning de modelos Hugging Face con 20% de mejora en tareas financieras. Stack: Python, FastAPI, AWS, Hugging Face.',
 							'about.skillsTitle': '⚡ ARSENAL TECNICO',
 							'about.skill.backend': '🖥️ BACKEND',
 							'about.skill.frontend': '🎨 FRONTEND',
@@ -411,24 +535,27 @@ import Footer from '../components/Footer.astro';
 							'about.philosophyTitle': '💡 FILOSOFIA DE CODIGO',
 							'about.philosophyP1': 'Creo en escribir codigo limpio y mantenible que no solo resuelva problemas, sino que tambien cuente una historia. Mi enfoque combina practicas modernas de desarrollo con una comprension profunda del negocio para entregar soluciones que realmente importan.',
 							'about.philosophyP2': 'Cuando no estoy programando, participo en proyectos open source, hackathons, mentoring a desarrolladores junior o explorando nuevas tendencias del sector. Me apasiona compartir conocimiento y creo que la mejor forma de crecer es ayudar a otros a crecer.',
-							'about.philosophyP3': 'Actualmente estoy enfocado en dominar las ultimas funcionalidades de Laravel 11, explorar nuevas capacidades de Angular 19 y profundizar en tecnicas de optimizacion para bases de datos NoSQL.'
+							
 						},
 						en: {
 							'about.mainTitle': '👨‍💻 PLAYER PROFILE',
 							'about.missionTitle': '🎯 MISSION STATEMENT',
-							'about.missionP1': "Hello, I'm Alan Ugarte, a passionate Full Stack Developer with over 5 years of professional experience crafting digital solutions. My journey began at age 15 with my first line of C++, and since then, I have been on an ongoing quest to master the art of programming.",
+							'about.missionP1': "Hello, I'm Alan Ugarte, a passionate Full Stack Developer with 3 years of professional experience crafting digital solutions. My journey began at age 15 with my first line of C++, and since then, I have been on an ongoing quest to master the art of programming.",
 							'about.missionP2': 'I specialize in building scalable web applications using modern technologies, with a strong focus on Laravel 11 backends, Angular 19 frontends, and NoSQL databases. My mission is to transform complex business requirements into elegant, efficient, and user-friendly solutions.',
 							'about.experienceTitle': '🚀 EXPERIENCE LOG',
 							'about.exp1.date': '2024 - PRESENT',
 							'about.exp1.title': 'Freelancer',
-							'about.exp1.desc': 'Currently developing and maintaining web applications with Python, React, and diverse databases. Leading projects end-to-end with a focus on performance, scalability, and user experience.',
+							'about.exp1.desc': `Trellcord: Full-stack app combining Trello-style task management and real-time Discord-style chat. JWT auth, drag-and-drop boards, WebSockets, CI/CD with Docker & GitHub Actions. Stack: React.js, Node.js, Socket.io, MongoDB.
+Casino Fibonacci: Interactive Streamlit simulator for betting strategies (Fibonacci, Martingale, D'Alembert) with statistical analysis and 1000+ simulation runs. Stack: Python, Streamlit, Plotly, Pandas, NumPy.
+Virtual Assistant: Intelligent assistant with NLP (spaCy/NLTK), conversational memory, predictive analytics and API integration. 85% intent accuracy, responses under 2 seconds. Stack: Python, Streamlit, spaCy, NLTK.`,
 							'about.exp2.date': '2024',
 							'about.exp2.title': 'Geem Solutions',
-							'about.exp2.desc': 'Full Stack Developer for point-of-sale systems using PHP and React. Enhanced application performance and user experience through modern development practices.',
+							'about.exp2.desc': 'Developed and maintained a POS platform adopted by 50+ local businesses. Reduced security vulnerabilities by 40% and built a PHP remote lock system that improved debt recovery rates by 90%. Stack: PHP.',
 							'about.exp3.date': '2023 - 2024',
 							'about.exp3.title': 'Magmalabs',
-							'about.exp3.desc': 'Began my professional journey as a Full Stack Developer. Contributed to projects like Bright Coders and Magma Chat, working with Python and React to deliver robust web applications.',
-							'about.skillsTitle': '⚡ TECH ARSENAL',
+						'about.exp3.desc': `Bright-Coders: Built React (Redux) components and RESTful Rails API endpoints, boosting responsiveness by 30%. Optimized PostgreSQL queries reducing load times by 25% and improved test coverage with RSpec and Jest. Stack: React, Rails, PostgreSQL.
+						MagmaChat AI: Engineered FastAPI backend services for NLP pipelines, JWT auth, AWS S3 integration, and fine-tuned Hugging Face models achieving 20% accuracy improvement on financial tasks. Stack: Python, FastAPI, AWS, Hugging Face.`,
+						'about.skillsTitle': '⚡ TECH ARSENAL',
 							'about.skill.backend': '🖥️ BACKEND',
 							'about.skill.frontend': '🎨 FRONTEND',
 							'about.skill.databases': '🗄️ DATABASES',
@@ -436,7 +563,7 @@ import Footer from '../components/Footer.astro';
 							'about.philosophyTitle': '💡 CODING PHILOSOPHY',
 							'about.philosophyP1': 'I believe in writing clean, maintainable code that not only solves problems but also tells a story. My approach combines modern development practices with a deep understanding of business requirements to deliver solutions that truly matter.',
 							'about.philosophyP2': "When I am not coding, you will find me contributing to open-source projects, participating in hackathons, mentoring junior developers, or exploring the latest industry trends. I am passionate about sharing knowledge and believe that the best way to grow is by helping others succeed.",
-							'about.philosophyP3': "Currently focused on mastering Laravel 11's latest features, exploring Angular 19's new capabilities, and diving deeper into NoSQL database optimization techniques."
+							
 						}
 					};
 

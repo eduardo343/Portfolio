@@ -21,42 +21,20 @@ const subpath = pathname.match(/[^\/]+/g);
 const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
 ---
 
-<!-- 
-  Navigation link component with automatic active state detection
-  Uses conditional class application to style the current page link differently
--->
 <a href={href} class:list={[className, { active: isActive }]} {...props}>
-	<!-- Slot allows parent component to pass in link text/content -->
 	<slot />
 </a>
 <style>
-	/* Base styling for navigation links */
 	a {
-		display: inline-block;  /* Allow padding and transforms while staying inline */
-		text-decoration: none;  /* Remove default underline */
-		font-family: 'Press Start 2P', monospace;  /* Pixel-perfect retro font */
-		transition: all 0.3s ease;  /* Smooth transitions for all hover effects */
+		display: inline-block;
+		text-decoration: none;
+		transition: all 0.2s ease;
 	}
-	
-	/* Active state styling for current page link */
+
 	a.active {
-		/* Bright neon green background to indicate current page */
-		background-color: #00ff41 !important;
-		/* Dark text for contrast against bright background */
-		color: #0f0f23 !important;
-		/* Multiple shadow effects for 8-bit arcade aesthetic */
-		box-shadow: 
-			0 0 15px rgba(0, 255, 65, 0.7),  /* Bright outer glow */
-			0 4px 0 #00aa2e !important;      /* 3D drop shadow effect */
-		/* Slight upward movement to simulate button press/active state */
-		transform: translateY(-2px) !important;
-		/* Ensure border matches the active background color */
-		border-color: #00ff41 !important;
-		/* Remove any inherited text shadows that might interfere */
-		text-shadow: none !important;
-		/* 
-		  Note: !important used here to override parent component styles
-		  since this component's styles are applied after the parent's
-		*/
+		background-color: #0f0f0f !important;
+		border-color: #22d3ee !important;
+		color: #ffffff !important;
+		box-shadow: 0 0 0 1px rgba(34, 211, 238, 0.2);
 	}
 </style>

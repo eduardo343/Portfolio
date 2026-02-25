@@ -2,44 +2,43 @@
 const today = new Date();
 ---
 
-<footer class="pixel-footer">
-	<!-- Terminal-style footer content -->
-	<div class="footer-container">
-		<div class="footer-section copyright-section">
-			<div class="copyright-content" data-year={today.getFullYear()}>
-				<span data-i18n="footer.copy">© {today.getFullYear()} Alan Ugarte • Built with love and lots of coffee</span>
-				<br />
-				<span class="astro-credit" data-i18n="footer.powered">Powered by Astro</span>
-			</div>
-		</div>
+<footer class="site-footer">
+	<div class="footer-inner" data-year={today.getFullYear()}>
+		<p class="footer-copy" data-i18n="footer.copy">© {today.getFullYear()} Alan Ugarte • Built with focus and coffee</p>
+		<p class="footer-powered" data-i18n="footer.powered">Powered by Astro</p>
 	</div>
-	<!-- Terminal cursor animation -->
-	<div class="terminal-cursor">_</div>
 </footer>
 
 <script is:inline>
 	(() => {
-		const root = document.querySelector('.pixel-footer');
+		const root = document.querySelector('.site-footer');
 		const languageApi = window.portfolioLanguage;
 		if (!root || !languageApi) return;
 
 		const year = root.querySelector('[data-year]')?.getAttribute('data-year') || String(new Date().getFullYear());
 		const translations = {
 			es: {
-				'footer.copy': `© ${year} Alan Ugarte • Hecho con amor y mucho cafe`,
+				'footer.copy': `© ${year} Alan Ugarte • Hecho con enfoque y café`,
 				'footer.powered': 'Impulsado por Astro'
 			},
 			en: {
-				'footer.copy': `© ${year} Alan Ugarte • Built with love and lots of coffee`,
+				'footer.copy': `© ${year} Alan Ugarte • Built with focus and coffee`,
 				'footer.powered': 'Powered by Astro'
 			}
+		};
+
+		const activeLang = languageApi.getLang();
+		const currentMessages = languageApi.captureTranslations?.(root) || {};
+		translations[activeLang] = {
+			...(translations[activeLang] || {}),
+			...currentMessages
 		};
 
 		const render = (lang) => {
 			languageApi.applyTranslations(root, translations, lang);
 		};
 
-		render(languageApi.getLang());
+		render(activeLang);
 		window.addEventListener('portfolio-lang-change', (event) => {
 			render(event.detail);
 		});
@@ -47,257 +46,30 @@ const today = new Date();
 </script>
 
 <style>
-	/* Pixel-art styled footer */
-	.pixel-footer {
-		background: rgba(0, 0, 0, 0.6);
-		border-top: 3px solid #00ff41;
-		color: #00ff41;
-		font-family: 'Press Start 2P', 'Courier New', monospace;
-		padding: 2rem 1rem;
-		position: relative;
-		margin-top: auto;
+	.site-footer {
+		border-top: 1px solid #1f1f1f;
+		background: #020202;
 	}
-	
-	/* Animated border effect */
-	.pixel-footer::before {
-		content: '';
-		position: absolute;
-		top: -3px;
-		left: 0;
-		right: 0;
-		height: 3px;
-		background: linear-gradient(
-			90deg,
-			#ff0080, #00ff41, #0080ff, #ff0080
-		);
-		animation: rainbow-border 3s linear infinite;
-		background-size: 400% 100%;
-	}
-	
-	@keyframes rainbow-border {
-		0% { background-position: 0% 50%; }
-		50% { background-position: 100% 50%; }
-		100% { background-position: 0% 50%; }
-	}
-	
-	.footer-container {
-		max-width: 1000px;
+
+	.footer-inner {
+		max-width: 1120px;
 		margin: 0 auto;
-		display: grid;
-		grid-template-columns: 1fr 1fr;
-		gap: 1.5rem;
-	}
-	
-	.footer-section {
 		padding: 1rem;
-		background: rgba(0, 0, 0, 0.4);
-		border: 2px solid #00ff41;
-		border-radius: 0;
-		position: relative;
-		box-shadow: 
-			0 0 15px rgba(0, 255, 65, 0.2),
-			inset 0 0 15px rgba(0, 255, 65, 0.05);
-	}
-	
-	/* Terminal prompt styling */
-	.terminal-line {
-		margin-bottom: 0.5rem;
-		font-size: 0.7rem;
-	}
-	
-	.prompt {
-		color: #0080ff;
-		text-shadow: 1px 1px 0 #004080;
-	}
-	
-	.command {
-		color: #00ff41;
-		text-shadow: 1px 1px 0 #00aa2e;
-		margin-left: 0.5rem;
-	}
-	
-	.terminal-output {
-		color: #00ff41;
-		font-size: 0.6rem;
-		line-height: 1.6;
-		text-shadow: 1px 1px 0 #00aa2e;
-		padding-left: 1rem;
-		border-left: 2px solid #00ff41;
-	}
-	
-	/* Social links styling */
-	.social-links {
-		display: flex;
-		gap: 0.8rem;
-		justify-content: flex-start;
-		flex-wrap: wrap;
-		padding-left: 1rem;
-		border-left: 2px solid #00ff41;
-	}
-	
-	/* Copyright section specific styling */
-	.copyright-section {
-		border-color: #ff0080;
-		box-shadow: 
-			0 0 15px rgba(255, 0, 128, 0.2),
-			inset 0 0 15px rgba(255, 0, 128, 0.05);
-	}
-	
-	.copyright-content {
-		color: #ff0080;
-		font-size: 0.6rem;
-		line-height: 1.6;
-		text-shadow: 1px 1px 0 #aa0055;
 		text-align: center;
 	}
-	
-	.astro-credit {
-		color: #0080ff;
-		font-size: 0.5rem;
-		text-shadow: 1px 1px 0 #004080;
+
+	.footer-copy {
+		margin: 0;
+		color: #d1d5db;
+		font-family: 'IBM Plex Mono', ui-monospace, monospace;
+		font-size: 0.78rem;
+		line-height: 1.45;
 	}
-	
-	.pixel-social-link {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.5rem;
-		padding: 0.5rem 1rem;
-		border: 2px solid #00ff41;
-		background: rgba(0, 0, 0, 0.6);
-		color: #00ff41;
-		text-decoration: none;
-		font-size: 0.6rem;
-		transition: all 0.3s ease;
-		position: relative;
-		overflow: hidden;
-	}
-	
-	.pixel-social-link::before {
-		content: '';
-		position: absolute;
-		top: 0;
-		left: -100%;
-		width: 100%;
-		height: 100%;
-		background: linear-gradient(90deg, 
-			transparent,
-			rgba(0, 255, 65, 0.2),
-			transparent);
-		transition: left 0.5s ease;
-	}
-	
-	.pixel-social-link:hover::before {
-		left: 100%;
-	}
-	
-	.pixel-social-link:hover {
-		background: linear-gradient(45deg, #00ff41, #00aa2e);
-		color: #0f0f23;
-		transform: translateY(-2px);
-		box-shadow: 
-			0 4px 0 #007a22,
-			0 8px 15px rgba(0, 255, 65, 0.3);
-	}
-	
-	.social-icon {
-		font-size: 0.8rem;
-	}
-	
-	.social-text {
-		text-transform: uppercase;
-	}
-	
-	
-	/* Animated terminal cursor */
-	.terminal-cursor {
-		position: absolute;
-		bottom: 1rem;
-		right: 2rem;
-		color: #00ff41;
-		font-size: 1rem;
-		animation: cursor-blink 1s infinite;
-	}
-	
-	@keyframes cursor-blink {
-		0%, 50% { opacity: 1; }
-		51%, 100% { opacity: 0; }
-	}
-	
-	/* Responsive design */
-	@media (max-width: 768px) {
-		.footer-container {
-			grid-template-columns: 1fr;
-			gap: 1rem;
-		}
-		
-		.footer-section {
-			padding: 0.8rem;
-		}
-		
-		.terminal-line {
-			font-size: 0.6rem;
-		}
-		
-		.terminal-output,
-		.copyright-content {
-			font-size: 0.55rem;
-		}
-		
-		.social-links {
-			gap: 0.5rem;
-			justify-content: center;
-		}
-		
-		.pixel-social-link {
-			padding: 0.4rem 0.8rem;
-			font-size: 0.55rem;
-		}
-		
-		.astro-credit {
-			font-size: 0.45rem;
-		}
-	}
-	
-	@media (max-width: 480px) {
-		.pixel-footer {
-			padding: 1.5rem 0.5rem;
-		}
-		
-		.terminal-cursor {
-			bottom: 0.5rem;
-			right: 1rem;
-		}
-		
-		.copyright-content {
-			font-size: 0.5rem;
-		}
-		
-		.astro-credit {
-			font-size: 0.4rem;
-		}
-	}
-	
-	/* High contrast mode support */
-	@media (prefers-contrast: high) {
-		.pixel-footer {
-			background: rgba(0, 0, 0, 0.9);
-			border-top-color: #ffffff;
-		}
-		
-		.footer-section {
-			border-color: #ffffff;
-		}
-	}
-	
-	/* Reduce motion for accessibility */
-	@media (prefers-reduced-motion: reduce) {
-		.pixel-footer::before,
-		.terminal-cursor {
-			animation: none !important;
-		}
-		
-		.pixel-social-link::before {
-			transition: none !important;
-		}
+
+	.footer-powered {
+		margin: 0.25rem 0 0;
+		color: #9ca3af;
+		font-family: 'IBM Plex Mono', ui-monospace, monospace;
+		font-size: 0.74rem;
 	}
 </style>

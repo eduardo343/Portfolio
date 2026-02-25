@@ -268,6 +268,123 @@ import Footer from '../components/Footer.astro';
         }
       }
     </style>
+    <style>
+      body {
+        background: #000 !important;
+        color: #f5f5f5 !important;
+        font-family: 'Space Grotesk', sans-serif !important;
+      }
+
+      body::before {
+        display: none !important;
+      }
+
+      .pixel-contact-form {
+        max-width: 680px;
+        width: min(92vw, 680px);
+        background: #040404 !important;
+        border: 1px solid #1f1f1f !important;
+        border-radius: 12px;
+        box-shadow: none !important;
+        padding: 1.25rem !important;
+      }
+
+      .pixel-contact-form::before {
+        display: none !important;
+      }
+
+      .contact-title {
+        font-family: 'Space Grotesk', sans-serif !important;
+        font-size: clamp(1.2rem, 3vw, 1.7rem) !important;
+        color: #f8fafc !important;
+        text-shadow: none !important;
+        animation: none !important;
+        margin-bottom: 1.2rem !important;
+      }
+
+      .pixel-label {
+        color: #22d3ee !important;
+        font-family: 'IBM Plex Mono', ui-monospace, monospace !important;
+        font-size: 0.78rem !important;
+        text-shadow: none !important;
+      }
+
+      .pixel-input {
+        background: #000 !important;
+        border: 1px solid #1f1f1f !important;
+        border-radius: 8px;
+        color: #f8fafc !important;
+        font-family: 'IBM Plex Mono', ui-monospace, monospace !important;
+        font-size: 0.86rem !important;
+        padding: 0.75rem !important;
+        box-shadow: none !important;
+      }
+
+      .pixel-input:focus {
+        border-color: #22d3ee !important;
+        box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.12) !important;
+        color: #ffffff !important;
+      }
+
+      .pixel-input::placeholder {
+        color: #6b7280 !important;
+        font-size: 0.78rem !important;
+        font-family: 'IBM Plex Mono', ui-monospace, monospace !important;
+      }
+
+      .pixel-submit {
+        border: 1px solid #155e75 !important;
+        border-radius: 8px;
+        background: #082f49 !important;
+        color: #e0f2fe !important;
+        font-family: 'IBM Plex Mono', ui-monospace, monospace !important;
+        font-size: 0.8rem !important;
+        box-shadow: none !important;
+        transform: none !important;
+      }
+
+      .pixel-submit::before {
+        display: none !important;
+      }
+
+      .pixel-submit:hover {
+        background: #0e7490 !important;
+        color: #ffffff !important;
+        box-shadow: none !important;
+        transform: none !important;
+      }
+
+      .pixel-calendly {
+        border-top: 1px solid #1f2937 !important;
+        margin-top: 1.3rem !important;
+        padding-top: 1rem !important;
+      }
+
+      .calendly-text {
+        color: #94a3b8 !important;
+        text-shadow: none !important;
+        font-family: 'IBM Plex Mono', ui-monospace, monospace !important;
+        font-size: 0.82rem !important;
+      }
+
+      .pixel-calendly-btn {
+        border: 1px solid #1f2937 !important;
+        border-radius: 8px;
+        background: #060606 !important;
+        color: #e2e8f0 !important;
+        box-shadow: none !important;
+        font-family: 'IBM Plex Mono', ui-monospace, monospace !important;
+        font-size: 0.74rem !important;
+      }
+
+      .pixel-calendly-btn:hover {
+        background: #0f172a !important;
+        border-color: #334155 !important;
+        color: #ffffff !important;
+        box-shadow: none !important;
+        transform: none !important;
+      }
+    </style>
   </head>
   <body>
     <!-- Main page layout -->
@@ -387,12 +504,20 @@ import Footer from '../components/Footer.astro';
 	          en: 'Contact - Alan Ugarte'
 	        };
 
+	        const activeLang = languageApi.getLang();
+	        const currentMessages = languageApi.captureTranslations?.(root) || {};
+	        translations[activeLang] = {
+	          ...(translations[activeLang] || {}),
+	          ...currentMessages
+	        };
+	        pageTitles[activeLang] = document.title;
+
 	        const render = (lang) => {
 	          languageApi.applyTranslations(root, translations, lang);
 	          document.title = pageTitles[lang] || pageTitles.en;
 	        };
 
-	        render(languageApi.getLang());
+	        render(activeLang);
 	        window.addEventListener('portfolio-lang-change', (event) => {
 	          render(event.detail);
 	        });

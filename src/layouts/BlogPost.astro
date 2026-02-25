@@ -14,10 +14,15 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 	<head>
 		<BaseHead title={title} description={description} />
 		<style>
+			body {
+				background: #000;
+				color: #f5f5f5;
+				font-family: 'Space Grotesk', sans-serif;
+			}
 			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
+				width: min(980px, calc(100% - 2rem));
+				max-width: 980px;
+				margin: 0 auto;
 			}
 			.hero-image {
 				width: 100%;
@@ -26,30 +31,57 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				display: block;
 				margin: 0 auto;
 				border-radius: 12px;
-				box-shadow: var(--box-shadow);
+				box-shadow: 0 12px 32px rgba(0, 0, 0, 0.38);
 			}
 			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
+				width: min(780px, calc(100% - 1.2rem));
 				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
+				padding: 1.2rem 0.6rem 2rem;
+				color: #e2e8f0;
+				font-family: 'IBM Plex Mono', ui-monospace, monospace;
+				font-size: 0.95rem;
+				line-height: 1.8;
 			}
 			.title {
 				margin-bottom: 1em;
 				padding: 1em 0;
-				text-align: center;
+				text-align: left;
 				line-height: 1;
 			}
 			.title h1 {
 				margin: 0 0 0.5em 0;
+				color: #f8fafc;
+				font-family: 'Space Grotesk', sans-serif;
+				font-size: clamp(1.4rem, 4vw, 2.1rem);
 			}
 			.date {
 				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
+				color: #94a3b8;
+				font-size: 0.84rem;
 			}
 			.last-updated-on {
 				font-style: italic;
+			}
+			hr {
+				border: none;
+				border-top: 1px solid #1f2937;
+			}
+			.prose a {
+				color: #22d3ee;
+			}
+			.prose :global(code) {
+				background: #030712;
+				color: #e2e8f0;
+				border: 1px solid #1f2937;
+				border-radius: 6px;
+			}
+			.prose :global(pre) {
+				background: #020617;
+				border: 1px solid #1f2937;
+			}
+			.prose :global(blockquote) {
+				border-left-color: #22d3ee;
+				color: #cbd5e1;
 			}
 		</style>
 	</head>
@@ -96,11 +128,18 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 					}
 				};
 
+				const activeLang = languageApi.getLang();
+				const currentMessages = languageApi.captureTranslations?.(root) || {};
+				translations[activeLang] = {
+					...(translations[activeLang] || {}),
+					...currentMessages
+				};
+
 				const render = (lang) => {
 					languageApi.applyTranslations(root, translations, lang);
 				};
 
-				render(languageApi.getLang());
+				render(activeLang);
 				window.addEventListener('portfolio-lang-change', (event) => {
 					render(event.detail);
 				});

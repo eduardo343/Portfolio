@@ -508,6 +508,170 @@ import Footer from '../../components/Footer.astro';
 				}
 			}
 		</style>
+		<style>
+			body {
+				background: #000 !important;
+				color: #f5f5f5 !important;
+				font-family: 'Space Grotesk', sans-serif !important;
+				overflow-y: auto !important;
+			}
+
+			.retro-grid,
+			.stars-container,
+			.scanlines,
+			.console-leds {
+				display: none !important;
+			}
+
+			.console {
+				width: min(94vw, 1120px) !important;
+				height: auto !important;
+				min-height: 84vh !important;
+				margin: 2rem auto !important;
+				background: #030303 !important;
+				border: 1px solid #1f1f1f !important;
+				border-radius: 14px !important;
+				box-shadow: 0 18px 40px rgba(0, 0, 0, 0.42) !important;
+			}
+
+			.screen {
+				margin: 1rem !important;
+				border: 1px solid #1f1f1f !important;
+				border-radius: 10px !important;
+				box-shadow: none !important;
+				background: #000 !important;
+			}
+
+			.screen-content {
+				padding: clamp(1rem, 3vw, 1.9rem) !important;
+			}
+
+			.glitch-title {
+				font-family: 'Space Grotesk', sans-serif !important;
+				font-size: clamp(1.4rem, 3.5vw, 2.25rem) !important;
+				color: #f8fafc !important;
+				text-shadow: none !important;
+				animation: none !important;
+			}
+
+			.subtitle {
+				font-family: 'IBM Plex Mono', ui-monospace, monospace !important;
+				font-size: 0.82rem !important;
+				color: #94a3b8 !important;
+				animation: none !important;
+			}
+
+			.level-indicator {
+				background: #0f172a !important;
+				border: 1px solid #334155 !important;
+				color: #cbd5e1 !important;
+				box-shadow: none !important;
+			}
+
+			.project-sprite {
+				filter: grayscale(0.2);
+				animation: none !important;
+			}
+
+			.dialog-box {
+				background: #050505 !important;
+				border: 1px solid #1f1f1f !important;
+				border-radius: 12px !important;
+				box-shadow: none !important;
+			}
+
+			.dialog-header {
+				background: #080808 !important;
+				border-bottom: 1px solid #1f1f1f !important;
+			}
+
+			.project-title {
+				color: #f8fafc !important;
+				text-shadow: none !important;
+				font-family: 'IBM Plex Mono', ui-monospace, monospace !important;
+			}
+
+			.dialog-content p {
+				color: #cbd5e1 !important;
+				text-shadow: none !important;
+				font-family: 'IBM Plex Mono', ui-monospace, monospace !important;
+				font-size: 0.86rem !important;
+				line-height: 1.65 !important;
+			}
+
+			.project-link {
+				border: 1px solid #334155 !important;
+				background: #0f172a !important;
+				color: #e2e8f0 !important;
+				box-shadow: none !important;
+				transform: none !important;
+				font-family: 'IBM Plex Mono', ui-monospace, monospace !important;
+			}
+
+			.project-link.demo {
+				border-color: #155e75 !important;
+				background: #082f49 !important;
+			}
+
+			.project-link:hover {
+				background: #111827 !important;
+				border-color: #22d3ee !important;
+				color: #fff !important;
+				transform: none !important;
+				box-shadow: none !important;
+			}
+
+			.tech-badges .badge {
+				border: 1px solid #1f2937 !important;
+				background: #020617 !important;
+				color: #cbd5e1 !important;
+				text-shadow: none !important;
+				box-shadow: none !important;
+			}
+
+			.controls {
+				border-top: 1px solid #1f1f1f !important;
+				background: #020202 !important;
+			}
+
+			.progress-label {
+				color: #94a3b8 !important;
+				text-shadow: none !important;
+				font-family: 'IBM Plex Mono', ui-monospace, monospace !important;
+			}
+
+			.progress-container {
+				background: #0f172a !important;
+				border: 1px solid #1f2937 !important;
+			}
+
+			.progress-fill {
+				background: linear-gradient(90deg, #155e75, #22d3ee) !important;
+				box-shadow: none !important;
+			}
+
+			.digital-display {
+				background: #000 !important;
+				border: 1px solid #1f2937 !important;
+				color: #e2e8f0 !important;
+				text-shadow: none !important;
+			}
+
+			.nav-btn {
+				border: 1px solid #334155 !important;
+				background: #0f172a !important;
+				color: #cbd5e1 !important;
+				box-shadow: none !important;
+				transform: none !important;
+			}
+
+			.nav-btn:hover {
+				border-color: #22d3ee !important;
+				color: #fff !important;
+				box-shadow: none !important;
+				transform: none !important;
+			}
+		</style>
 	</head>
 	<body>
 		<!-- Grid animado de fondo -->
