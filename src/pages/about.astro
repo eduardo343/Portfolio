@@ -2,212 +2,267 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { getLang } from '../utils/i18n';
-
-const lang = getLang(Astro.url);
-
-const copy = {
-	es: {
-		title: 'Acerca de mi | Alan Ugarte',
-		description: 'Trayectoria y enfoque como desarrollador full stack.',
-		header: 'Perfil Profesional',
-		introTitle: 'Mision',
-		introText1: 'Soy Alan Ugarte, desarrollador full stack con enfoque practico en producto, arquitectura y experiencia de usuario.',
-		introText2: 'Desde mis primeras lineas de C++ hasta proyectos actuales en Laravel y Angular, mantengo una forma de trabajo orientada a resultados medibles.',
-		expTitle: 'Experiencia',
-		skillsTitle: 'Stack Tecnico',
-		mindsetTitle: 'Forma de trabajo',
-		mindsetText1: 'Priorizo codigo mantenible, decisiones tecnicas justificadas y comunicacion clara con negocio y producto.',
-		mindsetText2: 'Me interesa construir software que crezca sin friccion: buen rendimiento, seguridad base y entregas iterativas.',
-		categories: {
-			backend: 'Backend',
-			frontend: 'Frontend',
-			data: 'Bases de Datos',
-			tools: 'Herramientas'
-		},
-		timeline: [
-			{
-				period: '2024 - Actual',
-				role: 'Freelancer',
-				desc: 'Desarrollo de aplicaciones web end-to-end con foco en performance, escalabilidad y experiencia final.'
-			},
-			{
-				period: '2024',
-				role: 'Geem Solutions',
-				desc: 'Implementacion de sistemas punto de venta con PHP y React, mejorando flujo operativo y estabilidad.'
-			},
-			{
-				period: '2023 - 2024',
-				role: 'Magmalabs',
-				desc: 'Inicio profesional en desarrollo full stack participando en productos web para equipos y comunidades.'
-			}
-		]
-	},
-	en: {
-		title: 'About Me | Alan Ugarte',
-		description: 'Professional background and approach as a full-stack developer.',
-		header: 'Professional Profile',
-		introTitle: 'Mission',
-		introText1: 'I am Alan Ugarte, a full-stack developer focused on product execution, architecture, and user experience.',
-		introText2: 'From my first C++ lines to current Laravel and Angular projects, I keep a practical workflow driven by measurable outcomes.',
-		expTitle: 'Experience',
-		skillsTitle: 'Technical Stack',
-		mindsetTitle: 'Working Style',
-		mindsetText1: 'I prioritize maintainable code, well-justified technical decisions, and clear communication with business and product teams.',
-		mindsetText2: 'I aim to build software that scales without friction: strong performance, baseline security, and iterative delivery.',
-		categories: {
-			backend: 'Backend',
-			frontend: 'Frontend',
-			data: 'Databases',
-			tools: 'Tooling'
-		},
-		timeline: [
-			{
-				period: '2024 - Present',
-				role: 'Freelancer',
-				desc: 'End-to-end web product development with a focus on performance, scalability, and real user impact.'
-			},
-			{
-				period: '2024',
-				role: 'Geem Solutions',
-				desc: 'Point-of-sale systems using PHP and React, improving operational flow and product reliability.'
-			},
-			{
-				period: '2023 - 2024',
-				role: 'Magmalabs',
-				desc: 'Started professional full-stack work building web products for internal teams and user communities.'
-			}
-		]
-	}
-} as const;
-
-const t = copy[lang];
-
-const skills = {
-	backend: ['Laravel 11', 'PHP 8.2', 'Node.js', 'REST APIs', 'GraphQL'],
-	frontend: ['Angular 19', 'TypeScript', 'JavaScript', 'HTML/CSS', 'Tailwind CSS'],
-	data: ['MongoDB', 'Firebase', 'DynamoDB', 'MySQL', 'Redis'],
-	tools: ['Git', 'Docker', 'AWS', 'CI/CD', 'Agile']
-} as const;
 ---
 
-<!doctype html>
-<html lang={lang}>
+<html lang="en">
 	<head>
-		<BaseHead title={t.title} description={t.description} />
+		<BaseHead title="About Alan Ugarte - Full Stack Developer" description="Learn about Alan Ugarte's journey as a Full Stack Developer specializing in Laravel, Angular, and NoSQL databases" />
+		<!-- Import Press Start 2P font for consistency -->
+		<link
+			href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+			rel="stylesheet"
+		/>
 		<style>
+			/* Apply same retro background as homepage */
 			body {
-				margin: 0;
+				background: 
+					linear-gradient(45deg, #0f0f23 25%, transparent 25%), 
+					linear-gradient(-45deg, #0f0f23 25%, transparent 25%), 
+					linear-gradient(45deg, transparent 75%, #0f0f23 75%), 
+					linear-gradient(-45deg, transparent 75%, #0f0f23 75%),
+					linear-gradient(to bottom, #1a1a3a, #0f0f23);
+				background-size: 20px 20px, 20px 20px, 20px 20px, 20px 20px, 100% 100%;
+				background-position: 0 0, 0 10px, 10px -10px, -10px 0px, 0 0;
+				color: #00ff41;
+				font-family: 'Press Start 2P', monospace;
 				min-height: 100vh;
-				font-family: 'Manrope', 'Segoe UI', sans-serif;
-				background:
-					radial-gradient(circle at 9% 2%, rgba(227, 174, 92, 0.23), transparent 42%),
-					radial-gradient(circle at 92% 16%, rgba(47, 123, 106, 0.16), transparent 36%),
-					linear-gradient(180deg, #fbf2de 0%, #f1dfbb 100%);
-				color: #2e1f17;
+				position: relative;
+				overflow-x: hidden;
 			}
 
-			main {
-				max-width: 1120px;
-				margin: 0 auto;
-				padding: 1.2rem 1rem 2.2rem;
-				display: grid;
-				gap: 1rem;
+			/* CRT scanlines effect */
+			body::before {
+				content: '';
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: repeating-linear-gradient(
+					0deg,
+					transparent,
+					transparent 2px,
+					rgba(0, 255, 65, 0.03) 2px,
+					rgba(0, 255, 65, 0.03) 4px
+				);
+				pointer-events: none;
+				z-index: 1000;
 			}
 
-			.section {
-				border: 2px solid rgba(142, 63, 42, 0.5);
-				background:
-					repeating-linear-gradient(-45deg, rgba(179, 90, 63, 0.09) 0 12px, transparent 12px 24px),
-					linear-gradient(160deg, rgba(250, 239, 215, 0.95), rgba(236, 214, 173, 0.9));
-				padding: 1.05rem;
-				box-shadow: 0 10px 24px rgba(89, 49, 36, 0.14);
+			/* Main about container */
+			.pixel-about {
+				position: relative;
+				padding: 2rem;
+				max-width: 1000px;
+				margin: 2rem auto;
 			}
 
-			h1,
-			h2 {
-				margin: 0;
-				font-family: 'Cinzel', 'Georgia', serif;
-				letter-spacing: 0.04em;
-				color: #8e3f2a;
+			/* About sections */
+			.about-section {
+				background: rgba(0, 0, 0, 0.4);
+				border: 3px solid #330ce2;
+				margin-bottom: 2rem;
+				padding: 2rem;
+				position: relative;
+				box-shadow: 
+					0 0 30px rgba(51, 12, 226, 0.3),
+					inset 0 0 30px rgba(206, 205, 209, 0.1);
 			}
 
-			h1 {
-				font-size: clamp(1.5rem, 2.9vw, 2.2rem);
+			/* Rainbow border for sections */
+			.about-section::before {
+				content: '';
+				position: absolute;
+				top: -3px;
+				left: -3px;
+				right: -3px;
+				bottom: -3px;
+				background: linear-gradient(
+					45deg,
+					#ff0080, #141515, #0080ff, #ff0080
+				);
+				z-index: -1;
+				animation: rainbow-border 3s linear infinite;
 			}
 
-			h2 {
-				font-size: 1.2rem;
+			@keyframes rainbow-border {
+				0% { background-position: 0% 50%; }
+				50% { background-position: 100% 50%; }
+				100% { background-position: 0% 50%; }
 			}
 
-			.lead,
-			.paragraph,
-			.timeline-item,
-			.skill-list {
-				color: rgba(46, 31, 23, 0.88);
-				line-height: 1.5;
+			/* Section titles */
+			.section-title {
+				font-size: 1.5rem;
+				color: #000000;
+				margin-bottom: 1.5rem;
+				text-align: center;
+				text-shadow: 
+					0 0 5px #6b17b4,
+					0 0 10px #2429c8;
+				animation: glitch 2s infinite;
 			}
 
-			.lead {
-				margin-top: 0.65rem;
+			/* Main title */
+			.main-title {
+				font-size: 2.5rem;
+				color: #b020b5;
+				text-align: center;
+				margin-bottom: 3rem;
+				text-shadow: 
+					0 0 5px #00ff41,
+					0 0 10px #00ff41,
+					0 0 15px #00ff41;
+				animation: glitch 2s infinite;
 			}
 
-			.paragraph {
-				margin: 0.7rem 0 0;
+			/* Glitch animation */
+			@keyframes glitch {
+				0%, 100% {
+					text-shadow: 
+						0 0 5px #00ff41,
+						0 0 10px #00ff41,
+						0 0 15px #00ff41;
+				}
+				25% {
+					text-shadow: 
+						-2px 0 #ff0080,
+						2px 0 #0080ff,
+						0 0 5px #00ff41;
+				}
+				50% {
+					text-shadow: 
+						2px 0 #ff0080,
+						-2px 0 #0080ff,
+						0 0 5px #00ff41;
+				}
+				75% {
+					text-shadow: 
+						0 0 5px #00ff41,
+						0 0 10px #00ff41,
+						0 0 15px #00ff41;
+				}
 			}
 
+			/* Content text */
+			.pixel-text {
+				color: #f6f6f6;
+				font-size: 0.8rem;
+				line-height: 1.8;
+				margin-bottom: 1.5rem;
+				text-shadow: 1px 1px 0 #000000;
+			}
+
+			/* Timeline container */
 			.timeline {
-				display: grid;
-				gap: 0.7rem;
-				margin-top: 0.8rem;
+				position: relative;
+				padding-left: 2rem;
 			}
 
+			.timeline::before {
+				content: '';
+				position: absolute;
+				left: 0;
+				top: 0;
+				bottom: 0;
+				width: 3px;
+				background: linear-gradient(to bottom, #ff0080, #00ff41, #0080ff);
+				border-radius: 2px;
+			}
+
+			/* Timeline items */
 			.timeline-item {
-				padding: 0.7rem;
-				border: 1px solid rgba(46, 31, 23, 0.2);
-				background: rgba(255, 251, 241, 0.62);
+				position: relative;
+				margin-bottom: 2rem;
+				padding-left: 2rem;
 			}
 
-			.timeline-item strong {
-				display: block;
-				font-size: 0.78rem;
-				color: #2f7b6a;
-				text-transform: uppercase;
-				letter-spacing: 0.08em;
+			.timeline-item::before {
+				content: '';
+				position: absolute;
+				left: -2rem;
+				top: 0.5rem;
+				width: 12px;
+				height: 12px;
+				background: #00ff41;
+				border: 2px solid #ff0080;
+				border-radius: 50%;
+				box-shadow: 0 0 10px #00ff41;
 			}
 
-			.timeline-item span {
-				display: block;
-				margin: 0.28rem 0;
-				font-weight: 800;
-				color: #8e3f2a;
+			.timeline-date {
+				color: #0080ff;
+				font-size: 0.7rem;
+				font-weight: bold;
+				margin-bottom: 0.5rem;
+				text-shadow: 1px 1px 0 #004080;
 			}
 
+			.timeline-title {
+				color: #00ff41;
+				font-size: 0.9rem;
+				margin-bottom: 0.5rem;
+				text-shadow: 1px 1px 0 #00aa2e;
+			}
+
+			.timeline-desc {
+				color: #f9f9f9;
+				font-size: 0.7rem;
+				line-height: 1.6;
+				text-shadow: 1px 1px 0 #080708;
+			}
+
+			/* Skills grid */
 			.skills-grid {
 				display: grid;
-				grid-template-columns: repeat(2, minmax(0, 1fr));
-				gap: 0.7rem;
-				margin-top: 0.7rem;
+				grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+				gap: 1rem;
+				margin-top: 1rem;
 			}
 
-			.skill-card {
-				padding: 0.7rem;
-				border: 1px solid rgba(46, 31, 23, 0.2);
-				background: rgba(255, 251, 241, 0.65);
+			.skill-category {
+				background: rgba(0, 0, 0, 0.6);
+				border: 2px solid #ff0080;
+				padding: 1rem;
+				text-align: center;
+				transition: all 0.3s ease;
 			}
 
-			.skill-card h3 {
-				margin: 0;
-				font-size: 0.95rem;
-				color: #2f7b6a;
+			.skill-category:hover {
+				border-color: #00ff41;
+				box-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
+				transform: translateY(-2px);
+			}
+
+			.skill-title {
+				color: #fbfbfb;
+				font-size: 0.8rem;
+				margin-bottom: 1rem;
+				text-shadow: 1px 1px 0 #050505;
 			}
 
 			.skill-list {
-				margin: 0.45rem 0 0;
-				font-size: 0.94rem;
+				color: #eae7e9;
+				font-size: 0.6rem;
+				line-height: 1.8;
+				text-shadow: 1px 1px 0 #000000;
 			}
 
-			@media (max-width: 760px) {
+			/* Responsive design */
+			@media (max-width: 768px) {
+				.main-title {
+					font-size: 1.8rem;
+				}
+				.section-title {
+					font-size: 1.2rem;
+				}
+				.pixel-about {
+					margin: 1rem;
+					padding: 1rem;
+				}
+				.about-section {
+					padding: 1.5rem;
+				}
 				.skills-grid {
 					grid-template-columns: 1fr;
 				}
@@ -217,54 +272,113 @@ const skills = {
 	<body>
 		<div class="flex flex-col min-h-screen">
 			<Header />
-			<main class="flex-1">
-				<section class="section">
-					<h1>{t.header}</h1>
-					<p class="lead">{t.introText1}</p>
-					<p class="paragraph">{t.introText2}</p>
-				</section>
+			
+			<main class="flex-1 px-4 py-8">
+				<div class="pixel-about">
+					<h1 class="main-title">👨‍💻 PLAYER PROFILE</h1>
+					
+					<!-- Introduction Section -->
+					<section class="about-section">
+						<h2 class="section-title">🎯 MISSION STATEMENT</h2>
+						<p class="pixel-text">
+							¡Hola! I'm Alan Ugarte, a passionate Full Stack Developer with over 5 years of professional experience crafting digital solutions. My journey began at age 15 with my first line of C++, and since then, I've been on an epic quest to master the art of programming.
+						</p>
+						<p class="pixel-text">
+							I specialize in building scalable web applications using modern technologies, with a strong focus on Laravel 11 backends, Angular 19 frontends, and NoSQL databases. My mission is to transform complex business requirements into elegant, efficient, and user-friendly solutions.
+						</p>
+					</section>
 
-				<section class="section">
-					<h2>{t.expTitle}</h2>
-					<div class="timeline">
-						{t.timeline.map((entry) => (
-							<article class="timeline-item">
-								<strong>{entry.period}</strong>
-								<span>{entry.role}</span>
-								{entry.desc}
-							</article>
-						))}
-					</div>
-				</section>
+					<!-- Experience Timeline -->
+					<section class="about-section">
+						<h2 class="section-title">🚀 EXPERIENCE LOG</h2>
+						<div class="timeline">
+							<div class="timeline-item">
+								<div class="timeline-date">2024 - PRESENT</div>
+								<div class="timeline-title">Freelancer</div>
+								<div class="timeline-desc">
+									Currently developing and maintaining web applications with Python, React, and diverse databases. Leading projects end-to-end with a focus on performance, scalability, and user experience.
+								</div>
+							</div>
+							<div class="timeline-item">
+								<div class="timeline-date">2024</div>
+								<div class="timeline-title">Geem Solutions</div>
+								<div class="timeline-desc">
+									Full Stack Developer for point-of-sale systems using PHP and React. Enhanced application performance and user experience through modern development practices.
+								</div>
+							</div>
+							<div class="timeline-item">
+								<div class="timeline-date">2023 - 2024</div>
+								<div class="timeline-title">Magmalabs</div>
+								<div class="timeline-desc">
+									Began my professional journey as a Full Stack Developer. Contributed to projects like Bright Coders and Magma Chat, working with Python and React to deliver robust web applications.
+								</div>
+							</div>
+						</div>
+					</section>
 
-				<section class="section">
-					<h2>{t.skillsTitle}</h2>
-					<div class="skills-grid">
-						<div class="skill-card">
-							<h3>{t.categories.backend}</h3>
-							<p class="skill-list">{skills.backend.join(' • ')}</p>
+					<!-- Technical Skills -->
+					<section class="about-section">
+						<h2 class="section-title">⚡ TECH ARSENAL</h2>
+						<div class="skills-grid">
+							<div class="skill-category">
+								<div class="skill-title">🖥️ BACKEND</div>
+								<div class="skill-list">
+									PHP 8.2<br/>
+									Laravel 11<br/>
+									Node.js<br/>
+									RESTful APIs<br/>
+									GraphQL
+								</div>
+							</div>
+							<div class="skill-category">
+								<div class="skill-title">🎨 FRONTEND</div>
+								<div class="skill-list">
+									TypeScript 5.0<br/>
+									Angular 19<br/>
+									JavaScript ES6+<br/>
+									HTML5 & CSS3<br/>
+									Tailwind CSS
+								</div>
+							</div>
+							<div class="skill-category">
+								<div class="skill-title">🗄️ DATABASES</div>
+								<div class="skill-list">
+									MongoDB<br/>
+									Firebase Firestore<br/>
+									DynamoDB<br/>
+									MySQL<br/>
+									Redis
+								</div>
+							</div>
+							<div class="skill-category">
+								<div class="skill-title">🛠️ TOOLS & OTHERS</div>
+								<div class="skill-list">
+									Git & GitHub<br/>
+									Docker<br/>
+									AWS Services<br/>
+									Agile/Scrum<br/>
+									CI/CD
+								</div>
+							</div>
 						</div>
-						<div class="skill-card">
-							<h3>{t.categories.frontend}</h3>
-							<p class="skill-list">{skills.frontend.join(' • ')}</p>
-						</div>
-						<div class="skill-card">
-							<h3>{t.categories.data}</h3>
-							<p class="skill-list">{skills.data.join(' • ')}</p>
-						</div>
-						<div class="skill-card">
-							<h3>{t.categories.tools}</h3>
-							<p class="skill-list">{skills.tools.join(' • ')}</p>
-						</div>
-					</div>
-				</section>
+					</section>
 
-				<section class="section">
-					<h2>{t.mindsetTitle}</h2>
-					<p class="paragraph">{t.mindsetText1}</p>
-					<p class="paragraph">{t.mindsetText2}</p>
-				</section>
+					<!-- Philosophy & Interests -->
+					<section class="about-section">
+						<h2 class="section-title">💡 CODING PHILOSOPHY</h2>
+						<p class="pixel-text">
+							I believe in writing clean, maintainable code that not only solves problems but also tells a story. My approach combines modern development practices with a deep understanding of business requirements to deliver solutions that truly matter.
+						</p>
+						<p class="pixel-text">
+							When I'm not coding, you'll find me contributing to open-source projects, participating in hackathons, mentoring junior developers, or exploring the latest industry trends. I'm passionate about sharing knowledge and believe that the best way to grow is by helping others succeed.
+						</p>
+						<p class="pixel-text">
+							Currently focused on mastering Laravel 11's latest features, exploring Angular 19's new capabilities, and diving deeper into NoSQL database optimization techniques.
+						</p>
+					</section>
+				</div>
 			</main>
+			
 			<Footer />
 		</div>
 	</body>

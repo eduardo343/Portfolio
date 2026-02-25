@@ -4,17 +4,13 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
-import { getLang } from '../utils/i18n';
 
 type Props = CollectionEntry<'blog'>['data'];
 
 const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
-const lang = getLang(Astro.url);
-const locale = lang === 'es' ? 'es-MX' : 'en-US';
-const lastUpdatedText = lang === 'es' ? 'Ultima actualizacion' : 'Last updated on';
 ---
 
-<html lang={lang}>
+<html lang="en">
 	<head>
 		<BaseHead title={title} description={description} />
 		<style>
@@ -68,11 +64,11 @@ const lastUpdatedText = lang === 'es' ? 'Ultima actualizacion' : 'Last updated o
 				<div class="prose">
 					<div class="title">
 						<div class="date">
-							<FormattedDate date={pubDate} locale={locale} />
+							<FormattedDate date={pubDate} />
 							{
 								updatedDate && (
 									<div class="last-updated-on">
-										{lastUpdatedText} <FormattedDate date={updatedDate} locale={locale} />
+										Last updated on <FormattedDate date={updatedDate} />
 									</div>
 								)
 							}

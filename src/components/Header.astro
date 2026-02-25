@@ -1,238 +1,243 @@
 ---
+// Import necessary components and constants
 import HeaderLink from './HeaderLink.astro';
-import { SITE_TITLE, GITHUB_URL, LINKEDIN_URL } from '../consts';
-import { getLang, withLang } from '../utils/i18n';
-
-const lang = getLang(Astro.url);
-
-const copy = {
-	es: {
-		home: 'Inicio',
-		projects: 'Proyectos',
-		about: 'Acerca',
-		contact: 'Contacto',
-		tagline: 'Portafolio de desarrollo',
-		social: 'Redes'
-	},
-	en: {
-		home: 'Home',
-		projects: 'Projects',
-		about: 'About',
-		contact: 'Contact',
-		tagline: 'Development portfolio',
-		social: 'Networks'
-	}
-} as const;
-
-const t = copy[lang];
-
-const navigation = [
-	{ href: '/', label: t.home },
-	{ href: '/blog', label: t.projects },
-	{ href: '/about', label: t.about },
-	{ href: '/contact', label: t.contact }
-];
-
-const esHref = withLang(Astro.url.pathname, 'es');
-const enHref = withLang(Astro.url.pathname, 'en');
+import { SITE_TITLE } from '../consts';
 ---
 
-<header class="aztec-header">
-	<nav class="aztec-nav">
-		<a class="brand" href={withLang('/', lang)}>
-			<span class="brand-mark" aria-hidden="true">☀</span>
-			<span class="brand-text">
-				<strong>{SITE_TITLE}</strong>
-				<small>{t.tagline}</small>
-			</span>
-		</a>
-
-		<div class="internal-links">
-			{navigation.map((item) => (
-				<HeaderLink href={withLang(item.href, lang)} class="aztec-link">
-					{item.label}
-				</HeaderLink>
-			))}
+<!-- 8-bit styled navigation header with retro gaming aesthetics -->
+<header class="pixel-header">
+	<nav>
+		<!-- Logo section with alien emoji and site title -->
+		<div class="logo-section">
+			<h2><a href="/" class="pixel-logo">👾 {SITE_TITLE}</a></h2>
 		</div>
-
-		<div class="utility-nav">
-			<div class="lang-switch" role="tablist" aria-label="Language">
-				<a href={esHref} class:list={["lang-pill", { active: lang === 'es' }]}>ES</a>
-				<a href={enHref} class:list={["lang-pill", { active: lang === 'en' }]}>EN</a>
-			</div>
-
-			<div class="social-links" aria-label={t.social}>
-				<a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" class="social-link">
-					LinkedIn
-				</a>
-				<a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" class="social-link">
-					GitHub
-				</a>
-			</div>
+		
+		<!-- Main navigation links with gaming-themed emojis -->
+		<div class="internal-links">
+			<HeaderLink href="/" class="pixel-nav-link">🏠 Home</HeaderLink>
+			<HeaderLink href="/blog" class="pixel-nav-link">🚀 Projects</HeaderLink>
+			<HeaderLink href="/about" class="pixel-nav-link">👨‍💻 About</HeaderLink>
+			<HeaderLink href="/contact" class="pixel-nav-link">📧 Contact</HeaderLink>
+		</div>
+		
+		<!-- Social media links with emoji icons for better retro aesthetic -->
+		<div class="social-links">
+			<a href="https://www.twitch.tv/malan117" target="_blank" class="pixel-social">
+				<span class="sr-only">Follow me in twitch</span>
+				🎮
+			</a>
+			<a href="https://www.linkedin.com/in/alan-ugarte/" target="_blank" class="pixel-social">
+				<span class="sr-only">Connect with me on LinkedIn</span>
+				💼
+			</a>
+			<a href="https://github.com/eduardo343" target="_blank" class="pixel-social">
+				<span class="sr-only">Go to GitHub repo</span>
+				⚡
+			</a>
 		</div>
 	</nav>
 </header>
-
 <style>
-	.aztec-header {
-		position: sticky;
+	/* Main header container with 8-bit gaming aesthetic */
+	.pixel-header {
+		margin: 0;
+		padding: 0;
+		/* Dark gradient background mimicking retro console screens */
+		background: linear-gradient(135deg, #0f0f23 0%, #1a1a3a 50%, #0f0f23 100%);
+		/* Bright neon green border for that classic arcade look */
+		border-bottom: 4px solid #00ff41;
+		/* Layered shadow creates depth and neon glow effect */
+		box-shadow: 
+			0 4px 0 #00aa2e,  /* Darker green shadow for 3D effect */
+			0 8px 16px rgba(0, 255, 65, 0.3);  /* Soft green glow */
+		position: relative;
+	}
+	
+	/* Animated rainbow line at the top - classic 80s aesthetic */
+	.pixel-header::before {
+		content: '';  /* Empty content for pseudo-element */
+		position: absolute;
 		top: 0;
-		z-index: 50;
-		border-bottom: 2px solid rgba(142, 63, 42, 0.45);
-		background:
-			repeating-linear-gradient(90deg, rgba(179, 90, 63, 0.1) 0 24px, rgba(0, 0, 0, 0) 24px 48px),
-			linear-gradient(180deg, rgba(250, 240, 216, 0.96), rgba(236, 217, 182, 0.92));
-		backdrop-filter: blur(4px);
+		left: 0;
+		right: 0;
+		height: 2px;
+		/* Multi-color gradient creating rainbow effect */
+		background: linear-gradient(90deg, 
+			#ff0080 0%,   /* Hot pink */
+			#00ff41 25%,  /* Neon green */
+			#0080ff 50%,  /* Electric blue */
+			#ff0080 75%,  /* Hot pink again */
+			#00ff41 100%); /* Neon green */
+		/* Gentle pulsing animation for retro feel */
+		animation: rainbow-glow 2s ease-in-out infinite alternate;
 	}
-
-	.aztec-header::after {
-		content: '';
-		display: block;
-		height: 7px;
-		background:
-			repeating-linear-gradient(-45deg, rgba(47, 123, 106, 0.7) 0 8px, transparent 8px 16px),
-			repeating-linear-gradient(45deg, rgba(195, 146, 58, 0.75) 0 8px, transparent 8px 16px);
-		opacity: 0.8;
+	
+	/* Animation for the rainbow glow effect */
+	@keyframes rainbow-glow {
+		0% { opacity: 0.6; }   /* Dimmer state */
+		100% { opacity: 1; }   /* Brighter state */
 	}
-
-	.aztec-nav {
-		max-width: 1200px;
-		margin: 0 auto;
-		padding: 0.85rem 1.2rem;
-		display: grid;
-		grid-template-columns: auto 1fr auto;
-		gap: 1rem;
-		align-items: center;
+	
+	/* Logo heading styling */
+	h2 {
+		margin: 0;
+		font-size: 1.2em;
+		/* Pixel-perfect retro font */
+		font-family: 'Press Start 2P', monospace;
 	}
-
-	.brand {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.6rem;
+	
+	/* Main logo link styling */
+	.pixel-logo {
+		color: #ebf4ed;  /* Bright neon green */
 		text-decoration: none;
-		color: #2e1f17;
+		/* Multiple text shadows create depth and glow */
+		text-shadow: 
+			2px 2px 0 #32109f,  /* Dark green for 3D effect */
+			0 0 10px #32109f;  /* Soft green glow */
+		/* Smooth transitions for hover effects */
+		transition: all 0.3s ease;
 	}
-
-	.brand-mark {
-		display: grid;
-		place-items: center;
-		width: 2rem;
-		height: 2rem;
-		border-radius: 999px;
-		background: linear-gradient(145deg, #e0b55f, #c78638);
-		box-shadow: inset 0 0 0 1px rgba(46, 31, 23, 0.2);
+	
+	/* Logo hover effect - changes to pink with stronger glow */
+	.pixel-logo:hover {
+		color: #ff0080;  /* Hot pink color change */
+		text-shadow: 
+			2px 2px 0 #aa0055,  /* Dark pink shadow */
+			0 0 15px rgba(255, 0, 128, 0.7);  /* Bright pink glow */
+		transform: scale(1.05);  /* Slight scale up on hover */
 	}
-
-	.brand-text {
+	
+	/* Navigation container layout */
+	nav {
 		display: flex;
-		flex-direction: column;
-		line-height: 1.1;
+		align-items: center;
+		justify-content: space-between;  /* Distribute items evenly */
+		padding: 1em 1.5em;
+		font-family: 'Press Start 2P', monospace;
 	}
-
-	.brand-text strong {
-		font-family: 'Cinzel', 'Palatino Linotype', serif;
-		font-size: 0.95rem;
-		letter-spacing: 0.03em;
-	}
-
-	.brand-text small {
-		font-size: 0.68rem;
-		text-transform: uppercase;
-		letter-spacing: 0.08em;
-		color: rgba(46, 31, 23, 0.74);
-	}
-
+	
+	/* Container for main navigation links */
 	.internal-links {
 		display: flex;
-		justify-content: center;
-		flex-wrap: wrap;
-		gap: 0.5rem;
+		gap: 0.5em;  /* Space between nav items */
+		flex-wrap: wrap;  /* Allow wrapping on smaller screens */
 	}
-
-	.aztec-link {
-		padding: 0.4rem 0.7rem;
-		border: 1px solid rgba(46, 31, 23, 0.22);
-		background: rgba(255, 249, 236, 0.65);
-		font-size: 0.82rem;
-		font-weight: 700;
-		color: rgba(46, 31, 23, 0.86);
-	}
-
-	.aztec-link:hover {
-		border-color: rgba(142, 63, 42, 0.5);
-		transform: translateY(-1px);
-	}
-
-	.utility-nav {
-		display: flex;
-		align-items: center;
-		gap: 0.85rem;
-	}
-
-	.lang-switch {
-		display: inline-flex;
-		padding: 0.2rem;
-		border: 1px solid rgba(46, 31, 23, 0.25);
-		background: rgba(255, 255, 255, 0.5);
-	}
-
-	.lang-pill {
-		padding: 0.3rem 0.55rem;
-		font-size: 0.75rem;
-		font-weight: 800;
-		color: #2e1f17;
+	
+	/* Individual navigation link styling */
+	.pixel-nav-link {
+		padding: 0.5em 1em;
+		color: #00ff41;  /* Neon green text */
+		border: 2px solid #00ff41;  /* Matching border */
+		background: transparent;  /* See-through background */
 		text-decoration: none;
+		transition: all 0.3s ease;  /* Smooth animations */
+		font-size: 0.7em;  /* Smaller text for nav items */
+		position: relative;  /* For pseudo-element positioning */
+		overflow: hidden;  /* Hide the sliding effect overflow */
 	}
-
-	.lang-pill.active {
-		background: #2f7b6a;
-		color: #fdf5e7;
+	
+	/* Sliding light effect on navigation links */
+	.pixel-nav-link::before {
+		content: '';  /* Empty content for effect */
+		position: absolute;
+		top: 0;
+		left: -100%;  /* Start off-screen to the left */
+		width: 100%;
+		height: 100%;
+		/* Semi-transparent gradient that slides across */
+		background: linear-gradient(90deg, transparent, rgba(0, 255, 65, 0.2), transparent);
+		transition: left 0.5s ease;  /* Smooth sliding animation */
 	}
-
+	
+	/* Trigger the sliding effect on hover */
+	.pixel-nav-link:hover::before {
+		left: 100%;  /* Slide across to the right */
+	}
+	
+	/* Navigation link hover effects */
+	.pixel-nav-link:hover {
+		background-color: rgba(0, 255, 65, 0.1);  /* Subtle green background */
+		/* Multiple glowing shadows for depth */
+		box-shadow: 
+			0 0 10px rgba(0, 255, 65, 0.5),  /* Outer glow */
+			inset 0 0 10px rgba(0, 255, 65, 0.1);  /* Inner glow */
+		transform: translateY(-2px);  /* Lift effect on hover */
+	}
+	
+	/* Active state for current page navigation link */
+	.pixel-nav-link.active {
+		background-color: #00ff41;  /* Solid green background */
+		color: #0f0f23;  /* Dark text for contrast */
+		/* Strong glow and 3D shadow effects */
+		box-shadow: 
+			0 0 15px rgba(0, 255, 65, 0.7),  /* Bright outer glow */
+			0 4px 0 #00aa2e;  /* 3D shadow underneath */
+	}
+	
+	/* Social media links container */
 	.social-links {
 		display: flex;
-		gap: 0.5rem;
+		gap: 0.5em;  /* Space between social icons */
 	}
-
-	.social-link {
-		padding: 0.3rem 0.55rem;
-		font-size: 0.75rem;
-		font-weight: 700;
+	
+	/* Individual social media link styling */
+	.pixel-social {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 40px;   /* Fixed square dimensions */
+		height: 40px;
+		border: 2px solid #ff0080;  /* Hot pink border */
+		background: transparent;
+		color: #ff0080;  /* Matching text color */
 		text-decoration: none;
-		border: 1px solid rgba(46, 31, 23, 0.24);
-		color: rgba(46, 31, 23, 0.85);
-		background: rgba(255, 255, 255, 0.42);
+		transition: all 0.3s ease;  /* Smooth hover transitions */
+		font-size: 1.2em;  /* Larger emoji icons */
+		position: relative;
 	}
-
-	.social-link:hover {
-		border-color: rgba(47, 123, 106, 0.7);
-		background: rgba(47, 123, 106, 0.1);
+	
+	/* Social link hover effects with playful rotation */
+	.pixel-social:hover {
+		background-color: #ff0080;  /* Fill with pink background */
+		color: #0f0f23;  /* Dark text for contrast */
+		/* Glowing shadow effects */
+		box-shadow: 
+			0 0 15px rgba(255, 0, 128, 0.7),  /* Pink glow */
+			0 4px 0 #aa0055;  /* 3D shadow */
+		/* Lift and slight rotation for playful effect */
+		transform: translateY(-2px) rotate(5deg);
 	}
-
-	@media (max-width: 980px) {
-		.aztec-nav {
-			grid-template-columns: 1fr;
-			justify-items: center;
+	
+	/* Responsive design for tablet screens */
+	@media (max-width: 768px) {
+		/* Stack navigation vertically on smaller screens */
+		nav {
+			flex-direction: column;
+			gap: 1em;
+			padding: 1em;
 		}
-
+		
+		/* Center navigation links */
 		.internal-links {
-			order: 2;
-		}
-
-		.utility-nav {
-			order: 3;
-			flex-wrap: wrap;
 			justify-content: center;
 		}
-	}
-
-	@media (max-width: 640px) {
-		.brand-text small {
-			display: none;
+		
+		/* Center social links */
+		.social-links {
+			justify-content: center;
 		}
-
-		.aztec-link {
-			font-size: 0.75rem;
+		
+		/* Smaller text for nav links on mobile */
+		.pixel-nav-link {
+			font-size: 0.6em;
+			padding: 0.4em 0.8em;
+		}
+	}
+	
+	/* Hide social links on very small screens to save space */
+	@media (max-width: 480px) {
+		.social-links {
+			display: none;
 		}
 	}
 </style>

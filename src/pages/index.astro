@@ -1,233 +1,568 @@
 ---
+// Import reusable Astro components for consistent layout structure
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { SITE_TITLE } from '../consts';
-import { getLang, withLang } from '../utils/i18n';
-
-const lang = getLang(Astro.url);
-
-const copy = {
-	es: {
-		title: 'Inicio | Alan Ugarte',
-		description: 'Desarrollo web full stack con enfoque en productos escalables y experiencia de usuario.',
-		kicker: 'Desarrollo Full Stack',
-		headline: 'Construyo productos web claros, rapidos y mantenibles.',
-		subtitle: 'Trabajo con Laravel, Angular y ecosistemas modernos para convertir ideas de negocio en software real.',
-		primaryCta: 'Hablar de tu proyecto',
-		secondaryCta: 'Ver proyectos',
-		thirdCta: 'Mi experiencia',
-		focusTitle: 'Enfoque actual',
-		focusItems: [
-			'Arquitectura backend con Laravel 11 y APIs robustas.',
-			'Frontends interactivos con Angular 19 y TypeScript.',
-			'Integracion de datos con MongoDB, Firebase y DynamoDB.'
-		],
-		badge: 'Disponible para freelance y colaboraciones.'
-	},
-	en: {
-		title: 'Home | Alan Ugarte',
-		description: 'Full-stack web development focused on scalable products and practical user experience.',
-		kicker: 'Full-Stack Development',
-		headline: 'I build web products that are clear, fast, and maintainable.',
-		subtitle: 'I work with Laravel, Angular, and modern ecosystems to turn business ideas into production-ready software.',
-		primaryCta: 'Discuss your project',
-		secondaryCta: 'View projects',
-		thirdCta: 'My background',
-		focusTitle: 'Current Focus',
-		focusItems: [
-			'Backend architecture with Laravel 11 and robust APIs.',
-			'Interactive frontends with Angular 19 and TypeScript.',
-			'Data integrations with MongoDB, Firebase, and DynamoDB.'
-		],
-		badge: 'Available for freelance and collaborations.'
-	}
-} as const;
-
-const t = copy[lang];
+// Import site configuration constants
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang="en">
 	<head>
-		<BaseHead title={t.title} description={t.description} />
+		<!-- Include base head meta tags, favicon, etc. -->
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<!-- 
+		  Import Press Start 2P font from Google Fonts
+		  This is the iconic 8-bit style font used in classic video games
+		  display=swap ensures text remains visible during font load
+		-->
+		<link
+			href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+			rel="stylesheet"
+		/>
 		<style>
+			/* Main body styling with complex 8-bit background pattern */
 			body {
-				margin: 0;
+				/* 
+				  Create a diamond/checkerboard pattern using multiple linear gradients
+				  This mimics the pixelated backgrounds common in retro games
+				*/
+				background: 
+					/* Four diagonal gradients create diamond pattern */
+					linear-gradient(45deg, #0f0f23 25%, transparent 25%), 
+					linear-gradient(-45deg, #0f0f23 25%, transparent 25%), 
+					linear-gradient(45deg, transparent 75%, #0f0f23 75%), 
+					linear-gradient(-45deg, transparent 75%, #0f0f23 75%),
+					/* Base gradient from lighter to darker for depth */
+					linear-gradient(to bottom, #1a1a3a, #0f0f23);
+				/* 
+				  Set sizes for each background layer
+				  First 4 are 20x20px for diamond pattern, last covers full area
+				*/
+				background-size: 20px 20px, 20px 20px, 20px 20px, 20px 20px, 100% 100%;
+				/* 
+				  Position each gradient layer to create seamless diamond pattern
+				  Offset positions create the interlocking effect
+				*/
+				background-position: 0 0, 0 10px, 10px -10px, -10px 0px, 0 0;
+				/* Bright neon green text - classic retro gaming color */
+				color: #00ff41;
+				/* 8-bit style font applied globally */
+				font-family: 'Press Start 2P', monospace;
+				/* Ensure full viewport height */
 				min-height: 100vh;
-				font-family: 'Manrope', 'Segoe UI', sans-serif;
-				background:
-					radial-gradient(circle at 10% 0%, rgba(227, 174, 92, 0.24), transparent 42%),
-					radial-gradient(circle at 90% 18%, rgba(47, 123, 106, 0.2), transparent 38%),
-					linear-gradient(180deg, #fbf2de 0%, #f0dfbc 100%);
-				color: #2e1f17;
-			}
-
-			main {
-				max-width: 1140px;
-				margin: 0 auto;
-				padding: clamp(1.1rem, 2vw, 2rem) clamp(1rem, 3vw, 2rem) 2.5rem;
-			}
-
-			.hero {
 				position: relative;
-				padding: clamp(1.2rem, 3vw, 2.6rem);
-				border: 3px solid #8e3f2a;
-				background:
-					repeating-linear-gradient(45deg, rgba(179, 90, 63, 0.1) 0 14px, transparent 14px 28px),
-					linear-gradient(160deg, rgba(248, 236, 210, 0.95), rgba(237, 214, 173, 0.92));
-				box-shadow: 0 16px 30px rgba(89, 49, 36, 0.2);
-				overflow: hidden;
+				/* Prevent horizontal scrolling from animations */
+				overflow-x: hidden;
 			}
 
-			.hero::after {
-				content: '';
-				position: absolute;
-				inset: 0;
-				background: repeating-linear-gradient(-45deg, rgba(47, 123, 106, 0.08) 0 10px, transparent 10px 20px);
+			/* CRT monitor scanlines effect using CSS pseudo-element */
+			body::before {
+				content: '';  /* Empty content for pseudo-element */
+				position: fixed;  /* Stay in place during scroll */
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				/* 
+				  Create horizontal lines that repeat every 4px
+				  This simulates the scanlines visible on old CRT monitors
+				*/
+				background: repeating-linear-gradient(
+					0deg,                          /* Horizontal direction */
+					transparent,                   /* Transparent line */
+					transparent 2px,               /* Transparent until 2px */
+					rgba(0, 255, 65, 0.03) 2px,   /* Very subtle green line */
+					rgba(0, 255, 65, 0.03) 4px    /* Green line until 4px, then repeat */
+				);
+				/* Don't interfere with mouse events */
 				pointer-events: none;
+				/* High z-index to overlay everything */
+				z-index: 1000;
 			}
 
-			.hero-content {
-				position: relative;
-				z-index: 1;
+			/* Main hero section container - the central focus of the page */
+			.pixel-hero {
+				position: relative;  /* For absolutely positioned pseudo-elements */
+				padding: 4rem 2rem;  /* Generous padding for content breathing room */
+				text-align: center;  /* Center all text content */
+				/* Semi-transparent dark background for content readability */
+				background: rgba(0, 0, 0, 0.3);
+				/* Bright neon green border, no rounded corners for pixel aesthetic */
+				border: 3px solid #00ff41;
+				border-radius: 0;  /* Sharp corners for 8-bit look */
+				margin: 2rem;  /* Space from page edges */
+				/* Multiple shadow layers create depth and glow effects */
+				box-shadow: 
+					0 0 30px rgba(0, 255, 65, 0.3),      /* Outer green glow */
+					inset 0 0 30px rgba(0, 255, 65, 0.1); /* Inner green glow */
 			}
 
-			.kicker {
-				margin: 0;
-				font-size: 0.78rem;
-				font-weight: 800;
-				letter-spacing: 0.14em;
-				text-transform: uppercase;
-				color: #2f7b6a;
+			/* Animated rainbow border effect using pseudo-element */
+			.pixel-hero::before {
+				content: '';  /* Empty content for decoration */
+				position: absolute;
+				/* Position slightly outside the main element to create border effect */
+				top: -3px;
+				left: -3px;
+				right: -3px;
+				bottom: -3px;
+				/* 
+				  Multi-color gradient that will animate to create flowing rainbow effect
+				  Colors cycle through neon pink, green, and blue
+				*/
+				background: linear-gradient(
+					45deg,  /* Diagonal gradient direction */
+					#ff0080, #00ff41, #0080ff, #ff0080  /* Color stops creating rainbow */
+				);
+				/* Place behind main element */
+				z-index: -1;
+				/* Apply the moving animation */
+				animation: rainbow-border 3s linear infinite;
 			}
 
-			h1 {
-				font-family: 'Cinzel', 'Palatino Linotype', serif;
-				font-size: clamp(1.7rem, 4vw, 3rem);
-				line-height: 1.1;
-				margin: 0.6rem 0 0.8rem;
-				color: #8e3f2a;
-				max-width: 780px;
+			/* Animation that shifts the gradient position to create moving rainbow effect */
+			@keyframes rainbow-border {
+				0% { background-position: 0% 50%; }    /* Start position */
+				50% { background-position: 100% 50%; } /* Middle - fully shifted */
+				100% { background-position: 0% 50%; }  /* End - back to start for seamless loop */
 			}
 
-			.subtitle {
-				margin: 0;
-				max-width: 760px;
-				font-size: clamp(0.98rem, 2vw, 1.12rem);
-				line-height: 1.5;
-				color: rgba(46, 31, 23, 0.86);
+			/* Glitch text effect for main headings - simulates digital corruption */
+			.glitch-text {
+				font-size: 2.5rem;  /* Large, bold text size */
+				color: #dbe3e7;     /* Primary neon green color */
+				/* 
+				  Multiple text shadows create layered glow effect
+				  Each shadow has increasing blur radius for depth
+				*/
+				text-shadow: 
+					0 0 5px #00ff41,   /* Small inner glow */
+					0 0 10px #00ff41,  /* Medium glow */
+					0 0 15px #00ff41,  /* Larger glow */
+					0 0 20px #00ff41;  /* Outermost glow */
+				position: relative;     /* For pseudo-element positioning */
+				display: inline-block;  /* Allow transforms while keeping inline behavior */
+				/* Apply the glitch animation continuously */
+				animation: glitch 2s infinite;
 			}
 
-			.badge {
-				display: inline-flex;
-				margin-top: 1rem;
-				padding: 0.45rem 0.75rem;
-				font-size: 0.82rem;
-				font-weight: 700;
-				border: 1px solid rgba(47, 123, 106, 0.6);
-				background: rgba(47, 123, 106, 0.12);
-				color: #22584c;
-			}
-
-			.cta-row {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 0.6rem;
-				margin-top: 1.3rem;
-			}
-
-			.cta {
-				display: inline-flex;
-				align-items: center;
-				justify-content: center;
-				text-decoration: none;
-				padding: 0.55rem 0.95rem;
-				font-weight: 800;
-				font-size: 0.84rem;
-				border: 1px solid rgba(46, 31, 23, 0.25);
-				background: rgba(255, 255, 255, 0.55);
-				color: #2e1f17;
-				transition: all 0.2s ease;
-			}
-
-			.cta.primary {
-				background: linear-gradient(140deg, #2f7b6a, #266558);
-				color: #f8edd3;
-				border-color: rgba(46, 31, 23, 0.35);
-			}
-
-			.cta:hover {
-				transform: translateY(-2px);
-				box-shadow: 0 10px 16px rgba(46, 31, 23, 0.14);
-			}
-
-			.focus-panel {
-				margin-top: 1.2rem;
-				padding: 1rem;
-				border: 1px solid rgba(142, 63, 42, 0.4);
-				background: rgba(255, 249, 235, 0.68);
-			}
-
-			.focus-panel h2 {
-				margin: 0;
-				font-family: 'Cinzel', 'Georgia', serif;
-				font-size: 1.1rem;
-				letter-spacing: 0.04em;
-				color: #8e3f2a;
-			}
-
-			.focus-list {
-				margin: 0.65rem 0 0;
-				padding-left: 1.05rem;
-				display: grid;
-				gap: 0.5rem;
-			}
-
-			.focus-list li {
-				line-height: 1.45;
-				color: rgba(46, 31, 23, 0.87);
-			}
-
-			@media (max-width: 720px) {
-				.hero {
-					padding: 1.1rem;
+			/* 
+			  Glitch animation simulates digital interference/corruption
+			  Uses shifting colored shadows to create RGB separation effect
+			*/
+			@keyframes glitch {
+				/* Normal state - clean green glow */
+				0%, 100% {
+					text-shadow: 
+						0 0 5px #00ff41,   /* Consistent green glows */
+						0 0 10px #00ff41,
+						0 0 15px #00ff41,
+						0 0 20px #00ff41;
 				}
+				/* First glitch state - left pink, right blue separation */
+				25% {
+					text-shadow: 
+						-2px 0 #ff0080,    /* Pink shadow shifted left */
+						2px 0 #0080ff,     /* Blue shadow shifted right */
+						0 0 5px #00ff41;   /* Small green glow remains */
+				}
+				/* Second glitch state - opposite separation for dynamic effect */
+				50% {
+					text-shadow: 
+						2px 0 #ff0080,     /* Pink shadow shifted right */
+						-2px 0 #0080ff,    /* Blue shadow shifted left */
+						0 0 5px #00ff41;   /* Small green glow remains */
+				}
+				/* Return to normal state briefly before looping */
+				75% {
+					text-shadow: 
+						0 0 5px #00ff41,   /* Back to normal green glow */
+						0 0 10px #00ff41,
+						0 0 15px #00ff41,
+						0 0 20px #00ff41;
+				}
+			}
 
-				.cta {
-					width: 100%;
+			/* Subtitle text styling with neon pink theme */
+			.pixel-subtitle {
+				font-size: 1rem;        /* Readable size for description text */
+				color: #ffffff;         /* Hot pink color for contrast with green headings */
+				margin: 2rem 0;        /* Vertical spacing around subtitle */
+				line-height: 1.8;      /* Comfortable reading line height */
+				max-width: 600px;      /* Limit width for readability */
+				margin-left: auto;     /* Center horizontally */
+				margin-right: auto;    /* Center horizontally */
+				/* Pink text shadow with glow effect */
+				text-shadow: 
+					1px 1px 0 #aa0055,              /* Dark pink shadow for depth */
+					0 0 10px rgba(255, 0, 128, 0.3); /* Soft pink glow */
+			}
+
+			/* Container for call-to-action buttons */
+			.pixel-buttons {
+				display: flex;           /* Horizontal layout */
+				gap: 1rem;              /* Space between buttons */
+				justify-content: center; /* Center buttons horizontally */
+				flex-wrap: wrap;        /* Allow wrapping on smaller screens */
+				margin-top: 3rem;       /* Space above button group */
+			}
+
+			/* Main call-to-action buttons with 3D arcade-style design */
+			.pixel-button {
+				display: inline-block;    /* Allow padding and transforms */
+				padding: 1rem 2rem;      /* Generous padding for clickable area */
+				border: 3px solid #00ff41; /* Thick neon green border */
+				/* Dark gradient background mimicking button depth */
+				background: linear-gradient(45deg, #0f0f23, #1a1a3a);
+				color: #00ff41;          /* Bright green text */
+				text-decoration: none;   /* Remove link underline */
+				font-family: 'Press Start 2P', monospace; /* Pixel font */
+				font-size: 0.8rem;       /* Readable but compact size */
+				transition: all 0.3s ease; /* Smooth hover animations */
+				position: relative;      /* For pseudo-element positioning */
+				overflow: hidden;        /* Hide sliding light effect overflow */
+				text-transform: uppercase; /* All caps for retro game feel */
+				/* Multi-layer shadow creates 3D button effect */
+				box-shadow: 
+					0 4px 0 #00aa2e,            /* Dark green 3D shadow */
+					0 8px 15px rgba(0, 0, 0, 0.3); /* Soft black shadow for depth */
+			}
+
+			/* Sliding light effect across button on hover */
+			.pixel-button::before {
+				content: '';              /* Empty content for decoration */
+				position: absolute;
+				top: 0;
+				left: -100%;             /* Start completely off-screen left */
+				width: 100%;
+				height: 100%;
+				/* 
+				  Semi-transparent light beam that sweeps across button
+				  Creates 'scanning' or 'charging' effect common in retro games
+				*/
+				background: linear-gradient(90deg, 
+					transparent,                 /* Invisible start */
+					rgba(0, 255, 65, 0.2),      /* Semi-transparent green light */
+					transparent);               /* Invisible end */
+				transition: left 0.5s ease; /* Smooth sliding animation */
+			}
+
+			/* Trigger the light sweep on hover */
+			.pixel-button:hover::before {
+				left: 100%; /* Move completely off-screen right */
+			}
+
+			/* Button hover effects - transforms into active/pressed state */
+			.pixel-button:hover {
+				/* Bright green gradient background when active */
+				background: linear-gradient(45deg, #00ff41, #00aa2e);
+				color: #0f0f23;          /* Dark text for contrast */
+				transform: translateY(-4px); /* Lift button up */
+				/* Enhanced 3D shadow effects for lifted state */
+				box-shadow: 
+					0 8px 0 #007a22,            /* Deeper 3D shadow */
+					0 12px 20px rgba(0, 0, 0, 0.4), /* Larger drop shadow */
+					0 0 20px rgba(0, 255, 65, 0.5); /* Bright green glow */
+			}
+
+			/* Secondary button variant with pink color scheme */
+			.pixel-button.secondary {
+				border-color: #ff0080;   /* Hot pink border */
+				color: #ff0080;          /* Hot pink text */
+				/* Pink-themed 3D shadow */
+				box-shadow: 
+					0 4px 0 #aa0055,            /* Dark pink 3D shadow */
+					0 8px 15px rgba(0, 0, 0, 0.3); /* Same drop shadow */
+			}
+
+			/* Secondary button hover effects */
+			.pixel-button.secondary:hover {
+				/* Pink gradient background when active */
+				background: linear-gradient(45deg, #ff0080, #aa0055);
+				color: #0f0f23;          /* Dark text for contrast */
+				/* Pink-themed enhanced shadows */
+				box-shadow: 
+					0 8px 0 #77003d,            /* Deeper pink 3D shadow */
+					0 12px 20px rgba(0, 0, 0, 0.4), /* Larger drop shadow */
+					0 0 20px rgba(255, 0, 128, 0.5); /* Bright pink glow */
+			}
+
+			/* Container for floating pixel animation - covers entire viewport */
+			.floating-pixels {
+				position: absolute;      /* Position relative to viewport */
+				top: 0;
+				left: 0;
+				width: 100%;            /* Full viewport width */
+				height: 100%;           /* Full viewport height */
+				pointer-events: none;   /* Don't interfere with mouse interactions */
+				overflow: hidden;       /* Hide pixels that go outside bounds */
+			}
+
+			/* Individual floating pixel elements */
+			.floating-pixel {
+				position: absolute;      /* Absolute positioning for animation */
+				width: 4px;             /* Small square pixel size */
+				height: 4px;
+				background: #00ff41;    /* Default neon green color */
+				/* Apply floating animation continuously */
+				animation: float 6s infinite linear;
+				opacity: 0.7;           /* Semi-transparent for subtlety */
+				/* Small glow effect around each pixel */
+				box-shadow: 0 0 4px #00ff41;
+			}
+
+			/* Every 2nd pixel gets pink color and different timing */
+			.floating-pixel:nth-child(2n) {
+				background: #ff0080;    /* Hot pink color */
+				box-shadow: 0 0 4px #ff0080; /* Pink glow */
+				animation-delay: -2s;   /* Start animation 2s earlier */
+			}
+
+			/* Every 3rd pixel gets blue color and different timing */
+			.floating-pixel:nth-child(3n) {
+				background: #0080ff;    /* Electric blue color */
+				box-shadow: 0 0 4px #0080ff; /* Blue glow */
+				animation-delay: -4s;   /* Start animation 4s earlier */
+			}
+
+			/* 
+			  Floating animation moves pixels from bottom to top with rotation
+			  Simulates particle effects common in retro games
+			*/
+			@keyframes float {
+				/* Start: Below viewport, invisible, no rotation */
+				0% {
+					transform: translateY(100vh) rotate(0deg);
+					opacity: 0;
+				}
+				/* Fade in after moving up slightly */
+				10% {
+					opacity: 0.7;
+				}
+				/* Stay visible through most of the journey */
+				90% {
+					opacity: 0.7;
+				}
+				/* End: Above viewport, invisible, full rotation */
+				100% {
+					transform: translateY(-100px) rotate(360deg);
+					opacity: 0;
+				}
+			}
+
+			/* Enhanced responsive design for various device sizes */
+			
+			/* Large tablets and small laptops */
+			@media (max-width: 1024px) {
+				.glitch-text {
+					font-size: 2.2rem;
+				}
+				.pixel-hero {
+					padding: 3rem 1.5rem;
+					margin: 1.5rem;
+				}
+				.pixel-subtitle {
+					font-size: 0.9rem;
+					max-width: 500px;
+				}
+			}
+
+			/* Standard tablets */
+			@media (max-width: 768px) {
+				.glitch-text {
+					font-size: 1.8rem;
+				}
+				.pixel-subtitle {
+					font-size: 0.8rem;
+					max-width: 400px;
+					line-height: 1.6;
+				}
+				.pixel-button {
+					padding: 0.8rem 1.5rem;
+					font-size: 0.7rem;
+				}
+				.pixel-hero {
+					margin: 1rem;
+					padding: 2.5rem 1.5rem;
+				}
+				.pixel-buttons {
+					gap: 0.8rem;
+					margin-top: 2rem;
+				}
+			}
+
+			/* Large mobile devices */
+			@media (max-width: 480px) {
+				.glitch-text {
+					font-size: 1.5rem;
+					line-height: 1.3;
+				}
+				.pixel-subtitle {
+					font-size: 0.7rem;
+					max-width: 300px;
+					line-height: 1.6;
+					margin: 1.5rem 0;
+				}
+				.pixel-button {
+					padding: 1rem 1.2rem;
+					font-size: 0.6rem;
+					min-height: 44px; /* Touch target minimum */
+					display: flex;
+					align-items: center;
+					justify-content: center;
+				}
+				.pixel-buttons {
+					flex-direction: column;
+					gap: 1rem;
+					margin-top: 2rem;
+				}
+				.pixel-hero {
+					margin: 0.5rem;
+					padding: 2rem 1rem;
+				}
+				/* Reduce floating pixels on mobile for performance */
+				.floating-pixel:nth-child(n+6) {
+					display: none;
+				}
+				/* Adjust background pattern size for mobile */
+				body {
+					background-size: 15px 15px, 15px 15px, 15px 15px, 15px 15px, 100% 100%;
+				}
+			}
+
+			/* Small mobile devices */
+			@media (max-width: 360px) {
+				.glitch-text {
+					font-size: 1.2rem;
+				}
+				.pixel-subtitle {
+					font-size: 0.6rem;
+					max-width: 280px;
+				}
+				.pixel-button {
+					font-size: 0.55rem;
+					padding: 0.8rem 1rem;
+				}
+				.pixel-hero {
+					margin: 0.25rem;
+					padding: 1.5rem 0.8rem;
+				}
+				/* Further reduce background pattern */
+				body {
+					background-size: 12px 12px, 12px 12px, 12px 12px, 12px 12px, 100% 100%;
+				}
+			}
+
+			/* Landscape orientation for mobile */
+			@media (max-width: 768px) and (orientation: landscape) {
+				.pixel-hero {
+					padding: 1.5rem 2rem;
+					margin: 1rem;
+				}
+				.glitch-text {
+					font-size: 1.6rem;
+				}
+				.pixel-subtitle {
+					font-size: 0.7rem;
+				}
+				.pixel-buttons {
+					flex-direction: row;
+					flex-wrap: wrap;
+					gap: 0.8rem;
+				}
+			}
+
+			/* High DPI screens */
+			@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+				/* Reduce some visual effects on retina displays for performance */
+				.floating-pixel {
+					box-shadow: 0 0 2px currentColor;
+				}
+			}
+
+			/* Accessibility: Reduce motion for users who prefer it */
+			@media (prefers-reduced-motion: reduce) {
+				.glitch-text,
+				.pixel-hero::before,
+				.floating-pixel {
+					animation: none !important;
+				}
+				.pixel-button::before {
+					transition: none !important;
 				}
 			}
 		</style>
 	</head>
 	<body>
+		<!-- 
+		  Background particle animation system
+		  Creates floating pixels that rise from bottom to top like retro game particles
+		-->
+		<div class="floating-pixels">
+			<!-- Each pixel is positioned at different horizontal locations -->
+			<!-- animation-delay creates staggered timing for natural particle flow -->
+			<div class="floating-pixel" style="left: 10%; animation-delay: 0s;"></div>
+			<div class="floating-pixel" style="left: 20%; animation-delay: -1s;"></div>
+			<div class="floating-pixel" style="left: 30%; animation-delay: -2s;"></div>
+			<div class="floating-pixel" style="left: 40%; animation-delay: -3s;"></div>
+			<div class="floating-pixel" style="left: 50%; animation-delay: -4s;"></div>
+			<div class="floating-pixel" style="left: 60%; animation-delay: -5s;"></div>
+			<div class="floating-pixel" style="left: 70%; animation-delay: -1.5s;"></div>
+			<div class="floating-pixel" style="left: 80%; animation-delay: -2s;"></div>
+			<div class="floating-pixel" style="left: 90%; animation-delay: -3.5s;"></div>
+		</div>
+
+		<!-- Main page layout using Flexbox for full-height design -->
 		<div class="flex flex-col min-h-screen">
+			<!-- Include the 8-bit styled navigation header -->
 			<Header />
-			<main class="flex-1">
-				<section class="hero">
-					<div class="hero-content">
-						<p class="kicker">{t.kicker}</p>
-						<h1>{t.headline}</h1>
-						<p class="subtitle">{t.subtitle}</p>
-						<p class="badge">{t.badge}</p>
-
-						<div class="cta-row">
-							<a class="cta primary" href={withLang('/contact', lang)}>{t.primaryCta}</a>
-							<a class="cta" href={withLang('/blog', lang)}>{t.secondaryCta}</a>
-							<a class="cta" href={withLang('/about', lang)}>{t.thirdCta}</a>
-						</div>
-
-						<div class="focus-panel">
-							<h2>{t.focusTitle}</h2>
-							<ul class="focus-list">
-								{t.focusItems.map((item) => (
-									<li>{item}</li>
-								))}
-							</ul>
-						</div>
+			
+			<!-- 
+			  Main content area - uses flex-1 to take remaining space
+			  Centers the hero section both horizontally and vertically
+			-->
+			<main class="flex-1 flex items-center justify-center px-4">
+				<!-- Central hero section with all main content -->
+				<div class="pixel-hero">
+					<!-- Primary heading with glitch animation effect -->
+					<h1 class="glitch-text">👾 ¡HELLO PLAYER!</h1>
+					
+					<!-- Secondary heading introducing the developer -->
+					<h2 class="glitch-text" style="font-size: 1.5rem; margin-top: 1rem;">I'M ALAN UGARTE</h2>
+					
+					<!-- 
+					  Description paragraph with role and mission statement
+					  Uses computer emoji to reinforce the tech theme
+					-->
+					<p class="pixel-subtitle">
+						💻 Full Stack Developer & Digital Creator 💻<br/>
+						Programming the future with retro vibes and modern code.<br/>
+						Ready to level up your digital experience!
+					</p>
+					
+					<!-- Call-to-action button group -->
+					<div class="pixel-buttons">
+						<!-- Primary CTA - Contact form -->
+						<a href="/contact" class="pixel-button">
+							📧 Contact Me
+						</a>
+						
+						<!-- Secondary CTA - Portfolio/Projects (uses different color scheme) -->
+						<a href="/blog" class="pixel-button secondary">
+							🚀 View Projects
+						</a>
+						
+						<!-- Tertiary CTA - About page -->
+						<a href="/about" class="pixel-button">
+							👨‍💻 About Me
+						</a>
 					</div>
-				</section>
+				</div>
 			</main>
+			
+			<!-- Include footer component for consistent site structure -->
 			<Footer />
 		</div>
 	</body>
