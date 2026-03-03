@@ -26,7 +26,11 @@ class RetroPortfolio {
     setupAudio() {
         // Crear contexto de audio para efectos de sonido (opcional)
         try {
-            this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const legacyWindow = /** @type {Window & { webkitAudioContext?: typeof AudioContext }} */ (window);
+            const AudioContextCtor = window.AudioContext || legacyWindow.webkitAudioContext;
+            if (AudioContextCtor) {
+                this.audioContext = new AudioContextCtor();
+            }
         } catch (e) {
             console.log('Audio context not supported');
         }

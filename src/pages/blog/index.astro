@@ -3,8 +3,28 @@ import BaseHead from '../../components/BaseHead.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 
+interface ProjectTech {
+	name: string;
+	class: string;
+}
+
+interface ProjectLinks {
+	demo?: string;
+	github?: string;
+	case?: string;
+}
+
+interface ProjectItem {
+	level: number;
+	emoji: string;
+	title: string;
+	description: string;
+	techs: ProjectTech[];
+	links: ProjectLinks;
+}
+
 // Datos de los proyectos - Edita aquí tus proyectos reales
-const projects = [
+const projects: ProjectItem[] = [
 	{
 		level: 1,
 		emoji: '💪',
@@ -67,15 +87,15 @@ const projects = [
 	{
 		level: 5,
 		emoji: '🎵',
-		title: 'MUSIC STREAMING PLATFORM',
-		description: 'Plataforma de streaming con recomendaciones IA, playlists colaborativas y reproductor con visualizador de ondas.',
+		title: 'MUSIC RECOMMENDER',
+		description: 'This platform uses machine learning algorithms to analyze user listening habits and preferences, providing personalized music recommendations and curated playlists for an enhanced listening experience.',
 		techs: [
-			{ name: 'VUE', class: 'vue' },
+			{ name: 'CSS', class: 'css' },
 			{ name: 'NODE', class: 'node' },
-			{ name: 'PSQL', class: 'postgres' }
+			{ name: 'Next.js', class: 'typescript-react' }
 		],
 		links: {
-			demo: 'https://tu-music-platform.com'
+			demo: 'https://project-music-ia.vercel.app/'
 		}
 	},
 	{
@@ -810,7 +830,7 @@ const totalProjects = projects.length;
 															⚙ CODE
 														</a>
 													)}
-													{project.links && 'case' in project.links && project.links.case && (
+													{project.links.case && (
 														<a href={String(project.links.case)} target="_blank" rel="noopener noreferrer" class="project-link">
 															📄 CASE
 														</a>

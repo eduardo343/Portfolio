@@ -698,7 +698,7 @@ import Footer from '../../components/Footer.astro';
 							<!-- Título con efecto glitch -->
 							<div class="title-section">
 								<h1 class="glitch-title" data-text="ALAN'S PORTFOLIO">ALAN'S PORTFOLIO</h1>
-								<p class="subtitle">>>> LEVEL SELECT <<<</p>
+				
 							</div>
 							
 							<!-- Contenedor de proyectos -->
@@ -795,14 +795,14 @@ import Footer from '../../components/Footer.astro';
 									</div>
 									<div class="dialog-box">
 										<div class="dialog-header">
-											<span class="project-title">MUSIC STREAMING PLATFORM</span>
+											<span class="project-title">MUSIC RECOMMENDER</span>
 										</div>
 										<div class="dialog-content">
-											<p>Plataforma de streaming con recomendaciones IA, playlists colaborativas y reproductor con visualizador de ondas.</p>
+											<p>This platform uses machine learning algorithms to analyze user listening habits and preferences, providing personalized music recommendations and curated playlists for an enhanced listening experience.</p>
 											<div class="tech-badges">
-												<span class="badge vue">VUE</span>
-												<span class="badge node">NODE</span>
-												<span class="badge postgres">PSQL</span>
+												<span class="badge vue">CSS</span>
+												<span class="badge node">Next.js</span>
+												<span class="badge postgres">Node.js</span>
 											</div>
 										</div>
 									</div>
@@ -867,29 +867,61 @@ import Footer from '../../components/Footer.astro';
 		
 		<script>
 			class RetroPortfolio {
+				currentProject = 0;
+				totalProjects: number;
+				projects: HTMLElement[];
+				prevBtn: HTMLButtonElement;
+				nextBtn: HTMLButtonElement;
+				progressFill: HTMLElement;
+				currentPageDisplay: HTMLElement;
+				screen: HTMLElement;
+				touchStartX = 0;
+				touchEndX = 0;
+
 				constructor() {
-					this.currentProject = 0;
-					this.totalProjects = 6;
-					this.projects = document.querySelectorAll('.project');
-					this.prevBtn = document.getElementById('prevBtn');
-					this.nextBtn = document.getElementById('nextBtn');
-					this.progressFill = document.querySelector('.progress-fill');
-					this.currentPageDisplay = document.querySelector('.current-page');
-					
+					this.projects = Array.from(document.querySelectorAll<HTMLElement>('.project'));
+
+					const prevBtn = document.querySelector<HTMLButtonElement>('#prevBtn');
+					const nextBtn = document.querySelector<HTMLButtonElement>('#nextBtn');
+					const progressFill = document.querySelector<HTMLElement>('.progress-fill');
+					const currentPageDisplay = document.querySelector<HTMLElement>('.current-page');
+					const screen = document.querySelector<HTMLElement>('.screen');
+
+					if (
+						!prevBtn ||
+						!nextBtn ||
+						!progressFill ||
+						!currentPageDisplay ||
+						!screen ||
+						this.projects.length === 0
+					) {
+						throw new Error('RetroPortfolio: Missing required DOM elements.');
+					}
+
+					this.totalProjects = this.projects.length;
+					this.prevBtn = prevBtn;
+					this.nextBtn = nextBtn;
+					this.progressFill = progressFill;
+					this.currentPageDisplay = currentPageDisplay;
+					this.screen = screen;
+
 					this.init();
 					this.createStars();
 					this.bindEvents();
 					this.updateDisplay();
 				}
-				
+
 				init() {
 					this.showProject(0);
 					this.updateButtons();
 				}
-				
+
 				createStars() {
-					const starsContainer = document.querySelector('.stars-container');
-					
+					const starsContainer = document.querySelector<HTMLElement>('.stars-container');
+					if (!starsContainer) {
+						return;
+					}
+
 					for (let i = 0; i < 15; i++) {
 						const star = document.createElement('div');
 						star.className = 'star';
@@ -908,13 +940,13 @@ import Footer from '../../components/Footer.astro';
 						starsContainer.appendChild(star);
 					}
 				}
-				
+
 				bindEvents() {
 					this.prevBtn.addEventListener('click', () => this.navigateProject(-1));
 					this.nextBtn.addEventListener('click', () => this.navigateProject(1));
-					
-					document.addEventListener('keydown', (e) => {
-						switch(e.key) {
+
+					document.addEventListener('keydown', (e: KeyboardEvent) => {
+						switch (e.key) {
 							case 'ArrowLeft':
 							case 'a':
 							case 'A':
@@ -929,138 +961,150 @@ import Footer from '../../components/Footer.astro';
 								break;
 						}
 					});
-					
-					[this.prevBtn, this.nextBtn].forEach(btn => {
+
+					[this.prevBtn, this.nextBtn].forEach((btn) => {
 						btn.addEventListener('click', () => this.playClickEffect(btn));
 					});
-					
+
 					this.setupTouchEvents();
 				}
-				
+
 				setupTouchEvents() {
-					let touchStartX = 0;
-					let touchEndX = 0;
-					
-					const screen = document.querySelector('.screen');
-					
-					screen.addEventListener('touchstart', (e) => {
-						touchStartX = e.changedTouches[0].screenX;
+					this.screen.addEventListener('touchstart', (e: TouchEvent) => {
+						this.touchStartX = e.changedTouches[0]?.screenX ?? 0;
 					});
-					
-					screen.addEventListener('touchend', (e) => {
-						touchEndX = e.changedTouches[0].screenX;
+
+					this.screen.addEventListener('touchend', (e: TouchEvent) => {
+						this.touchEndX = e.changedTouches[0]?.screenX ?? 0;
 						this.handleSwipe();
 					});
-					
-					const handleSwipe = () => {
-						const swipeThreshold = 50;
-						const diff = touchStartX - touchEndX;
-						
-						if (Math.abs(diff) > swipeThreshold) {
-							if (diff > 0) {
-								this.navigateProject(1);
-							} else {
-								this.navigateProject(-1);
-							}
-						}
-					};
-					
-					this.handleSwipe = handleSwipe;
 				}
-				
-				navigateProject(direction) {
+
+				handleSwipe() {
+					const swipeThreshold = 50;
+					const diff = this.touchStartX - this.touchEndX;
+
+					if (Math.abs(diff) <= swipeThreshold) {
+						return;
+					}
+
+					if (diff > 0) {
+						this.navigateProject(1);
+					} else {
+						this.navigateProject(-1);
+					}
+				}
+
+				navigateProject(direction: number) {
 					const newIndex = this.currentProject + direction;
-					
+
 					if (newIndex >= 0 && newIndex < this.totalProjects) {
 						this.showProject(newIndex);
 						this.vibrateDevice();
 					}
 				}
-				
-				showProject(index) {
-					if (this.projects[this.currentProject]) {
-						this.projects[this.currentProject].classList.remove('active');
+
+				showProject(index: number) {
+					const activeProject = this.projects[this.currentProject];
+					if (activeProject) {
+						activeProject.classList.remove('active');
 					}
-					
+
 					this.currentProject = index;
-					
+
 					setTimeout(() => {
-						this.projects[this.currentProject].classList.add('active');
+						const nextProject = this.projects[this.currentProject];
+						if (nextProject) {
+							nextProject.classList.add('active');
+						}
 					}, 150);
-					
+
 					this.updateDisplay();
 					this.updateButtons();
 					this.triggerScreenEffect();
 				}
-				
+
 				updateDisplay() {
 					this.currentPageDisplay.textContent = (this.currentProject + 1).toString().padStart(2, '0');
-					
+
 					const progressPercentage = ((this.currentProject + 1) / this.totalProjects) * 100;
 					this.progressFill.style.width = `${progressPercentage}%`;
 				}
-				
+
 				updateButtons() {
 					this.prevBtn.disabled = this.currentProject === 0;
 					this.nextBtn.disabled = this.currentProject === this.totalProjects - 1;
 				}
-				
+
 				triggerScreenEffect() {
-					const screen = document.querySelector('.screen');
-					screen.style.filter = 'brightness(1.5) contrast(1.2)';
-					
+					this.screen.style.filter = 'brightness(1.5) contrast(1.2)';
+
 					setTimeout(() => {
-						screen.style.filter = 'brightness(1) contrast(1)';
+						this.screen.style.filter = 'brightness(1) contrast(1)';
 					}, 100);
 				}
-				
-				playClickEffect(button) {
+
+				playClickEffect(button: HTMLButtonElement) {
 					button.style.transform = 'translateY(2px) scale(0.95)';
-					
+
 					setTimeout(() => {
 						button.style.transform = '';
 					}, 150);
-					
+
 					this.vibrateDevice();
 				}
-				
+
 				vibrateDevice() {
-					if (navigator.vibrate) {
+					if ('vibrate' in navigator) {
 						navigator.vibrate(50);
 					}
 				}
 			}
-			
+
 			document.addEventListener('DOMContentLoaded', () => {
-				const portfolio = new RetroPortfolio();
-				
+				let portfolio: RetroPortfolio;
+				try {
+					portfolio = new RetroPortfolio();
+				} catch (error) {
+					console.error(error);
+					return;
+				}
+
 				setInterval(() => {
 					if (Math.random() < 0.3) {
-						const title = document.querySelector('.glitch-title');
+						const title = document.querySelector<HTMLElement>('.glitch-title');
+						if (!title) {
+							return;
+						}
+
 						title.style.filter = 'hue-rotate(180deg)';
 						setTimeout(() => {
 							title.style.filter = '';
 						}, 500);
 					}
 				}, 10000);
-				
-				window.portfolio = portfolio;
+
+				(window as Window & { portfolio?: RetroPortfolio }).portfolio = portfolio;
 			});
-			
-			document.addEventListener('touchstart', function(event) {
+
+			document.addEventListener('touchstart', (event: TouchEvent) => {
 				if (event.touches.length > 1) {
 					event.preventDefault();
 				}
 			});
-			
+
 			let lastTouchEnd = 0;
-			document.addEventListener('touchend', function(event) {
-				const now = (new Date()).getTime();
-				if (now - lastTouchEnd <= 300) {
-					event.preventDefault();
-				}
-				lastTouchEnd = now;
-			}, false);
+			document.addEventListener(
+				'touchend',
+				(event: TouchEvent) => {
+					const now = new Date().getTime();
+					if (now - lastTouchEnd <= 300) {
+						event.preventDefault();
+					}
+					lastTouchEnd = now;
+				},
+				false
+			);
 		</script>
 	</body>
 </html>
