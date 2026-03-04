@@ -14,11 +14,16 @@ interface ProjectLinks {
 	case?: string;
 }
 
+interface LocalizedText {
+	es: string;
+	en: string;
+}
+
 interface ProjectItem {
 	level: number;
 	emoji: string;
-	title: string;
-	description: string;
+	title: LocalizedText;
+	description: LocalizedText;
 	techs: ProjectTech[];
 	links: ProjectLinks;
 }
@@ -28,8 +33,14 @@ const projects: ProjectItem[] = [
 	{
 		level: 1,
 		emoji: '💪',
-		title: 'Fitness Assistant',
-		description: 'This fitness assistant application provides personalized workout plans, nutrition tracking, and progress monitoring to help users achieve their fitness goals effectively.',
+		title: {
+			es: 'Asistente Fitness',
+			en: 'Fitness Assistant'
+		},
+		description: {
+			es: 'Esta app de asistencia fitness ofrece rutinas personalizadas, seguimiento de nutricion y monitoreo de progreso para ayudarte a alcanzar tus metas.',
+			en: 'This fitness assistant application provides personalized workout plans, nutrition tracking, and progress monitoring to help users achieve their fitness goals effectively.'
+		},
 		techs: [
 			{ name: 'Python', class: 'python' },
 			{ name: 'Streamlit', class: 'streamlit' },
@@ -42,8 +53,14 @@ const projects: ProjectItem[] = [
 	{
 		level: 2,
 		emoji: '📱',
-		title: 'Trellcord',
-		description: 'Trellcord is a mobile app that combines task management and team communication, allowing users to create tasks, assign them to team members, and chat in real-time within the same platform.',
+		title: {
+			es: 'Trellcord',
+			en: 'Trellcord'
+		},
+		description: {
+			es: 'Trellcord es una app que combina gestion de tareas y comunicacion de equipo, permitiendo crear tareas, asignarlas y chatear en tiempo real en la misma plataforma.',
+			en: 'Trellcord is a mobile app that combines task management and team communication, allowing users to create tasks, assign them to team members, and chat in real-time within the same platform.'
+		},
 		techs: [
 			{ name: 'REACT', class: 'react' },
 			{ name: 'NODE', class: 'node' },
@@ -57,8 +74,14 @@ const projects: ProjectItem[] = [
 	{
 		level: 3,
 		emoji: '🎰',
-		title: 'CASINO TESTING APP',
-		description: 'App móvil con seguimiento GPS, métricas de salud, retos sociales y integración con dispositivos wearables.',
+		title: {
+			es: 'App de pruebas de casino',
+			en: 'Casino Testing App'
+		},
+		description: {
+			es: 'Suite para simulacion y validacion de reglas en juegos de casino, con escenarios de prueba y analisis de resultados.',
+			en: 'Suite for simulation and rule validation in casino games, with repeatable scenarios and results analysis.'
+		},
 		techs: [
 			{ name: 'Python', class: 'python' },
 			{ name: 'Streamlit', class: 'streamlit' },
@@ -71,39 +94,57 @@ const projects: ProjectItem[] = [
 	},
 	{
 		level: 4,
-		emoji: '🧠',
-		title: 'AI IMAGE GENERATOR',
-		description: 'Generador de imágenes con IA usando modelos de difusión. Interface web intuitiva con historial y personalización avanzada.',
+		emoji: '👨‍💻',
+		title: {
+			es: 'Zero Roots',
+			en: 'Zero Roots'
+		},
+		description: {
+			es: 'Zero Roots es una pagina donde te guia para empezar a programar con rutas personalizadas, recursos curados y comunidad de apoyo.',
+			en: 'Zero Roots is a platform that guides beginners on where to start learning programming with structured paths, curated resources, and community support.'
+		},
 		techs: [
-			{ name: 'PYTHON', class: 'python' },
-			{ name: 'AI/ML', class: 'ai' },
+			{ name: 'Ruby', class: 'ruby' },
+			{ name: 'Astro', class: 'astro' },
 			{ name: 'DOCKER', class: 'docker' }
 		],
 		links: {
-			demo: 'https://tu-ai-demo.com',
-			github: 'https://github.com/tu-usuario/ai-generator'
+			demo: 'https://zero-roots.vercel.app/',
+			github: 'https://github.com/eduardo343/ZeroRoots.git'
 		}
 	},
 	{
 		level: 5,
 		emoji: '🎵',
-		title: 'MUSIC RECOMMENDER',
-		description: 'This platform uses machine learning algorithms to analyze user listening habits and preferences, providing personalized music recommendations and curated playlists for an enhanced listening experience.',
+		title: {
+			es: 'Descubre tu ritmo',
+			en: 'Discovery your rhythm'
+		},
+		description: {
+			es: 'Esta plataforma usa APIs de musica para ayudarte a descubrir nuevas canciones y armar una experiencia personalizada.',
+			en: 'This platform uses music APIs to help you discover new songs and build a personalized listening experience.'
+		},
 		techs: [
 			{ name: 'CSS', class: 'css' },
 			{ name: 'NODE', class: 'node' },
 			{ name: 'Next.js', class: 'typescript-react' }
 		],
 		links: {
-			demo: 'https://project-music-ia.vercel.app/',
-			github: 'https://github.com/eduardo343/Project-Music-IA.git'
+			demo: 'https://zero-roots.vercel.app/',
+			github: 'https://github.com/eduardo343/ZeroRoots.git'
 		}
 	},
 	{
 		level: 6,
 		emoji: '⚡',
-		title: 'BLOCKCHAIN WALLET',
-		description: 'Cartera de criptomonedas multi-chain con intercambio DEX, staking y portfolio tracking. Seguridad de grado bancario.',
+		title: {
+			es: 'Billetera blockchain',
+			en: 'Blockchain Wallet'
+		},
+		description: {
+			es: 'Billetera de criptomonedas multi-chain con intercambio DEX, staking y seguimiento de portafolio.',
+			en: 'Multi-chain cryptocurrency wallet with DEX swaps, staking, and portfolio tracking.'
+		},
 		techs: [
 			{ name: 'SOL', class: 'solidity' },
 			{ name: 'WEB3', class: 'web3' },
@@ -813,10 +854,21 @@ const totalProjects = projects.length;
 									</div>
 									<div class="dialog-box">
 										<div class="dialog-header">
-											<span class="project-title">{project.title}</span>
+											<span
+												class="project-title"
+												data-title-es={project.title.es}
+												data-title-en={project.title.en}
+											>
+												{project.title.es}
+											</span>
 										</div>
 										<div class="dialog-content">
-											<p>{project.description}</p>
+											<p
+												data-description-es={project.description.es}
+												data-description-en={project.description.en}
+											>
+												{project.description.es}
+											</p>
 											
 											{project.links && (
 												<div class="project-links">
@@ -853,7 +905,7 @@ const totalProjects = projects.length;
 				
 				<div class="controls">
 					<div class="progress-bar">
-						<div class="progress-label">PROGRESS</div>
+						<div class="progress-label" data-i18n="projects.progress">PROGRESO</div>
 						<div class="progress-container">
 							<div class="progress-fill" id="progressFill"></div>
 						</div>
@@ -879,8 +931,61 @@ const totalProjects = projects.length;
 		
 		<Footer />
 		
-		<script define:vars={{ totalProjects }}>
-			class RetroPortfolio {
+			<script define:vars={{ totalProjects }}>
+				const pageI18n = {
+					es: {
+						'projects.progress': 'PROGRESO'
+					},
+					en: {
+						'projects.progress': 'PROGRESS'
+					}
+				};
+
+				const pageTitles = {
+					es: 'Proyectos - Alan Ugarte',
+					en: 'Projects - Alan Ugarte'
+				};
+
+				function syncProjectLanguage(lang) {
+					const normalized = lang === 'en' ? 'en' : 'es';
+					const titleKey = normalized === 'en' ? 'titleEn' : 'titleEs';
+					const descriptionKey = normalized === 'en' ? 'descriptionEn' : 'descriptionEs';
+
+					document.querySelectorAll('.project-title').forEach((node) => {
+						const value = node.dataset[titleKey];
+						if (value) node.textContent = value;
+					});
+
+					document.querySelectorAll('.dialog-content p[data-description-es]').forEach((node) => {
+						const value = node.dataset[descriptionKey];
+						if (value) node.textContent = value;
+					});
+
+					document.title = pageTitles[normalized];
+				}
+
+				function mountPageI18n() {
+					const languageApi = window.portfolioLanguage;
+					if (!languageApi) {
+						syncProjectLanguage(document.documentElement.lang);
+						return;
+					}
+
+					const root = document.querySelector('.portfolio-wrapper');
+					const render = (lang) => {
+						syncProjectLanguage(lang);
+						if (root) {
+							languageApi.applyTranslations(root, pageI18n, lang);
+						}
+					};
+
+					render(languageApi.getLang());
+					window.addEventListener('portfolio-lang-change', (event) => {
+						render(event.detail);
+					});
+				}
+
+				class RetroPortfolio {
 				constructor() {
 					this.currentProject = 0;
 					this.totalProjects = totalProjects;
@@ -989,10 +1094,11 @@ const totalProjects = projects.length;
 				}
 			}
 			
-			document.addEventListener('DOMContentLoaded', () => {
-				new RetroPortfolio();
-				
-				// Efecto glitch aleatorio en el título
+				document.addEventListener('DOMContentLoaded', () => {
+					new RetroPortfolio();
+					mountPageI18n();
+					
+					// Efecto glitch aleatorio en el título
 				setInterval(() => {
 					if (Math.random() < 0.3) {
 						const title = document.querySelector('.glitch-title');

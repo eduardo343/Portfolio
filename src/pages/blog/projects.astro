@@ -591,22 +591,33 @@ import Footer from '../../components/Footer.astro';
 				font-family: 'IBM Plex Mono', ui-monospace, monospace !important;
 			}
 
-			.dialog-content p {
-				color: #cbd5e1 !important;
-				text-shadow: none !important;
-				font-family: 'IBM Plex Mono', ui-monospace, monospace !important;
-				font-size: 0.86rem !important;
-				line-height: 1.65 !important;
-			}
+				.dialog-content p {
+					color: #cbd5e1 !important;
+					text-shadow: none !important;
+					font-family: 'IBM Plex Mono', ui-monospace, monospace !important;
+					font-size: 0.86rem !important;
+					line-height: 1.65 !important;
+				}
 
-			.project-link {
-				border: 1px solid #334155 !important;
-				background: #0f172a !important;
-				color: #e2e8f0 !important;
-				box-shadow: none !important;
-				transform: none !important;
-				font-family: 'IBM Plex Mono', ui-monospace, monospace !important;
-			}
+				.project-links {
+					display: flex;
+					gap: 10px;
+					margin-bottom: 18px;
+					flex-wrap: wrap;
+				}
+
+				.project-link {
+					border: 1px solid #334155 !important;
+					background: #0f172a !important;
+					color: #e2e8f0 !important;
+					box-shadow: none !important;
+					transform: none !important;
+					padding: 8px 12px;
+					text-decoration: none;
+					display: inline-block;
+					font-size: 0.72rem;
+					font-family: 'IBM Plex Mono', ui-monospace, monospace !important;
+				}
 
 			.project-link.demo {
 				border-color: #155e75 !important;
@@ -795,10 +806,18 @@ import Footer from '../../components/Footer.astro';
 									</div>
 									<div class="dialog-box">
 										<div class="dialog-header">
-											<span class="project-title">MUSIC RECOMMENDER</span>
+											<span class="project-title">Discovery your rhythm</span>
 										</div>
 										<div class="dialog-content">
-											<p>This platform uses machine learning algorithms to analyze user listening habits and preferences, providing personalized music recommendations and curated playlists for an enhanced listening experience.</p>
+											<p>This is a platform using apis for the music discovery you wanna try your welcome.</p>
+											<div class="project-links">
+												<a href="https://zero-roots.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link demo">
+													▶ DEMO
+												</a>
+												<a href="https://github.com/eduardo343/ZeroRoots.git" target="_blank" rel="noopener noreferrer" class="project-link">
+													⚙ CODE
+												</a>
+											</div>
 											<div class="tech-badges">
 												<span class="badge vue">CSS</span>
 												<span class="badge node">Next.js</span>
